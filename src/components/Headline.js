@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-const Headline = ({text}) => {
+const Headline = ({ text }) => {
   return (
     <div>
       <h1>{text}</h1>

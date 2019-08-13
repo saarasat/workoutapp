@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import Headline from './components/Headline'
+import React from 'react'
 import StopWatch from './components/Stopwatch'
-import Navbar from './components/Navbar'
-import { setInterval } from 'timers';
+import Navigationbar from './components/Navbar'
+import TimesList from './components/TimesList'
 
 
 const App = (props) => {
 
+  const store = props.store
+
   return (
-    <div className='name'>
-      <Headline text="Sporttivartti"/>
-      <StopWatch></StopWatch>
+    <div className="container" align="center">
+      <Navigationbar />
+      <StopWatch store={store} />
+      <TimesList store={store} />
     </div>
   )
 }
+
+
 
 export default App
