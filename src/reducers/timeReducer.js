@@ -3,7 +3,7 @@ const timeReducer = (state = [], action) => {
   switch (action.type) {
   case 'ADD_NEW_TIME':
     return [...state, action.data]
-  default: 
+  default:
     return state
   }
 }
@@ -15,7 +15,8 @@ export const createNewTime = (time) => {
     type: 'ADD_NEW_TIME',
     data: {
       time,
-      id: generateId()
+      id: generateId(),
+      date: Date.now()
     }
   }
 }

@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
 import App from './App'
-import timeReducer from './reducers/timeReducer'
+import timeStore from './stores/timeStore'
 import './index.css'
 
 
-const store = createStore(timeReducer)
+const store = timeStore
 
 const renderApp = () => {
   ReactDOM.render(<App store={store} />, document.getElementById('root'))

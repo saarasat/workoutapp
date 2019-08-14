@@ -1,9 +1,9 @@
 import React from 'react'
 import { useStopwatch } from '../hooks/index'
 import Headline from './Headline'
-import { createNewTime, timeReducer} from '../reducers/timeReducer'
+import { createNewTime } from '../reducers/timeReducer'
 
-const StopWatch = (props) => {
+const StopWatch = ({ store }) => {
   const {
     timerOn,
     time,
@@ -18,9 +18,9 @@ const StopWatch = (props) => {
 
   const create = (event) => {
     event.preventDefault()
-    const jtime = time
-    props.store.dispatch(
-      createNewTime(jtime)
+    const newTime = time
+    store.dispatch(
+      createNewTime(newTime)
     )
   }
 

@@ -9,7 +9,7 @@ const TimesList = ({ store }) => {
       <ListGroup>
         {store.getState().map(time =>
           <ListGroupItem key={time.id}>
-            {time.time}
+            {time.time} {time.date}
           </ListGroupItem>
         )}
       </ListGroup>
