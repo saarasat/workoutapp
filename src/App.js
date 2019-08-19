@@ -1,18 +1,24 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
 import Home from './components/Home'
 import StopWatch from './components/Stopwatch'
-import Navigationbar from './components/Navbar'
 import { Navbar, NavDropdown, Nav, Form, FormControl, Button } from 'react-bootstrap'
-
+import NewMap from './components/Map'
 import Settings from './components/Settings'
 import TimesList from './components/TimesList'
-import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { createStore } from 'redux'
+import timeReducer from './reducers/timeReducer'
 
-const App = ({ store }) => {
+
+const reducer = timeReducer
+
+const store = createStore(reducer)
 
 
+export const MapContainer = (props) => {
   return (
-    <div className="container" align="center">
+    <div>
       <Router>
         <div>
           <Navbar bg="dark" variant="dark" expand="lg">
@@ -38,15 +44,22 @@ const App = ({ store }) => {
             </Navbar.Collapse>
           </Navbar>
         </div>
+        <div className="container" align="center">
 
-        <Route exact path="/" render={() => <Home />}/>
-        <Route exact path="/times" render={() => <TimesList store={store} />} />
-        <Route exact path="/stopwatch" render={() => <StopWatch store={store}/>} />
-        <Route exact path="/settings" render={() => <Settings store={store}/>} />
-        
+          <Route exact path="/" render={() => <Home />}/>
+          <Route exact path="/times" render={() => <TimesList store={store} />} />
+          <Route exact path="/stopwatch" render={() => <StopWatch store={store}/>} />
+          <Route exact path="/settings" render={() => <Settings store={store}/>} />
+        </div>
+
       </Router>
+      <div className="container">
+        <NewMap google={props.google}/>
+      </div>
     </div>
   )
 }
 
-export default App
+export default GoogleApiWrapper({
+  apiKey: {}
+})(MapContainer)

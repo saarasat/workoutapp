@@ -10,13 +10,13 @@ const timeReducer = (state = [], action) => {
 
 const generateId = () => Number((Math.random()*100000)).toFixed(0)
 
-export const createNewTime = (time) => {
+export const createNewTime = (time, date) => {
   return {
     type: 'ADD_NEW_TIME',
     data: {
       time,
       id: generateId(),
-      date: Date.now()
+      date
     }
   }
 }

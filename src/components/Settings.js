@@ -1,7 +1,5 @@
 import React from 'react'
-import Headline from './Headline'
-import { Button, Form, FormControl, Col, Row, FormGroup, FormLabel, FormText } from 'react-bootstrap'
-import { Agent } from 'https';
+import { Form, Col, Row } from 'react-bootstrap'
 
 
 const Settings = () => {

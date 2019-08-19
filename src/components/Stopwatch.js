@@ -19,8 +19,10 @@ const StopWatch = ({ store }) => {
   const create = (event) => {
     event.preventDefault()
     const newTime = time
+    const date = new Date()
+    const times = date.getDate() +"." + (date.getMonth()+1) + "." + date.getFullYear()
     store.dispatch(
-      createNewTime(newTime)
+      createNewTime(newTime, times)
     )
   }
 
