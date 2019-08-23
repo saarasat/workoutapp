@@ -1,27 +1,16 @@
+import React from 'react'
+import { Map, Marker } from 'google-maps-react'
+import Location from './Location'
 
-import React, { useState } from 'react'
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
-import { Alert } from 'react-bootstrap';
 
 const mapStyles = {
   map: {
-    position: 'absolute',
-    width: '100%',
+    width: '80%',
     height: '80%'
   }
 }
 
 const NewMap = ({ google }) => {
-  const [ locations, setLocation ] = useState({lat: 0, lng: 0})
-  console.log(navigator.geolocation.getCurrentPosition(
-    position => {
-      const location = JSON.stringify(position)
-      console.log(location)
-      this.setState({location})
-    }, error => Alert.alert(error.message),
-    {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000}
-  ))
-
 
   return (
     <div>
@@ -33,7 +22,9 @@ const NewMap = ({ google }) => {
           lat: 60.175,
           lng: 24.941
         }}
-      />
+      >
+        <Marker position={{ lat: Location().latitude, lng: Location().longitude }}/>
+      </Map>
     </div>
   )
 }

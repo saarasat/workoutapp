@@ -23,31 +23,31 @@ const Settings = () => {
         <Form.Group as={Row} controlId="exampleForm.ControlSelect1">
           <Form.Label column sm={2}>Age</Form.Label>
           <Col sm={2}>
-          <Form.Control as="select">
-            {ages.map(age =>
-              <option key={age}>{age}</option>
-            )}
-          </Form.Control>
+            <Form.Control as="select">
+              {ages.map(age =>
+                <option key={age}>{age}</option>
+              )}
+            </Form.Control>
           </Col>
         </Form.Group>
         <Form.Group as={Row} controlId="another">
           <Form.Label column sm={2}>Weight</Form.Label>
           <Col sm={2}>
-          <Form.Control as="select">
-            {weights.map(weight =>
-              <option key={weight}>{weight}</option>  
-            )}
-          </Form.Control>
+            <Form.Control as="select">
+              {weights.map(weight =>
+                <option key={weight}>{weight}</option>  
+              )}
+            </Form.Control>
           </Col>
         </Form.Group>
         <Form.Group as={Row}>
           <Form.Label column sm={2}>Height</Form.Label>
           <Col sm={2}>
-          <Form.Control as="select">
-            {heights.map(height =>
-              <option key={height}>{height}</option>  
-            )}
-          </Form.Control>
+            <Form.Control as="select">
+              {heights.map(height =>
+                <option key={height}>{height}</option>  
+              )}
+            </Form.Control>
           </Col>
         </Form.Group>
 

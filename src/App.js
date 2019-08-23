@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react'
+import React from 'react'
+import { GoogleApiWrapper } from 'google-maps-react'
 import Home from './components/Home'
 import StopWatch from './components/Stopwatch'
 import { Navbar, NavDropdown, Nav, Form, FormControl, Button } from 'react-bootstrap'
 import NewMap from './components/Map'
 import Settings from './components/Settings'
 import TimesList from './components/TimesList'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { createStore } from 'redux'
 import timeReducer from './reducers/timeReducer'
 
@@ -26,9 +26,9 @@ export const MapContainer = (props) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <Nav.Link><Link to="/">Home</Link></Nav.Link>
-                <Nav.Link><Link to="/times">Times</Link></Nav.Link>
-                <Nav.Link><Link to="/stopwatch">Stopwatch</Link></Nav.Link>
+                <Nav.Link to="/">Home</Nav.Link>
+                <Nav.Link to="/times">Times</Nav.Link>
+                <Nav.Link to="/stopwatch">Stopwatch</Nav.Link>
                 <NavDropdown title="Placeholder" id="basic-nav-dropdown">
                   <NavDropdown.Item href="#placeholder">placeholder</NavDropdown.Item>
                   <NavDropdown.Item href="#placeholder">placeholder</NavDropdown.Item>
@@ -61,5 +61,5 @@ export const MapContainer = (props) => {
 }
 
 export default GoogleApiWrapper({
-  apiKey: {}
+  apiKey: ''
 })(MapContainer)
