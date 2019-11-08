@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import {  useEffect, useState } from 'react'
 
 
 export const useTimer = () => {
@@ -44,6 +44,4 @@ export const useStopwatch = () => {
   }
 }
 
-
-
-export default useStopwatch
+export default { useStopwatch }

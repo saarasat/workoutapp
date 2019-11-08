@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-
+import { useEffect, useState } from 'react'
+/*
 const distanceCalculator = () => {
   const r = 6731
   const lat1 = 60.169857
@@ -14,13 +14,13 @@ const distanceCalculator = () => {
   const d = r*c
   return d
 } 
-
+*/
 const Location = () => {
   const [position, setPosition] = useState({})
   const [distance, setDistance] = useState(0)
   const [error, setError] = useState(null)
   const geoOptions = { enableHighAccuracy: true }
-  console.log(position.latitude)
+
 
   const onChange = ({ coords }) => {
     setPosition({
@@ -31,14 +31,16 @@ const Location = () => {
   const onError = (error) => {
     setError(error.message)
   }
+
+
   useEffect(() => {
     const geo = navigator.geolocation
     if (!geo) {
       setError('Geolocation is not supported')
       return
     }
-    const watcher = geo.watchPosition(onChange, onError, geoOptions)
 
+    const watcher = geo.watchPosition(onChange, onError, geoOptions)
     setTimeout(() => {
       geo.clearWatch(watcher)
     }, 15000)

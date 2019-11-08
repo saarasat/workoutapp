@@ -1,19 +1,18 @@
 import React from 'react'
-import { Map, Marker } from 'google-maps-react'
-import Location from './Location'
+import { Map } from 'google-maps-react'
 
 
 const mapStyles = {
   map: {
-    width: '80%',
-    height: '80%'
+    height: '80%',
+    width: '80%'
   }
 }
 
 const NewMap = ({ google }) => {
 
   return (
-    <div>
+    <div className="container">
       <Map
         google={google}
         zoom={14}
@@ -22,8 +21,7 @@ const NewMap = ({ google }) => {
           lat: 60.175,
           lng: 24.941
         }}
-      >
-        <Marker position={{ lat: Location().latitude, lng: Location().longitude }}/>
+      > 
       </Map>
     </div>
   )

@@ -1,9 +1,12 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { createNewTime } from '../reducers/timeReducer'
 import { useStopwatch } from '../hooks/index'
 import Headline from './Headline'
-import { createNewTime } from '../reducers/timeReducer'
+import { Button } from 'react-bootstrap'
 
-const StopWatch = ({ store }) => {
+
+const StopWatch = (props) => {
   const {
     timerOn,
     time,
@@ -16,14 +19,22 @@ const StopWatch = ({ store }) => {
     timerOn ? pauseTimer() : startTimer()
   }
 
-  const create = (event) => {
+  const weekdays = new Array(7)
+  weekdays[0] = 'Sun'
+  weekdays[1] = 'Mon'
+  weekdays[2] = 'Tue'
+  weekdays[3] = 'Wed'
+  weekdays[4] = 'Thu'
+  weekdays[5] = 'Fri'
+  weekdays[6] = 'Sat'
+
+
+  const create = async (event) => {
     event.preventDefault()
     const newTime = time
     const date = new Date()
-    const times = date.getDate() +"." + (date.getMonth()+1) + "." + date.getFullYear()
-    store.dispatch(
-      createNewTime(newTime, times)
-    )
+    const day = weekdays[date.getDay()]
+    props.createNewTime(newTime, date, day)
   }
 
   let minutes = (('0' + Math.floor(time / 60) % 60)).slice(-2)
@@ -31,19 +42,23 @@ const StopWatch = ({ store }) => {
   let tensOfSeconds = time.substring(time.length - 1, time.length)
 
   return (
-    <div className="container">
-      <Headline text="Duration"/>
-      <h1>{minutes}:{seconds}:{tensOfSeconds}</h1>
-      <button onClick={handleStartPause} type="button" className="btn btn-success btn-circle btn-xl">
-        {timerOn ? 'Pause' : 'Start'}
-      </button>
-      <button onClick={resetTimer} type="button" className="btn btn-primary btn-circle btn-xl">
-        Reset
-      </button>
-      <button onClick={create}>save</button>
+    <div>
+      <div className="container">
+        <Headline text="Duration"/>
+        <h1>{minutes}:{seconds}:{tensOfSeconds}</h1>
+        <Button onClick={handleStartPause} variant={timerOn ? "pause" : "save"} className="btn-circle">
+          {timerOn ? 'Pause' : 'Start'}
+        </Button>
+        <Button onClick={resetTimer} variant="change" className="btn-circle">
+          Reset
+        </Button>
+      </div>
+      <div className="container">
+        <Button variant="save" onClick={create}>Save</Button>
+      </div>
     </div>
   )
 }
 
-export default StopWatch
+export default connect (null, { createNewTime })(StopWatch)
 

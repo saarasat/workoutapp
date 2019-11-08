@@ -14,4 +14,13 @@
 | 15.8. | 3,5  | Added Google Maps |
 |       | 0,5  | Did some refactoring on the code |
 | 19.8. | 1    | Improved documentation |
-| Total | 21   | 
+| 23.8. | 3    | Added current location and distance calculator |
+| 1.11. | 1,5  | Worked on navigation |
+|       | 1    | Improved css |
+|       | 1,5  | Improved settings-menu functionality |
+| 5.11. | 2    | Improved settings-menu functionality |
+|       | 2    | Re-factoring of redux-stores |
+| 6.11. | 3    | Initialized backend |
+|       | 3    | Added basic server-services to front-end |
+| 6.11. | 2    | Formatted time-reports | 
+| Total | 40   | 
