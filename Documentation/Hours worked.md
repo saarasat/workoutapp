@@ -22,5 +22,8 @@
 |       | 2    | Re-factoring of redux-stores |
 | 6.11. | 3    | Initialized backend |
 |       | 3    | Added basic server-services to front-end |
-| 6.11. | 2    | Formatted time-reports | 
-| Total | 40   | 
+| 6.11. | 2    | Formatted time-reports, added functionality for monthly results | 
+| 7.11. | 5    | Added server-services for workout-times and settings-menu |
+| 8.11. | 2    | Started working on Main Menu |
+| 8.11. | 2    | Worked out issues with Google api |
+| Total | 49   | 
