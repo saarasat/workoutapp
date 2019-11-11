@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import Headline from './Headline'
 import Setting from './Setting'
@@ -12,13 +12,8 @@ const SettingsMenu = (props) => {
   const [heightShow, setHeightShow] = useState(false)
   const [weightShow, setWeightShow] = useState(false)
 
-  console.log(props.heights)
-  console.log(props.weights)
-  console.log(props.ages)
 
   const ages = props.ages
-  const weights = props.weights
-  const heights = props.heights
 
   const setAge = async (event) => {
     event.preventDefault()

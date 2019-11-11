@@ -18,7 +18,7 @@ const Setting = ({ setModalVisible, modalToShow, setValue, nameOfValue, labelFor
                 <Form.Label>{labelForValue}</Form.Label>
               </Col>
               <Col md={4}>
-                <Form.Control name={nameOfValue} as="select" focus={valuesForSelect/2}>
+                <Form.Control name={nameOfValue} as="select">
                   {valuesForSelect.map(age =>
                     <option key={age}>{age}</option>
                   )}

@@ -1,30 +1,41 @@
+
 import React from 'react'
-import { Map } from 'google-maps-react'
+import Location from './Location'
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
+
+
+const dotenv = require('dotenv')
+dotenv.config()
 
 
 const mapStyles = {
   map: {
-    height: '80%',
-    width: '80%'
+    position: 'relative',
+    height: '100%',
+    width: '100%',
   }
 }
 
-const NewMap = ({ google }) => {
+
+const NewMap = (props) => {
 
   return (
-    <div className="container">
-      <Map
-        google={google}
+    <div>
+      <Map 
+        google={props.google}
         zoom={14}
         style={mapStyles}
         initialCenter={{
           lat: 60.175,
           lng: 24.941
         }}
-      > 
+      >
+        <Marker position={{ lat: Location().latitude, lng: Location().longitude }}/>
       </Map>
     </div>
   )
 }
 
-export default NewMap
+const API_KEY = process.env.API_KEY
+console.log(API_KEY)
+export default GoogleApiWrapper({ apiKey: '' })(NewMap)

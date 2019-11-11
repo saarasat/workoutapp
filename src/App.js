@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { GoogleApiWrapper } from 'google-maps-react'
 import Home from './components/Home'
-import StopWatch from './components/Stopwatch'
+import TrainingOutside from './components/TrainingOutside'
 import { Nav, Navbar } from 'react-bootstrap'
-import NewMap from './components/Map'
 import SettingsMenu from './components/SettingsMenu'
 import TimesList from './components/TimesList'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -21,22 +19,22 @@ export const MapContainer = (props) => {
     props.initializeWeights('weights')
     props.initializeHeights('heights')
     props.initializeAges('ages')
-  }, [])
+  })
 
 
   return (
     <div className="app">
+
       <Router>
         <div>
           <Navbar bg="dark" variant="dark">
             <Navbar.Brand href="/">Sporttivartti</Navbar.Brand>
           </Navbar>
         </div>
-
         <div className="container" align="center">
           <Route exact path="/" render={() => <Home />}/>
           <Route exact path="/times" render={() => <TimesList />} />
-          <Route exact path="/training" render={() => <StopWatch />} />
+          <Route exact path="/training" render={() => <TrainingOutside />} />
           <Route exact path="/settings" render={() => <SettingsMenu />} />
         </div>
       </Router>
