@@ -26,7 +26,6 @@ export const useTimer = () => {
   }
 }
 
-
 export const useStopwatch = () => {
   const { timerOn, setTimerOn, time, setTime } = useTimer()
 

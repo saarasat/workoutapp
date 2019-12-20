@@ -1,8 +1,0 @@
-POST http://localhost:3001/times
-Content-Type: application/json
-
-{
-  "id": 6,
-  "date": "4.11.2019",
-  "time": 0.7
-}

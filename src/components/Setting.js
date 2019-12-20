@@ -8,7 +8,7 @@ const Setting = ({ setModalVisible, modalToShow, setValue, nameOfValue, labelFor
     <div className="container">
       <Card.Header as={Row} onClick={() => setModalVisible(true)}>
         <Col>{labelForValue}</Col>
-        <Col>{currentValue ? currentValue.age : 0}</Col>
+        <Col>{currentValue ? currentValue.height : 0}</Col>
       </Card.Header>
       <Modal show={modalToShow} onHide={() => setModalVisible(false)} centered area-labelledby="first">
         <Form onSubmit={setValue}>

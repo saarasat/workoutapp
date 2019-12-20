@@ -1,24 +1,20 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Home from './components/Home'
-import TrainingOutside from './components/TrainingOutside'
 import { Nav, Navbar } from 'react-bootstrap'
 import SettingsMenu from './components/SettingsMenu'
-import TimesList from './components/TimesList'
+import WorkoutList from './components/WorkoutList'
+import Workout from './components/Workout'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { initializeWeights } from './reducers/weightReducer'
-import { initializeHeights } from './reducers/heightReducer'
-import { initializeAges } from './reducers/ageReducer'
+import { initializeSettings } from './reducers/settingsReducer'
 import { initializeTimes } from './reducers/timeReducer'
 
 
-export const MapContainer = (props) => {
+export const App = (props) => {
 
   useEffect(() => {
     props.initializeTimes()
-    props.initializeWeights('weights')
-    props.initializeHeights('heights')
-    props.initializeAges('ages')
+    props.initializeSettings('settings')
   })
 
 
@@ -33,8 +29,8 @@ export const MapContainer = (props) => {
         </div>
         <div className="container" align="center">
           <Route exact path="/" render={() => <Home />}/>
-          <Route exact path="/times" render={() => <TimesList />} />
-          <Route exact path="/training" render={() => <TrainingOutside />} />
+          <Route exact path="/times" render={() => <WorkoutList />} />
+          <Route exact path="/training" render={() => <Workout />} />
           <Route exact path="/settings" render={() => <SettingsMenu />} />
         </div>
       </Router>
@@ -52,4 +48,4 @@ export const MapContainer = (props) => {
   )
 }
 
-export default connect(null, { initializeAges, initializeHeights, initializeWeights, initializeTimes })(MapContainer)
+export default connect(null, { initializeSettings, initializeTimes })(App)

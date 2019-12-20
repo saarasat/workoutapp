@@ -1,0 +1,10 @@
+POST http://localhost:3002/api/times
+content-Type: application/json
+
+{
+  "sport": "Waliking",
+  "time": "12:22",
+  "date": "2019-12-19T22:46:33.102Z",
+  "day": "Fri",
+  "month": "December"
+}

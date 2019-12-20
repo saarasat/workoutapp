@@ -1,15 +1,15 @@
 import React from 'react'
 
 
-const Total = ({ array, time, measurement }) => {
+const Total = ({ values, time, measurement }) => {
 
   const countTotal = () => {
-    return array.reduce((total, currentValue) => total + Number(currentValue.time),0)
+    return values.reduce((total, currentValue) => total + Number(currentValue.time),0)
   }
 
   return (
     <div className="container">
-      {time} {array ? countTotal() : 0} {measurement}
+      {time} {values ? countTotal() : 0} {measurement}
     </div>
   )
 
