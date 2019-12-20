@@ -1,11 +1,11 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import timeReducer from './reducers/timeReducer'
+import workoutReducer from './reducers/workoutReducer'
 import settingsReducer from './reducers/settingsReducer'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 const reducer = combineReducers({
-  times: timeReducer,
+  workouts: workoutReducer,
   settings: settingsReducer
 })
 

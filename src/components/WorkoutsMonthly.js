@@ -2,10 +2,19 @@ import React from 'react'
 import { Table } from 'react-bootstrap'
 
 
-const MonthlyWorkouts = (props) => {
+const MonthlyWorkouts = ({ workouts }) => {
+
+  const countTotal = () => {
+    const timesOnly = workouts.map(workout => workout.time)
+    const hours = timesOnly.map(time => time.split(":"))
+
+    console.log(hours)
+    return workouts.reduce((total, currentValue) => total + Number(currentValue.time),0)
+  }
 
   return (
     <div>
+      Total {countTotal}
       <Table>
         <thead>
           <tr>
@@ -16,7 +25,7 @@ const MonthlyWorkouts = (props) => {
           </tr>
         </thead>
         <tbody className="result-list">
-        {props.times.map(item =>
+        {workouts.map(item =>
           <tr key={item.id}>
             <td>{item.sport}</td>
             <td>{item.day}</td>

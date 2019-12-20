@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { createNewTime } from '../reducers/timeReducer'
+import { createNewWorkout } from '../reducers/workoutReducer'
 import Headline from './Headline'
 import { Button, Col, Form, FormControl, InputGroup, Row } from 'react-bootstrap'
 
@@ -47,7 +47,7 @@ const Workout = (props) => {
     const date = new Date()
     const day = weekdays[date.getDay()]
     const month = months[date.getMonth()]
-    props.createNewTime(sport, time, date, day, month)
+    props.createNewWorkout(sport, time, date, day, month)
 
   }
 
@@ -109,4 +109,4 @@ const Workout = (props) => {
 
 }
 
-export default connect (null, { createNewTime })(Workout)
+export default connect (null, { createNewWorkout })(Workout)

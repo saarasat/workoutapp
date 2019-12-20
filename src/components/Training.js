@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { createNewTime } from '../reducers/timeReducer'
+import { createNewWorkout } from '../reducers/workoutReducer'
 import { useStopwatch } from '../hooks/index'
 import Headline from './Headline'
 import { Button } from 'react-bootstrap'
@@ -44,11 +44,11 @@ const Training = (props) => {
 
   const create = async (event) => {
     event.preventDefault()
-    const newTime = time
+    const time = time
     const date = new Date()
     const day = weekdays[date.getDay()]
     const month = months[date.getMonth()]
-    props.createNewTime(newTime, date, day, month)
+    props.createNewWorkout(time, date, day, month)
   }
 
   let minutes = (('0' + Math.floor(time / 60) % 60)).slice(-2)
@@ -75,4 +75,4 @@ const Training = (props) => {
   )
 }
 
-export default connect (null, { createNewTime })(Training)
+export default connect (null, { createNewWorkout })(Training)

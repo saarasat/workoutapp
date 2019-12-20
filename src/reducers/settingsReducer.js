@@ -27,9 +27,9 @@ export const createNewSettings = (age, weight, height) => {
 }
 
 
-export const initializeSettings = (value) => {
+export const initializeSettings = () => {
   return async (dispatch) => {
-    const data = await settingsService.getAll(value)
+    const data = await settingsService.getAll('settings')
     dispatch({
       data,
       type: 'INITIALIZE'

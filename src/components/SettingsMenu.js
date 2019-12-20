@@ -2,24 +2,25 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import Headline from './Headline'
 import Setting from './Setting'
+import { Button } from 'react-bootstrap'
+
 import { createNewSettings } from '../reducers/settingsReducer'
 
 
 const SettingsMenu = (props) => {
-  const [ageShow, setAgeShow] = useState(false)
-  const [heightShow, setHeightShow] = useState(false)
-  const [weightShow, setWeightShow] = useState(false)
+  const [ageModal, setAgeModal] = useState(false)
+  const [heightModal, setHeightModal] = useState(false)
+  const [weightModal, setWeightModal] = useState(false)
+  const [age, setAge] = useState(0)
+  const [height, setHeight] = useState(0)
+  const [weight, setWeight] = useState(0)
 
   const createSettings = async (event) => {
     event.preventDefault()
-    const newAge = event.target.age.value
-    const newHeight = event.target.height.value
-    const newWeight = event.target.weight.value
-    const newSettings = {age: newAge, weight: newWeight, height: newHeight}
-    props.createNewSettings('settings', newSettings)
-    setAgeShow(false)
-    setHeightShow(false)
-    setWeightShow(false)
+    props.createNewSettings(age, weight, height)
+    setAgeModal(false)
+    setHeightModal(false)
+    setWeightModal(false)
   }
 
   const createOptions = (start, end) => {
@@ -37,9 +38,10 @@ const SettingsMenu = (props) => {
   return (
     <div className="container">
       <Headline text="Set profile"></Headline>
-      <Setting setModalVisible={setAgeShow} modalToShow={ageShow} nameOfValue="age" labelForValue="Age : " valuesForSelect={ageOptions} currentValue={30}></Setting>
-      <Setting setModalVisible={setHeightShow} modalToShow={heightShow} nameOfValue="height" labelForValue="Height (cm) : " valuesForSelect={heightOptions} currentValue={170}></Setting>
-      <Setting setModalVisible={setWeightShow} modalToShow={weightShow} nameOfValue="weight" labelForValue="Weight (kg) : " valuesForSelect={weightOptions} currentValue={70}></Setting>
+      <Setting visible={setAgeModal} modal={ageModal} label="Age : " options={ageOptions}></Setting>
+      <Setting visible={setHeightModal} modal={heightModal} label="Height (cm) : " options={heightOptions}></Setting>
+      <Setting visible={setWeightModal} modal={weightModal} label="Weight (kg) : " options={weightOptions}></Setting>
+      <Button onClick={createSettings} variant="save">Save</Button>
     </div>
   )
 }

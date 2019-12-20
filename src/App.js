@@ -7,14 +7,14 @@ import WorkoutList from './components/WorkoutList'
 import Workout from './components/Workout'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { initializeSettings } from './reducers/settingsReducer'
-import { initializeTimes } from './reducers/timeReducer'
+import { initializeWorkouts } from './reducers/workoutReducer'
 
 
 export const App = (props) => {
 
   useEffect(() => {
-    props.initializeTimes()
-    props.initializeSettings('settings')
+    props.initializeWorkouts()
+    props.initializeSettings()
   })
 
 
@@ -29,7 +29,7 @@ export const App = (props) => {
         </div>
         <div className="container" align="center">
           <Route exact path="/" render={() => <Home />}/>
-          <Route exact path="/times" render={() => <WorkoutList />} />
+          <Route exact path="/workouts" render={() => <WorkoutList />} />
           <Route exact path="/training" render={() => <Workout />} />
           <Route exact path="/settings" render={() => <SettingsMenu />} />
         </div>
@@ -38,14 +38,15 @@ export const App = (props) => {
         <Navbar className="justify-content-center" fixed="bottom"  variant="dark" bg="dark" >
           <Nav variant="save">
             <Nav.Link href="/training">Training</Nav.Link>
-            <Nav.Link href="/times">Reports</Nav.Link>
+            <Nav.Link href="/workouts">Reports</Nav.Link>
             <Nav.Link href="/settings">Profile</Nav.Link>
           </Nav>
         </Navbar>
       </div>
+    
     </div>
 
   )
 }
 
-export default connect(null, { initializeSettings, initializeTimes })(App)
+export default connect(null, { initializeSettings, initializeWorkouts })(App)

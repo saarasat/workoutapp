@@ -2,33 +2,34 @@ import React from 'react'
 import { Button, Card, Col, Form, Modal, Row } from 'react-bootstrap'
 
 
-const Setting = ({ setModalVisible, modalToShow, setValue, nameOfValue, labelForValue, currentValue, valuesForSelect }) => {
+const Setting = ({ setValue, visible, modal, label, options }) => {
+
 
   return (
     <div className="container">
-      <Card.Header as={Row} onClick={() => setModalVisible(true)}>
-        <Col>{labelForValue}</Col>
-        <Col>{currentValue ? currentValue.height : 0}</Col>
+      <Card.Header as={Row} onClick={() => visible(true)}>
+        <Col>{label}</Col>
+        <Col>0</Col>
       </Card.Header>
-      <Modal show={modalToShow} onHide={() => setModalVisible(false)} centered area-labelledby="first">
+      <Modal show={modal} onHide={() => visible(false)} centered>
         <Form onSubmit={setValue}>
           <Modal.Header closeButton>
-            <Form.Group as={Row} controlId={labelForValue}>
-              <Col md={8}>
-                <Form.Label>{labelForValue}</Form.Label>
+            <Row>
+              <Col>
+                <Form.Label>{label}</Form.Label>
               </Col>
-              <Col md={4}>
-                <Form.Control name={nameOfValue} as="select">
-                  {valuesForSelect.map(age =>
-                    <option key={age}>{age}</option>
+              <Col>
+                <Form.Control as="select">
+                  {options.map(option =>
+                    <option key={option}>{option}</option>
                   )}
                 </Form.Control>
               </Col>
-            </Form.Group>
+            </Row>
           </Modal.Header>
           <Modal.Footer className="justify-content-center">
-            <Button onClick={() => setModalVisible(false)} variant="secondary">Cancel</Button>
-            <Button type="submit" variant="save">Save changes</Button>
+            <Button onClick={() => visible(false)} variant="secondary">Cancel</Button>
+            <Button type="submit" variant="save">Ok</Button>
           </Modal.Footer>
         </Form>
       </Modal>

@@ -1,16 +1,7 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-const url = process.env.MONGO_DB
-
-mongoose.connect(url, { useNewUrlParser: true })
-  .then(result => {
-    console.log('Connected to database')
-  })
-  .catch((error) => {
-    console.log('error connecting to database: ', error.message)
-  })
+const workoutSchema = new mongoose.Schema({
   
-  const workoutSchema = new mongoose.Schema({
     sport: String,
     time: String,
     date: Date,

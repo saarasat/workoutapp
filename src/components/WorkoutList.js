@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import { connect } from 'react-redux'
 import { Accordion, Card, Table } from 'react-bootstrap'
 import Headline from './Headline'
-import Total from './Total'
 import MonthlyWorkouts from './WorkoutsMonthly'
 
 const WorkoutList = (props) => {
@@ -34,12 +33,8 @@ const WorkoutList = (props) => {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={month}>
               <Card.Body>
-              <Total></Total>
               {byMonth != '' ? 
-              <MonthlyWorkouts 
-              month={month} 
-              times={props.times.filter(time => time.month == month)}
-              ></MonthlyWorkouts> 
+              <MonthlyWorkouts month={month} workouts={props.workouts.filter(time => time.month == month)}/>
               : ''}
               </Card.Body>
             </Accordion.Collapse>
@@ -51,14 +46,10 @@ const WorkoutList = (props) => {
   )
 }
 
-
 const mapStateToProps = (state) => {
   return {
-    times: state.times
+    workouts: state.workouts
   }
 }
-
-
-
 
 export default connect(mapStateToProps)(WorkoutList)
