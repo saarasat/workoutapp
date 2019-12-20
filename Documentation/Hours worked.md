@@ -26,4 +26,7 @@
 | 7.11. | 5    | Added server-services for workout-times and settings-menu |
 | 8.11. | 2    | Started working on Main Menu |
 | 8.11. | 2    | Worked out issues with Google api |
-| Total | 49   | 
+| 19.12.| 3    | Initialized database |
+|       | 2    | Added functionality for saving sport and formatted date and time |
+|       | 1    | Added Workout-Schema and saving to db | 
+| Total | 55   | 
