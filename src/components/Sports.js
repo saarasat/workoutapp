@@ -967,6 +967,407 @@ const calories = [
     "70": 352,
     "82": 409,
     "93": 465
-  }
+  },
+  {
+    "sport": "Canoeing, light",
+    "type": "Outdoor sports", 
+    "59": 177, 
+    "70": 211,
+    "82": 245,
+    "93": 279
+  },
+  {
+    "sport": "Canoeing, moderate",
+    "type": "Outdoor sports", 
+    "59": 413,
+    "70": 493,
+    "82": 572,
+    "93": 651
+  },
+  {
+    "sport": "Canoeing, fast",
+    "type": "Outdoor sports", 
+    "59": 708,
+    "70": 844,
+    "82": 981,
+    "93": 111,
+  },
+  {
+    "sport": "Kayaking",
+    "type": "Outdoor sports", 
+    "59": 295,
+    "70": 352,
+    "82": 409,
+    "93": 465
+  },
+  {
+    "sport": "Sailing, competitive",
+    "type": "Outdoor sports", 
+    "59": 295,
+    "70": 352,
+    "82": 409,
+    "93": 465
+  },
+  {
+    "sport": "Sailing, ocean sailing",
+    "type": "Outdoor sports", 
+    "59": 177, 
+    "70": 211,
+    "82": 245,
+    "93": 279
+  },
+  {
+    "sport": "Skiing",
+    "type": "Winter sports", 
+    "59": 354, 
+    "70": 422,
+    "82": 490,
+    "93": 558
+  },
+  {
+    "sport": "Water skiing",
+    "type": "Outdoor sports", 
+    "59": 354,
+    "70": 422,
+    "82": 490,
+    "93": 558
+  },
+  {
+    "sport": "Ski mobiling",
+    "type": "Winter sports", 
+    "59": 413,
+    "70": 493,
+    "82": 572,
+    "93": 651
+  },
+  {
+    "sport": "Snorkeling",
+    "type": "Water sports", 
+    "59": 295,
+    "70": 352,
+    "82": 409,
+    "93": 465
+  },
+  {
+    "sport": "Surfing",
+    "type": "Water sports", 
+    "59": 177,
+    "70": 211,
+    "82": 245,
+    "93": 279
+  },
+  {
+    "sport": "Swimming, backstroke",
+    "type": "Water sports", 
+    "59": 413,
+    "70": 493,
+    "82": 572,
+    "93": 651
+  },
+  {
+    "sport": "Swimming, breaststroke",
+    "type": "Water sports", 
+    "59": 590,
+    "70": 704,
+    "82": 817,
+    "93": 931
+  },
+  {
+    "sport": "Swimming, butterfly",
+    "type": "Water sports", 
+    "59": 649,
+    "70": 774,
+    "82": 899,
+    "93": 1024
+  },
+  {
+    "sport": "Swimming, leisurely",
+    "type": "Water sports", 
+    "59": 354,
+    "70": 422,
+    "82": 490,
+    "93": 558
+  },
+  {
+    "sport": "Swimming, sidestroke",
+    "type": "Water sports", 
+    "59": 472,
+    "70": 563,
+    "82": 654,
+    "93": 745
+  },
+  {
+    "sport": "Water polo",
+    "type": "Water sports", 
+    "59": 590,
+    "70": 704,
+    "82": 817,
+    "93": 931
+  },
+  {
+    "sport": "Water volleyball",
+    "type": "Water sports", 
+    "59": 177,
+    "70": 211,
+    "82": 245,
+    "93": 279
+  },
+  {
+    "sport": "Water jogging",
+    "type": "Water sports", 
+    "59": 472, 
+    "70": 563,
+    "82": 654,
+    "93": 754
+  },
+  {
+    "sport": "Ice skating, slow",
+    "type": "Winter sports", 
+    "59": 325,
+    "70": 387,
+    "82": 449,
+    "93": 512
+  },
+  {
+    "sport": "Ice skating, moderate pace",
+    "type": "Winter sports", 
+    "59": 413,
+    "70": 493,
+    "82": 572,
+    "93": 651
+  },
+  {
+    "sport": "Ice skating, fast pace",
+    "type": "Winter sports", 
+    "59": 531,
+    "70": 633,
+    "82": 735,
+    "93": 838
+  },
+  {
+    "sport": "Speed skating, competitive",
+    "type": "Winter sports", 
+    "59": 885,
+    "70": 1056,
+    "82": 1226,
+    "93": 1396
+  },
+  {
+    "sport": "Skiing, slow",
+    "type": "Winter sports", 
+    "59": 413,
+    "70": 493,
+    "82": 572,
+    "93": 651
+  },
+  {
+    "sport": "Skiing, moderate",
+    "type": "Winter sports", 
+    "59": 472,
+    "70": 563,
+    "82": 654,
+    "93": 745
+  },
+  {
+    "sport": "Skiing, fast",
+    "type": "Winter sports", 
+    "59": 531,
+    "70": 633,
+    "82": 735,
+    "93": 838
+  },
+  {
+    "sport": "Skiing, racing",
+    "type": "Winter sports", 
+    "59": 826,
+    "70": 985,
+    "82": 1144,
+    "93": 1303
+  },
+  {
+    "sport": "Downhill skiing, light",
+    "type": "Winter sports", 
+    "59": 295,
+    "70": 352,
+    "82": 409,
+    "93": 465
+  },
+  {
+    "sport": "Downhill skiing, moderate",
+    "type": "Winter sports", 
+    "59": 354,
+    "70": 422,
+    "82": 490,
+    "93": 558
+  },
+  {
+    "sport": "Downhill skiing, racing",
+    "type": "Winter sports", 
+    "59": 472,
+    "70": 563,
+    "82": 654,
+    "93": 745
+  },
+  {
+    "sport": "Sledding, tobagganing",
+    "type": "Winter sports", 
+    "59": 413, 
+    "70": 493,
+    "82": 572,
+    "93": 651
+  },
+  {
+    "sport": "Snow shoeing",
+    "type": "Winter sports", 
+    "59": 472,
+    "70": 563,
+    "82": 654,
+    "93": 745
+  },
+  {
+    "sport": "Snowmobiling",
+    "type": "Winter sports", 
+    "59": 207,
+    "70": 246,
+    "82": 286,
+    "93": 326
+  },
+  {
+    "sport": "General housework",
+    "type": "Everyday activities", 
+    "59": 207,
+    "70": 246,
+    "82": 286,
+    "93": 326
+  },
+  {
+    "sport": "Painting",
+    "type": "Everyday activities", 
+    "59": 266,
+    "70": 317,
+    "82": 368,
+    "93": 419
+  },
+  {
+    "sport": "Walking/running, Playing with animals",
+    "type": "Training with animals", 
+    "59": 236,
+    "70": 281,
+    "82": 327,
+    "93": 372
+  },
+  {
+    "sport": "Mowing lawn, pushing lawnmower",
+    "type": "Everyday activities", 
+    "59": 325,
+    "70": 387,
+    "82": 449,
+    "93": 512
+  },
+  {
+    "sport": "Mowing lawn, riding lawnmower",
+    "type": "Everyday activities", 
+    "59": 148,
+    "70": 176,
+    "82": 204,
+    "93": 326
+  },
+  {
+    "sport": "",
+    "type": "", 
+    "59": 
+    "70": 
+    "82": 
+    "93": 
+  },
+  {
+    "sport": "",
+    "type": "", 
+    "59": 
+    "70": 
+    "82": 
+    "93": 
+  },
+  {
+    "sport": "",
+    "type": "", 
+    "59": 
+    "70": 
+    "82": 
+    "93": 
+  },
+  {
+    "sport": "",
+    "type": "", 
+    "59": 
+    "70": 
+    "82": 
+    "93": 
+  },
+  {
+    "sport": "",
+    "type": "", 
+    "59": 
+    "70": 
+    "82": 
+    "93": 
+  },
+  {
+    "sport": "",
+    "type": "", 
+    "59": 
+    "70": 
+    "82": 
+    "93": 
+  },
+  {
+    "sport": "",
+    "type": "", 
+    "59": 
+    "70": 
+    "82": 
+    "93": 
+  },
+  {
+    "sport": "",
+    "type": "", 
+    "59": 
+    "70": 
+    "82": 
+    "93": 
+  },
+  {
+    "sport": "",
+    "type": "", 
+    "59": 
+    "70": 
+    "82": 
+    "93": 
+  },
+  {
+    "sport": "",
+    "type": "", 
+    "59": 
+    "70": 
+    "82": 
+    "93": 
+  },
+  {
+    "sport": "",
+    "type": "", 
+    "59": 
+    "70": 
+    "82": 
+    "93": 
+  },
+  {
+    "sport": "",
+    "type": "", 
+    "59": 
+    "70": 
+    "82": 
+    "93": 
+  },
+
 ]
 
