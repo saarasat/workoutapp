@@ -29,4 +29,6 @@
 | 19.12.| 3    | Initialized database |
 |       | 2    | Added functionality for saving sport and formatted date and time |
 |       | 1    | Added Workout-Schema and saving to db | 
-| Total | 55   | 
+| 20.12.| 2    | Added Settings-Schema and saving to database |
+| 21.12.| 3    | Searched for sport type & calories listing, formatted it |
+| Total | 60   | 
