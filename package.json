@@ -31,7 +31,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --verbose",
     "eject": "react-scripts eject",
     "server": "json-server -p3002 db.json",
     "lint": "eslint ."
@@ -54,7 +53,6 @@
   "devDependencies": {
     "deep-freeze": "0.0.1",
     "eslint": "^6.6.0",
-    "jest": "^24.9.0",
     "json-server": "^0.15.1",
     "nodemon": "^1.19.4"
   }

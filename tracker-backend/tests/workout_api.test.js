@@ -64,6 +64,25 @@ test('a valid workout can be added ', async () => {
   )
 })
 
+test('a workout without time cannot be added ', async () => {
+  const newWorkout = {
+    sport: "Valid workout",
+    date: new Date(),
+    day: "Sat",
+    month:"January"
+  }
+
+  await api
+    .post('/api/workouts')
+    .send(newWorkout)
+    .expect(400)
+
+  const response = await api.get('/api/workouts')
+
+  expect(response.body.length).toBe(helper.initialWorkouts.length)
+
+})
+
 
 afterAll(() => {
   mongoose.connection.close()

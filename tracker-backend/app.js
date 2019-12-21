@@ -2,6 +2,7 @@ const config = require('./utils/config')
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
+const cors = require('cors')
 const workoutsRouter = require('./controllers/workouts')
 const settingsRouter = require('./controllers/settings')
 const middleware = require('./utils/middleware')
@@ -17,7 +18,7 @@ mongoose.connect(config.MONGO_DB, { useNewUrlParser: true })
     console.log('error connection to MongoDB:', error.message)
   })
 
-
+app.use(cors())
 app.use(express.static('build'))
 app.use(bodyParser.json())
 

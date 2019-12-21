@@ -3,7 +3,7 @@ import React from 'react'
 
 const Headline = ({ text }) => {
   return (
-    <div>
+    <div className="container">
       <h1>{text}</h1>
     </div>
   )

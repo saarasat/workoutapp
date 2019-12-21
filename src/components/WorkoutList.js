@@ -1,26 +1,13 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { Accordion, Card, Table } from 'react-bootstrap'
+import { Accordion, Card } from 'react-bootstrap'
 import Headline from './Headline'
 import MonthlyWorkouts from './WorkoutsMonthly'
+import { reversedMonths as months } from './TimeUnits'
+
 
 const WorkoutList = (props) => {
   const [byMonth, setByMonth] = useState('')
-
-  const months = [
-    'December',
-    'November',
-    'October',
-    'September',
-    'August',
-    'July',
-    'June',
-    'May',
-    'April',
-    'March',
-    'February',
-    'January'
-  ]
 
   return (
     <div>
@@ -33,9 +20,9 @@ const WorkoutList = (props) => {
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={month}>
               <Card.Body>
-              {byMonth != '' ? 
-              <MonthlyWorkouts month={month} workouts={props.workouts.filter(time => time.month == month)}/>
-              : ''}
+                {byMonth !== '' ?
+                  <MonthlyWorkouts month={month} workouts={props.workouts.filter(time => time.month === month)}/>
+                  : ''}
               </Card.Body>
             </Accordion.Collapse>
           </Accordion>

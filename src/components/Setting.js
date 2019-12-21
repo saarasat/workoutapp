@@ -2,24 +2,24 @@ import React from 'react'
 import { Button, Card, Col, Form, Modal, Row } from 'react-bootstrap'
 
 
-const Setting = ({ setValue, visible, modal, label, options }) => {
+const Setting = ({ onChange, onSubmit, visible, modal, label, currentValue, options, value }) => {
 
 
   return (
     <div className="container">
       <Card.Header as={Row} onClick={() => visible(true)}>
         <Col>{label}</Col>
-        <Col>0</Col>
+        <Col>{currentValue}</Col>
       </Card.Header>
       <Modal show={modal} onHide={() => visible(false)} centered>
-        <Form onSubmit={setValue}>
+        <Form className="justify-content-center" onSubmit={onSubmit}>
           <Modal.Header closeButton>
             <Row>
               <Col>
                 <Form.Label>{label}</Form.Label>
               </Col>
-              <Col>
-                <Form.Control as="select">
+              <Col md={8}>
+                <Form.Control onChange={onChange} name="age" value={value} as="select">
                   {options.map(option =>
                     <option key={option}>{option}</option>
                   )}

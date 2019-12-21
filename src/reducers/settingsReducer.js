@@ -26,7 +26,6 @@ export const createNewSettings = (age, weight, height) => {
   }
 }
 
-
 export const initializeSettings = () => {
   return async (dispatch) => {
     const data = await settingsService.getAll('settings')
