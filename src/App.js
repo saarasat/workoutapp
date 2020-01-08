@@ -4,6 +4,7 @@ import Home from './components/Home'
 import { Nav, Navbar } from 'react-bootstrap'
 import SettingsMenu from './components/SettingsMenu'
 import WorkoutList from './components/WorkoutList'
+import SportsMenu from './components/SportsMenu'
 import Workout from './components/Workout'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { initializeSettings } from './reducers/settingsReducer'
@@ -30,7 +31,7 @@ export const App = (props) => {
         <div className="container" align="center">
           <Route exact path="/" render={() => <Home />}/>
           <Route exact path="/workouts" render={() => <WorkoutList />} />
-          <Route exact path="/training" render={() => <Workout />} />
+          <Route exact path="/training" render={() => <SportsMenu />} />
           <Route exact path="/settings" render={() => <SettingsMenu />} />
         </div>
       </Router>
