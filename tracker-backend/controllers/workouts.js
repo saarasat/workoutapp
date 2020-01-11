@@ -20,6 +20,7 @@ workoutsRouter.post('/', (request, response) => {
   const workout = new Workout({
     sport: body.sport,
     time: body.time,
+    calories: body.calories,
     date: body.date,
     day: body.day,
     month: body.month

@@ -15,6 +15,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^4.13.20",
+    "node.js": "0.0.0",
     "postman": "^0.2.0"
   },
   "devDependencies": {

@@ -12,6 +12,11 @@ const workoutSchema = new mongoose.Schema({
     minlength: 3,
     require: true
   },
+  calories: {
+    type: Number,
+    minlength: 1,
+    require: true
+  },
   date: {
     type: Date,
     require: true
