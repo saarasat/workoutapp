@@ -4,7 +4,7 @@ import { Table } from 'react-bootstrap'
 
 const MonthlyWorkouts = ({ workouts }) => {
 
-  const countTotal = () => {
+  const countTotalTime = () => {
     const timesOnly = workouts.map(workout => workout.time.split(':'))
     const hours = timesOnly.reduce((total, time) => total + Number(time[0]),0)
     const minutes = timesOnly.reduce((total, time) => total + Number(time[1]),0)
@@ -16,11 +16,22 @@ const MonthlyWorkouts = ({ workouts }) => {
     return totalTime + ':' + totalMinutes
   }
 
+  const countTotalCalories = () => {
+    const calories = workouts.map(workout => workout.calories)
+    if (calories.length > 0) {
+      return calories.reduce((total, value) => {
+        if (value !== undefined) return total + value
+        return total
+    })}
+    return 0
+  } 
+  
   return (
     <div>
       <div className="container">
-        <p>Workouts: {workouts.length}</p>
-        <p>Time: {countTotal(workouts)}</p>
+        <p>Workouts: {workouts.length} Time: {countTotalTime()} Calories: {countTotalCalories()}</p>
+        <p></p>
+      
       </div>
       <Table>
         <tbody className="result-list">
@@ -28,8 +39,8 @@ const MonthlyWorkouts = ({ workouts }) => {
             <tr key={item.id}>
               <td>{item.sport}</td>
               <td>{item.day}</td>
-              <td>{item.date.getDate() + '.' + (item.date.getMonth()+1) + '.' + item.date.getFullYear()}</td>
               <td>{item.time}</td>
+              <td>{item.calories}</td>
             </tr>
           )}
         </tbody>

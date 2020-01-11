@@ -45,7 +45,7 @@ const Training = (props) => {
   const create = async (event) => {
     event.preventDefault()
     const time = time
-    const date = new Date()
+    const date = new Date() 
     const day = weekdays[date.getDay()]
     const month = months[date.getMonth()]
     props.createNewWorkout(time, date, day, month)

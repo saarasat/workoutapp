@@ -6,6 +6,7 @@ import MonthlyWorkouts from './WorkoutsMonthly'
 import { reversedMonths as months } from './TimeUnits'
 
 
+
 const WorkoutList = (props) => {
   const [byMonth, setByMonth] = useState('')
 
@@ -15,7 +16,7 @@ const WorkoutList = (props) => {
       <div>
         {months.map(month =>
           <Accordion key={month}>
-            <Accordion.Toggle as={Card.Header} variant="link" eventKey={month} onClick={setByMonth}>
+            <Accordion.Toggle className="card-header" as={Card.Header} variant="link" eventKey={month} onClick={setByMonth}>
               {month}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={month}>

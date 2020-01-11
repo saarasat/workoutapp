@@ -5,7 +5,9 @@ const settingsReducer = (state = [], action) => {
   case 'INITIALIZE':
     return action.data
   case 'ADD_NEW_SETTINGS':
+    console.log(state)
     state = [...state, action.data]
+    console.log(state)
     return state
   default:
     return state

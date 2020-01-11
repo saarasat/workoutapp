@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import Home from './components/Home'
-import { Nav, Navbar } from 'react-bootstrap'
 import SettingsMenu from './components/SettingsMenu'
 import WorkoutList from './components/WorkoutList'
-import SportsMenu from './components/SportsMenu'
 import Workout from './components/Workout'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import { initializeSettings } from './reducers/settingsReducer'
 import { initializeWorkouts } from './reducers/workoutReducer'
-
 
 export const App = (props) => {
 
@@ -18,35 +15,26 @@ export const App = (props) => {
     props.initializeSettings()
   })
 
-
   return (
     <div className="app">
-
       <Router>
-        <div>
-          <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="/">Sporttivartti</Navbar.Brand>
-          </Navbar>
+        <div className="navbar-top">
+          <Link to="/">Sporttivartti</Link>
         </div>
-        <div className="container" align="center">
-          <Route exact path="/" render={() => <Home />}/>
+        <div className="body">
+          <Route exact path="/" component={Home}>
+          </Route> 
           <Route exact path="/workouts" render={() => <WorkoutList />} />
-          <Route exact path="/training" render={() => <SportsMenu />} />
+          <Route exact path="/training/:type" render={({match}) => <Workout type={(match.params.type)}/>} />
           <Route exact path="/settings" render={() => <SettingsMenu />} />
         </div>
+        <div className="navbar">
+          <Link to="/">Training</Link>
+          <Link to="/workouts">Reports</Link>
+          <Link to="/settings">Profile</Link>
+        </div>
       </Router>
-      <div>
-        <Navbar className="justify-content-center" fixed="bottom"  variant="dark" bg="dark" >
-          <Nav variant="save">
-            <Nav.Link href="/training">Training</Nav.Link>
-            <Nav.Link href="/workouts">Reports</Nav.Link>
-            <Nav.Link href="/settings">Profile</Nav.Link>
-          </Nav>
-        </Navbar>
-      </div>
-    
     </div>
-
   )
 }
 
