@@ -18,9 +18,9 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
     console.log('error connection to MongoDB:', error.message)
   })
 
-app.use(cors())
 app.use(express.static('build'))
 app.use(bodyParser.json())
+app.use(cors())
 
 app.use('/api/workouts', workoutsRouter)
 app.use('/api/settings', settingsRouter)
