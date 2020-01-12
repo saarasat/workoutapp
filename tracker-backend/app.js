@@ -8,9 +8,9 @@ const settingsRouter = require('./controllers/settings')
 const middleware = require('./utils/middleware')
 const mongoose = require('mongoose')
 
-console.log('connecting to', config.MONGO_DB)
+console.log('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGO_DB, { useNewUrlParser: true })
+mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
     console.log('connected to MongoDB')
   })

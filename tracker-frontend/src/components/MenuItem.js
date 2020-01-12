@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 
 const MenuItem = ({ type, icon, sports }) => {
 
-
   return (
     <>
       <Card bg="dark" >
