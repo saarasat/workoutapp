@@ -24,7 +24,7 @@ const Stopwatch = () => {
       <div className="container">
         <h1>Duration</h1>
         <h2>{minutes}:{seconds}:{tensOfSeconds}</h2>
-        <Button onClick={handleStartPause} variant={timerOn ? "pause" : "save"} className="btn-circle">
+        <Button onClick={handleStartPause} variant={timerOn ? "pause" : "start"} className="btn-circle">
           {timerOn ? 'Pause' : 'Start'}
         </Button>
         <Button onClick={resetTimer} variant="change" className="btn-circle">

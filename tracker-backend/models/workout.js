@@ -23,7 +23,7 @@ const workoutSchema = new mongoose.Schema({
     require: true
   },
   date: {
-    type: String,
+    type: Date,
     require: true
   },
   day: {
@@ -34,6 +34,7 @@ const workoutSchema = new mongoose.Schema({
     type: String,
     require: true
   }
+  
 })
 
 workoutSchema.set('toJSON', {

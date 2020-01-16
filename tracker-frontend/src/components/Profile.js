@@ -56,8 +56,7 @@ const Profile = (props) => {
               </Form.Control>
             </Col>
           </Row>
-          <br></br>
-          <Button type="submit" variant="save">Save</Button>
+          <button type="submit" className="button-save">Save</button>
         </Form>
       </div>
     </div>

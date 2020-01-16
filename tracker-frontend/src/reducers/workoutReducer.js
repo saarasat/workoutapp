@@ -2,12 +2,17 @@
 
 import settingsService from '../services/settingsService'
 
+const byTime = (d1, d2) => d2.date-d1.date
+
 const workoutReducer = (state = [], action) => {
   switch (action.type) {
   case 'INITIALIZE_WORKOUTS':
-    return action.data.reverse()
+    const data = action.data.map(time => ({ id:time.id, sport: time.sport, type: time.type, calories: time.calories, time: time.time, date: new Date(time.date), day: time.day, month: time.month })).sort(byTime)
+    return data
   case 'ADD_NEW_WORKOUT':
-    return [...state, action.data]
+    const newWorkout = action.data
+    newWorkout.date = new Date(action.data.date)
+    return [...state, newWorkout]
   default:
     return state
   }
@@ -24,6 +29,7 @@ export const createNewWorkout = (sport, type, time, calories, date, day, month) 
       day,
       month
     }
+    console.log(newWorkout)
     const dispatchableWorkout = await settingsService.create('workouts', newWorkout)
     dispatch({
       data: dispatchableWorkout,

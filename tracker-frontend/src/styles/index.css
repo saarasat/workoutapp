@@ -2,8 +2,6 @@
 @import "nav.css";
 @import "buttons.css";
 @import "calendar.css";
-@import url(https://use.fontawesome.com/releases/v5.11.2/css/all.css);
-@import url(https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css);
 
 
 body {
@@ -55,7 +53,10 @@ a:hover {
   color: #00bf8a; 
 }
 
-
+.form {
+  text-align: left;
+  padding: 30px 30px 30px 40px;
+}
 
 @font-face {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;

@@ -1,9 +1,11 @@
 import React from 'react'
 import { Card, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-
+import { getIcon } from './Sports'
 
 const MenuItem = ({ type, icon }) => {
+
+
 
   return (
     <>
@@ -11,8 +13,9 @@ const MenuItem = ({ type, icon }) => {
         <Card.Header className="menu-header">
           <Link to={`/training/${type}`}>
             <Row>
-              <Col xs={3}><i className={icon}></i></Col>
+              <Col xs={3}>{getIcon(type)}</Col>
               <Col className="menu-sport">{type}</Col>
+              
             </Row>
           </Link>
         </Card.Header>

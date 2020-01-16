@@ -22,7 +22,7 @@ workoutsRouter.post('/', (request, response) => {
     type: body.type,
     time: body.time,
     calories: body.calories,
-    date: body.date,
+    date: new Date(body.date),
     day: body.day,
     month: body.month
   })

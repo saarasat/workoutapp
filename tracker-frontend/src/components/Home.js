@@ -7,9 +7,11 @@ const Home = () => {
   return (
     <div className="container">
       <h1>Add Workout</h1>
-      <div>
+      <div className="container">
         {types.map(item => 
-          <MenuItem key={item.type} type={item.type} icon={item.icon} />
+        <div key={item.type}>
+          <MenuItem key={item.type} type={item.type} />
+        </div>
         )}
       </div>
     </div>

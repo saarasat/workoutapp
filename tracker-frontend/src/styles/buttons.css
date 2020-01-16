@@ -3,7 +3,6 @@
   height: 80px;
   padding: 10px 10px;
   font-size: 1.3em;
-  color: white;
   line-height: 1.33;
   border-radius: 50%;
   border: 1px solid #212529;
@@ -12,23 +11,35 @@
 }
 
 .btn-change {
-  background-color:#00499B;
+  background-color:#26B9D1;
   color: white;
 }
 
-.btn-save {
+.btn-start {
   background-color:#00bf8a;
   color: white;
   border: none;
 }
 
 .btn-pause {
-  background-color:#B90C3D;
+  background-color:#DE685F;
   color: white;
 }
 
+.button-save {
+  margin: 1em;
+  background-color:#00bf8a;
+  color: white;
+  border: none;
+  padding: 0.5em 1em 0.5em 1em;
+  font-size: 1em;
+  border-radius: 8%;
+}
+
+
+
 .btn-xxl {
-  color:white;
+  
   padding: 1rem 1.5rem;
   font-size: 1.5rem;
 }

@@ -29,17 +29,18 @@ const Workout = (props) => {
     let minutes = event.target.minutes.value
     if (workoutDate === '') return
     if (hours < 10) {
-      hours = "0" + hours     } 
+      hours = "0" + hours     
+    } 
     if (minutes < 10) {
       minutes = "0" + minutes
     }
     const time = hours + ":" + minutes
     const calories = countCalories(sport, hours, minutes)
-    const dates = workoutDate.date.getDate() + "." + (workoutDate.date.getMonth()+1) + "."
+    const date = new Date(workoutDate.date)
     const type = props.type
     const day = weekdays[workoutDate.date.getDay()]
     const month = months[workoutDate.date.getMonth()]
-    props.createNewWorkout(sport, type, time, calories, dates, day, month)
+    props.createNewWorkout(sport, type, time, calories, date, day, month)
     setShowReport(true)
   }
 
@@ -75,16 +76,17 @@ const Workout = (props) => {
           <Row>
             <Col><Form.Label>Date</Form.Label></Col>
             <Col> {showDate === false ?
-            <Button onClick={() => setVisible(true)}>Set Date</Button>
+            <button className="button-save" onClick={() => setVisible(true)}>Set Date</button>
             : <p>Date set</p>} 
             </Col>
             <Modal show={visible} onHide={() => setVisible(false)}>
-              <Modal.Header closeButton>
+             
                 <ModalBody>
+                  <div>
                   <Calendar onClickDay={(returnValue, event) => changeDay(returnValue)} >
                   </Calendar>
+                  </div>
                 </ModalBody>
-              </Modal.Header>
               <Modal.Footer className="justify-content-center">
                 <Button onClick={() => setVisible(false)} variant="secondary">Cancel</Button>
                 <Button onClick={() => showDay()} variant="save"> Ok</Button>
@@ -142,9 +144,7 @@ const Workout = (props) => {
               </InputGroup>
             </Col>
             </Row> : ""}
-          <div className="container">
-            <Button variant="save" type="submit">Save</Button>
-          </div>
+            <button className="button-save" type="submit">Save</button>
         </Form>
       </div>
       <div>

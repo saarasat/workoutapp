@@ -1,55 +1,60 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDumbbell, faBiking, faMusic, faRunning, faHome, faVolleyballBall, faDog, faHiking, faEllipsisH, faSwimmer, faSkiing, faFistRaised } from '@fortawesome/free-solid-svg-icons'
 
-export const getIcon = (workout) => types.filter(type => type.type === workout.type).map(item => <i key={item.icon} className={item.icon}></i>)
+
+export const getIcon = (sportType) => {
+  return types.filter(type => type.type === sportType).map(item => item.icon)
+} 
 
 export const types = [
   {
     "type":"Gym",
-    "icon":"fas fa-dumbbell"
-  },
+    "icon":<FontAwesomeIcon key={1} className="menu-icon yellow" icon={faDumbbell} />
+  },  
   {
     "type":"Walking & running",
-    "icon":"fas fa-running"
+    "icon":<FontAwesomeIcon key={2} className="menu-icon red" icon={faRunning} />
   },
   {
     "type":"Cycling",
-    "icon":"fas fa-biking"
+    "icon":<FontAwesomeIcon key={3} className="menu-icon green" icon={faBiking} />
   },
   {
     "type":"Exercise classes",
-    "icon":"fas fa-music"
+    "icon":<FontAwesomeIcon key={4} className="menu-icon red" icon={faMusic} />
   },
   {
     "type":"Everyday activities",
-    "icon":"fas fa-home"
+    "icon":<FontAwesomeIcon key={5} className="menu-icon blue" icon={faHome} />
   },
   {
     "type":"Ball games",
-    "icon":"fas fa-volleyball-ball"
+    "icon":<FontAwesomeIcon key={6} className="menu-icon green" icon={faVolleyballBall} />
   },
   {
     "type":"Water sports",
-    "icon":"fas fa-swimmer"
+    "icon":<FontAwesomeIcon key={7} className="menu-icon blue" icon={faSwimmer} />
   },
   {
     "type":"Winter sports",
-    "icon":"fas fa-skiing"
+    "icon":<FontAwesomeIcon key={8} className="menu-icon blue" icon={faSkiing} />
   },
   {
     "type":"Combat sports",
-    "icon":"fas fa-fist-raised"
+    "icon":<FontAwesomeIcon key={9} className="menu-icon red" icon={faFistRaised} />
   },
   {
     "type":"Hiking & climbing",
-    "icon":"fas fa-hiking"
+    "icon":<FontAwesomeIcon key={10} className="menu-icon green" icon={faHiking} />
   },
   {
     "type":"Training with animals",
-    "icon":"fas fa-dog"
+    "icon":<FontAwesomeIcon key={11} className="menu-icon grey" icon={faDog} />
   },
   {
     "type":"Others",
-    "icon":"fas fa-ellipsis-h"
+    "icon":<FontAwesomeIcon key={12} className="menu-icon green" icon={faEllipsisH} />
   }
 ]
 
