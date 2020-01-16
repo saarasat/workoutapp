@@ -1,36 +1,21 @@
 @import "menu.css";
 @import "nav.css";
+@import "buttons.css";
+@import "calendar.css";
+@import url(https://use.fontawesome.com/releases/v5.11.2/css/all.css);
+@import url(https://use.fontawesome.com/releases/v5.11.2/css/v4-shims.css);
 
 
 body {
   background-color: #212529;
+  color: white;
   margin-bottom: 3em;
   margin-top: 3em;
   text-align: center;
+  
 }
-
-
-.app {
-  color: white;
-  background-color:#212529;
-}
-
 .container {
-  color: white;
-  background-color:#212529;
-  font-size: 1.0em;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-.container-save {
-  color: #00bf8a;
-  background-color:#212529;
-  font-size: 1.0em;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  position: relative;
-  z-index: 1;
-  margin-bottom: 1.5em;
-  margin-top: 1em;
+  margin-top: 2em;
 }
 
 .save {
@@ -38,12 +23,27 @@ body {
   color: white;
 }
 
+.image {
+  color: white;
+}
+
+h1 {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-top: 1.8em;
+  font-weight: 200;
+}
+
+
 a {
   color: white;
 }
 
+a.attribution {
+  font-size: 0.5em;
+  font-weight: 300;
+}
+
 a:link {
-  color: white;
   text-decoration: none;
 }
 
@@ -54,40 +54,6 @@ a:active {
 a:hover {
   color: #00bf8a; 
 }
-
-
-.btn-circle {
-  width: 80px;
-  height: 80px;
-  padding: 10px 6px;
-  font-size: 1.3em;
-  line-height: 1.33;
-  border-radius: 50%;
-  border: 1px solid #212529;
-  text-align: center;
-  margin: 2px 5px 2px 5px;
-}
-
-.btn-change {
-  background-color:#205ade;
-  color: white;
-}
-
-.btn-save {
-  background-color:#00bf8a;
-  color: white;
-}
-
-.btn-pause {
-  background-color:#ff3333;
-  color: white;
-}
-
-.btn-xxl {
-  padding: 1rem 1.5rem;
-  font-size: 1.5rem;
-}
-
 
 
 

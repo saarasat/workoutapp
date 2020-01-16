@@ -8,7 +8,6 @@ const getAll = async (value) => {
 
 const create = async (value, newObject) => {
   const response = await axios.post(`/api/${value}`, newObject)
-  console.log(response)
   return response.data
 }
 

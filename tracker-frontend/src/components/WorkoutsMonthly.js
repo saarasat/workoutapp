@@ -1,50 +1,32 @@
 import React from 'react'
-import { Table } from 'react-bootstrap'
+import { Row, Col, Table } from 'react-bootstrap'
+import Calendar from 'react-calendar'
+import { getIcon } from './Sports'
 
 
-const MonthlyWorkouts = ({ workouts }) => {
-
-  const countTotalTime = () => {
-    const timesOnly = workouts.map(workout => workout.time.split(':'))
-    const hours = timesOnly.reduce((total, time) => total + Number(time[0]),0)
-    const minutes = timesOnly.reduce((total, time) => total + Number(time[1]),0)
-    const totalTime = hours + (Math.floor(minutes / 60))
-    let totalMinutes = minutes % 60
-    if (totalMinutes < 10) {
-      totalMinutes = '0' + totalMinutes
-    }
-    return totalTime + ':' + totalMinutes
-  }
-
-  const countTotalCalories = () => {
-    const calories = workouts.map(workout => workout.calories)
-    if (calories.length > 0) {
-      return calories.reduce((total, value) => {
-        if (value !== undefined) return total + value
-        return total
-    })}
-    return 0
-  } 
+const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
   
   return (
     <div>
-      <div className="container">
-        <p>Workouts: {workouts.length} Time: {countTotalTime()} Calories: {countTotalCalories()}</p>
-        <p></p>
-      
+      <div>
+        <Calendar 
+          showNavigation={false}
+          tileContent={({ date, view }) => view === 'month' && date.getMonth() === month ? <span>&#11041;</span> : null}
+          className="react-calendar">  
+        </Calendar>
+        <Table className="results-total" >
+        </Table>
       </div>
-      <Table>
-        <tbody className="result-list">
           {workouts.map(item =>
-            <tr key={item.id}>
-              <td>{item.sport}</td>
-              <td>{item.day}</td>
-              <td>{item.time}</td>
-              <td>{item.calories}</td>
-            </tr>
+            <Row className="result-list-row" key={item.id}>
+              <Col xs={2} class-name="result-icon">{getIcon(item)}</Col>
+              <Col xs={4} className="result-sport">{item.sport}</Col>
+              <Col xs={2} className="result-number">{item.day} {item.date}</Col>
+              <Col xs={1} className="result-number">{item.time}</Col>
+              <Col xs={3} className="result-number">{item.calories} kcal</Col>
+            </Row>
           )}
-        </tbody>
-      </Table>
+        
     </div>
   )
 }

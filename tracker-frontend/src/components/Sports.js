@@ -1,55 +1,61 @@
 
+import React from 'react'
+
+export const getIcon = (workout) => types.filter(type => type.type === workout.type).map(item => <i key={item.icon} className={item.icon}></i>)
+
+
 export const types = [
   {
     "type":"Gym",
     "icon":"fas fa-dumbbell"
   },
   {
-    "type":"Running",
-    "icon":""
+    "type":"Walking & running",
+    "icon":"fas fa-running"
   },
   {
     "type":"Cycling",
-    "icon":""
+    "icon":"fas fa-biking"
   },
   {
     "type":"Exercise classes",
-    "icon":""
-  },
-  {
-    "type":"Outdoor activities",
-    "icon":""
+    "icon":"fas fa-music"
   },
   {
     "type":"Everyday activities",
-    "icon":""
+    "icon":"fas fa-home"
   },
   {
-    "type":"Ballgames",
-    "icon":""
+    "type":"Ball games",
+    "icon":"fas fa-volleyball-ball"
   },
   {
     "type":"Water sports",
-    "icon":""
+    "icon":"fas fa-swimmer"
   },
   {
     "type":"Winter sports",
-    "icon":""
+    "icon":"fas fa-skiing"
   },
   {
     "type":"Combat sports",
-    "icon":""
+    "icon":"fas fa-fist-raised"
+  },
+  {
+    "type":"Hiking & climbing",
+    "icon":"fas fa-hiking"
   },
   {
     "type":"Training with animals",
-    "icon":""
+    "icon":"fas fa-dog"
   },
   {
     "type":"Others",
-    "icon":""
+    "icon":"fas fa-ellipsis-h"
   }
 
 ]
+
 
 export const sports = [
   {
@@ -99,25 +105,7 @@ export const sports = [
   },
   {
     "id":6,
-    "sport": "Stationary cycling, very light",
-    "type": "Gym",
-    "59": 177,
-    "70": 211,
-    "82": 245,
-    "93": 279
-  },
-  {
-    "id":7,
-    "sport": "Stationary cycling, light",
-    "type": "Gym",
-    "59": 325,
-    "70": 387,
-    "82": 449,
-    "93": 512
-  },
-  {
-    "id":8,
-    "sport": "Stationary cycling, moderate",
+    "sport": "General workout",
     "type": "Gym",
     "59": 413,
     "70": 493,
@@ -125,16 +113,7 @@ export const sports = [
     "93": 651
   },
   {
-    "id":9,
-    "sport": "Stationary cycling, fast",
-    "type": "Gym",
-    "59": 620,
-    "70": 739,
-    "82": 858,
-    "93": 977
-  },
-  {
-    "id":10,
+    "id":7,
     "sport": "Circuit training, minimal rest",
     "type": "Gym",
     "59": 472,
@@ -143,7 +122,16 @@ export const sports = [
     "93": 745
   },
   {
-    "id":11,
+    "id":8,
+    "sport": "Weight lifting, light workout",
+    "type": "Gym",
+    "59": 177,
+    "70": 211,
+    "82": 245,
+    "93": 279
+  },
+  {
+    "id":9,
     "sport": "Weight lifting, body building, vigorous",
     "type": "Gym",
     "59": 354,
@@ -152,13 +140,31 @@ export const sports = [
     "93": 558
   },
   {
-    "id":12,
-    "sport": "Weight lifting, light workout",
+    "id":10,
+    "sport": "Stationary cycling, light",
     "type": "Gym",
-    "59": 177,
-    "70": 211,
-    "82": 245,
-    "93": 279
+    "59": 325,
+    "70": 387,
+    "82": 449,
+    "93": 512
+  },
+  {
+    "id":11,
+    "sport": "Stationary cycling, moderate",
+    "type": "Gym",
+    "59": 413,
+    "70": 493,
+    "82": 572,
+    "93": 651
+  },
+  {
+    "id":12,
+    "sport": "Stationary cycling, fast",
+    "type": "Gym",
+    "59": 620,
+    "70": 739,
+    "82": 858,
+    "93": 977
   },
   {
     "id":13,
@@ -289,7 +295,7 @@ export const sports = [
   {
     "id":27,
     "sport": "Running, 8 km/h",
-    "type": "Running",
+    "type": "Walking & running",
     "59": 472,
     "70": 563,
     "82": 654,
@@ -298,7 +304,7 @@ export const sports = [
   {
     "id":28,
     "sport": "Running, 9,5 km/h",
-    "type": "Running",
+    "type": "Walking & running",
     "59": 590,
     "70": 704,
     "82": 817,
@@ -307,7 +313,7 @@ export const sports = [
   {
     "id":29,
     "sport": "Running, 11 km/h",
-    "type": "Running",
+    "type": "Walking & running",
     "59": 679,
     "70": 809,
     "82": 940,
@@ -316,7 +322,7 @@ export const sports = [
   {
     "id":30,
     "sport": "Running, 12 km/h",
-    "type": "Running",
+    "type": "Walking & running",
     "59": 738,
     "70": 880, 
     "82": 1022, 
@@ -325,7 +331,7 @@ export const sports = [
   {
     "id":31,
     "sport": "Running, 14 km/h",
-    "type": "Running",
+    "type": "Walking & running",
     "59": 826,
     "70": 985,
     "82": 1144,
@@ -334,7 +340,7 @@ export const sports = [
   {
     "id":32,
     "sport": "Running, 16 km/h",
-    "type": "Running",
+    "type": "Walking & running",
     "59": 944,
     "70": 1126,
     "82": 1308,
@@ -343,7 +349,7 @@ export const sports = [
   {
     "id":33,
     "sport": "Running, cross country",
-    "type": "Running",
+    "type": "Walking & running",
     "59": 531,
     "70": 633, 
     "82": 735, 
@@ -352,7 +358,7 @@ export const sports = [
   {
     "id":34,
     "sport": "Running, general",
-    "type": "Running",
+    "type": "Walking & running",
     "59": 472,
     "70": 563,
     "82": 654,
@@ -361,7 +367,7 @@ export const sports = [
   {
     "id":35,
     "sport": "Running, on track",
-    "type": "Running",
+    "type": "Walking & running",
     "59": 590,
     "70": 704,
     "82": 817,
@@ -370,7 +376,7 @@ export const sports = [
   {
     "id":36,
     "sport": "Running, stairs, up",
-    "type": "Running",
+    "type": "Walking & running",
     "59": 885,
     "70": 1056,
     "82": 1226,
@@ -541,7 +547,7 @@ export const sports = [
   {
     "id":55,
     "sport": "Frisbee, ultimate frisbee",
-    "type": "Ball games",
+    "type": "Others",
     "59": 472,
     "70": 563,
     "82": 654,
@@ -784,7 +790,7 @@ export const sports = [
   {
     "id":82,
     "sport": "Rock climbing, ascending rock",
-    "type": "Others", 
+    "type": "Hiking & climbing", 
     "59": 649,
     "70": 774,
     "82": 899,
@@ -793,7 +799,7 @@ export const sports = [
   {
     "id":83,
     "sport": "Rock climbing, rappelling",
-    "type": "Others", 
+    "type": "Hiking & climbing", 
     "59": 472,
     "70": 563,
     "82": 654,
@@ -991,7 +997,7 @@ export const sports = [
   {
     "id":105,
     "sport": "Backpacking, hiking with pack",
-    "type": "Others", 
+    "type": "Hiking & climbing", 
     "59": 413,
     "70": 493,
     "82": 572,
@@ -1016,18 +1022,9 @@ export const sports = [
     "93": 261
   },
   {
-    "id":108,
-    "sport": "Walking, moderate pace",
-    "type": "Others", 
-    "59": 236,
-    "70": 281,
-    "82": 327,
-    "93": 372
-  },
-  {
     "id":109,
     "sport": "Hiking, cross country",
-    "type": "Others", 
+    "type": "Hiking & climbing", 
     "59": 354,
     "70": 422,
     "82": 490,
@@ -1035,8 +1032,8 @@ export const sports = [
   },
   {
     "id":110,
-    "sport": "Climbing hills, carrying up to 5 kg",
-    "type": "Outdoor activities", 
+    "sport": "Hiking hills, carrying up to 5 kg",
+    "type": "Hiking & climbing", 
     "59": 413,
     "70": 493,
     "82": 572,
@@ -1044,8 +1041,8 @@ export const sports = [
   },
   {
     "id":111,
-    "sport": "Climbing hills, carrying 5-10 kg",
-    "type": "Outdoor activities",
+    "sport": "Hiking hills, carrying 5-10 kg",
+    "type": "Hiking & climbing",
     "59": 443,
     "70": 528,
     "82": 613,
@@ -1053,8 +1050,8 @@ export const sports = [
   },
   {
     "id":112,
-    "sport": "Climbing hills, carrying 11-15 kg",
-    "type": "Outdoor activities", 
+    "sport": "Hiking hills, carrying 11-15 kg",
+    "type": "Hiking & climbing", 
     "59": 472,
     "70": 563,
     "82": 654,
@@ -1062,8 +1059,8 @@ export const sports = [
   },
   {
     "id":113,
-    "sport": "Climbing hills, carrying over 15 kg",
-    "type": "Outdoor activities", 
+    "sport": "Hiking hills, carrying over 15 kg",
+    "type": "Hiking & climbing", 
     "59": 531,
     "70": 633,
     "82": 735,
@@ -1081,7 +1078,7 @@ export const sports = [
   {
     "id":115,
     "sport": "Mountain climbing",
-    "type": "Others", 
+    "type": "Hiking & climbing", 
     "59": 472,
     "70": 563,
     "82": 654,
@@ -1099,7 +1096,7 @@ export const sports = [
   {
     "id":117,
     "sport": "Walking, very slow",
-    "type": "Outdoor activities", 
+    "type": "Walking & running", 
     "59": 118,
     "70": 141,
     "82": 163,
@@ -1108,7 +1105,7 @@ export const sports = [
   {
     "id":118,
     "sport": "Walking, slow",
-    "type": "Outdoor activities", 
+    "type": "Walking & running", 
     "59": 148,
     "70": 176,
     "82": 204,
@@ -1117,7 +1114,7 @@ export const sports = [
   {
     "id":119,
     "sport": "Walking, moderate pace",
-    "type": "Outdoor activities", 
+    "type": "Walking & running", 
     "59": 195,
     "70": 232,
     "82": 270,
@@ -1126,7 +1123,7 @@ export const sports = [
   {
     "id":120,
     "sport": "Walking, brisk pace",
-    "type": "Outdoor activities", 
+    "type": "Walking & running", 
     "59": 224,
     "70": 267,
     "82": 311,
@@ -1135,7 +1132,7 @@ export const sports = [
   {
     "id":121,
     "sport": "Walking, very brisk pace",
-    "type": "Outdoor activities", 
+    "type": "Walking & running", 
     "59": 295,
     "70": 352,
     "82": 409,
@@ -1144,7 +1141,7 @@ export const sports = [
   {
     "id":122,
     "sport": "Canoeing, light",
-    "type": "Outdoor sports", 
+    "type": "Water sports", 
     "59": 177, 
     "70": 211,
     "82": 245,
@@ -1153,7 +1150,7 @@ export const sports = [
   {
     "id":123,
     "sport": "Canoeing, moderate",
-    "type": "Outdoor sports", 
+    "type": "Water sports", 
     "59": 413,
     "70": 493,
     "82": 572,
@@ -1162,7 +1159,7 @@ export const sports = [
   {
     "id":124,
     "sport": "Canoeing, fast",
-    "type": "Outdoor sports", 
+    "type": "Water sports", 
     "59": 708,
     "70": 844,
     "82": 981,
@@ -1171,7 +1168,7 @@ export const sports = [
   {
     "id":125,
     "sport": "Kayaking",
-    "type": "Outdoor sports", 
+    "type": "Water sports", 
     "59": 295,
     "70": 352,
     "82": 409,
@@ -1180,7 +1177,7 @@ export const sports = [
   {
     "id":126,
     "sport": "Sailing, competitive",
-    "type": "Outdoor sports", 
+    "type": "Water sports", 
     "59": 295,
     "70": 352,
     "82": 409,
@@ -1189,7 +1186,7 @@ export const sports = [
   {
     "id":127,
     "sport": "Sailing, ocean sailing",
-    "type": "Outdoor sports", 
+    "type": "Water sports", 
     "59": 177, 
     "70": 211,
     "82": 245,
@@ -1483,6 +1480,7 @@ export const sports = [
     "82": 245,
     "93": 279
   },
+
 
 ]
 

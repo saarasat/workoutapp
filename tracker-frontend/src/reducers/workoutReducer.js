@@ -5,7 +5,7 @@ import settingsService from '../services/settingsService'
 const workoutReducer = (state = [], action) => {
   switch (action.type) {
   case 'INITIALIZE_WORKOUTS':
-    return action.data
+    return action.data.reverse()
   case 'ADD_NEW_WORKOUT':
     return [...state, action.data]
   default:
@@ -13,10 +13,11 @@ const workoutReducer = (state = [], action) => {
   }
 }
 
-export const createNewWorkout = (sport, time, calories, date, day, month) => {
+export const createNewWorkout = (sport, type, time, calories, date, day, month) => {
   return async (dispatch) => {
     const newWorkout = {
       sport,
+      type,
       time,
       calories,
       date,

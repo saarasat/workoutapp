@@ -10,9 +10,26 @@
 }
 
 .navbar {  
-  padding: 1em 4em 1em 4em;
+  padding: 0.5em 1.5em 0.5em 1.5em;
   background-color: #212529;
   position: fixed;
   bottom: 0;
   width: 100%;
+  font-weight: 300;
+  font-size: 0.8em;
+  justify-content: center;
 }
+
+
+.nav-row {
+  text-align: center;
+  align-content: justify;
+  margin: 0px;
+  display: block;
+}
+
+
+
+
+
+

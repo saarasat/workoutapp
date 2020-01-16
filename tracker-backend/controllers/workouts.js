@@ -19,6 +19,7 @@ workoutsRouter.post('/', (request, response) => {
 
   const workout = new Workout({
     sport: body.sport,
+    type: body.type,
     time: body.time,
     calories: body.calories,
     date: body.date,

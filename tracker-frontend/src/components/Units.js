@@ -1,4 +1,14 @@
 
+
+export const createOptions = (start, end) => {
+  const array = new Array(end-start)
+  for (let i = start; i <= end; i++) {
+    array.push(i)
+  }
+  return array
+}
+
+
 export const weekdays = [
   'Sun',
   'Mon',
