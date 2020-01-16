@@ -31,4 +31,12 @@
 |       | 1    | Added Workout-Schema and saving to db | 
 | 20.12.| 2    | Added Settings-Schema and saving to database |
 | 21.12.| 3    | Searched for sport type & calories listing, formatted it |
-| Total | 60   | 
+| 8.1.  | 1    | Initializing the project on Heroku |
+| 12.1. | 2    | Reorganized the project-folder |
+|       | 1    | Worked on appearance |
+|       | 1    | Added counting calories to workouts |
+| 12.1. | 3    | Configurating the database, working with authorization issues and deployed to Heroku |
+| 15.1. | 3    | Used time to find the icons for the project and added them |
+|       | 2    | Used time to find a calendar-component and initialized it |
+| 16.1. | 3    | Worked on showing the single result |
+| Total | 76   | 
