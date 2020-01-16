@@ -17,16 +17,17 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
         <Table className="results-total" >
         </Table>
       </div>
-          {workouts.map(item =>
-            <Row className="result-list-row" key={item.id}>
-              <Col xs={2} class-name="result-icon">{getIcon(item)}</Col>
-              <Col xs={4} className="result-sport">{item.sport}</Col>
-              <Col xs={2} className="result-number">{item.day} {item.date}</Col>
-              <Col xs={1} className="result-number">{item.time}</Col>
-              <Col xs={3} className="result-number">{item.calories} kcal</Col>
-            </Row>
-          )}
-        
+      <div>
+        {workouts.map(item =>
+          <Row className="result-list-row" key={item.id}>
+            <Col xs={2} class-name="result-icon">{getIcon(item)}</Col>
+            <Col xs={4} className="result-sport">{item.sport}</Col>
+            <Col xs={2} className="result-number">{item.day} {item.date}</Col>
+            <Col xs={1} className="result-number">{item.time}</Col>
+            <Col xs={3} className="result-number">{item.calories} kcal</Col>
+          </Row>
+        )}
+      </div>  
     </div>
   )
 }

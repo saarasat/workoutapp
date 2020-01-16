@@ -1,10 +1,8 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { createNewWorkout } from '../reducers/workoutReducer'
-import { useStopwatch } from '../hooks/index'
 import { Button } from 'react-bootstrap'
+import { useStopwatch } from '../hooks/index'
 
-const Stopwatch = (props) => {
+const Stopwatch = () => {
   const {
     timerOn,
     time,
@@ -37,4 +35,4 @@ const Stopwatch = (props) => {
   )
 }
 
-export default connect (null, { createNewWorkout })(Stopwatch)
+export default Stopwatch

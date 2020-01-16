@@ -1,8 +1,6 @@
-
 import React from 'react'
 
 export const getIcon = (workout) => types.filter(type => type.type === workout.type).map(item => <i key={item.icon} className={item.icon}></i>)
-
 
 export const types = [
   {
@@ -53,9 +51,7 @@ export const types = [
     "type":"Others",
     "icon":"fas fa-ellipsis-h"
   }
-
 ]
-
 
 export const sports = [
   {
@@ -1480,7 +1476,5 @@ export const sports = [
     "82": 245,
     "93": 279
   },
-
-
 ]
 

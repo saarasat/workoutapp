@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import Calendar from 'react-calendar'
+import { Button, Col, Form, InputGroup, Row, Modal, ModalBody } from 'react-bootstrap'
 import { createNewWorkout } from '../reducers/workoutReducer'
 import { createOptions, weekdays, months } from './Units'
 import { sports } from './Sports'
-import Calendar from 'react-calendar'
-import { Button, Col, Form, InputGroup, Row, Modal, ModalBody } from 'react-bootstrap'
 import SingleResult from './SingleResult'
 
 const Workout = (props) => {
