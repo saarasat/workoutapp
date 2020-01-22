@@ -1,5 +1,10 @@
 import axios from 'axios'
 
+let token = null
+
+const setToken = newToken => {
+  token = `bearer ${newToken}`
+}
 
 const getAll = async (value) => {
   const response = await axios.get(`/api/${value}`)
@@ -7,7 +12,10 @@ const getAll = async (value) => {
 }
 
 const create = async (value, newObject) => {
-  const response = await axios.post(`/api/${value}`, newObject)
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.post(`/api/${value}`, newObject, config)
   return response.data
 }
 
@@ -18,5 +26,6 @@ const update = (value, id, newObject) => {
 export default {
   getAll: getAll,
   create: create,
-  update: update
+  update: update,
+  setToken: setToken
 }
