@@ -1,9 +1,10 @@
 POST http://localhost:3002/api/workouts
 content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imp1dXVwYWp1dXQiLCJpZCI6IjVlMjdkZDVkN2M3OWViMTkxNGVjMGY1YyIsImlhdCI6MTU3OTY3MjQyNn0.PU2XhWRCpGGgG9b81dTQO8oX0-ZSQBZ5iSEIaryYOyY
 
 {
   "sport": "Waliking",
-  "time": "12:22",
+  "time": "13:22",
   "type": "Walking",
   "calories": 333,
   "date": "2019-10-19T22:46:33.102Z",

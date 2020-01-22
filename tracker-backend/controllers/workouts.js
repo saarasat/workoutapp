@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const workoutsRouter = require('express').Router()
 const Workout = require('../models/workout')
 const User = require('../models/user')
@@ -8,18 +9,30 @@ workoutsRouter.get('/', async (request, response) => {
   response.json(workouts.map(workout => workout.toJSON()))
 })
 
+const getTokenFrom = request => {
+  const authorization = request.get('authorization')
+  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
+    return authorization.substring(7)
+  }
+  return null
+}
+
 workoutsRouter.post('/', async (request, response, next) => {
   
   const body = request.body
   console.log(body)
 
-  let user = ''
-
+  const token = getTokenFrom(request)
+  
   try {
-    user = await User.findById(body.userId)
-  } catch(exception) {
-    next(exception)
-  }
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }
+  
+
+  const user = await User.findById(decodedToken.id)
+  
   console.log(user)
   const workout = new Workout({
     sport: body.sport,
@@ -35,11 +48,11 @@ workoutsRouter.post('/', async (request, response, next) => {
 
   console.log(workout)
 
-  try {
-    const savedWorkout = await workout.save()
-    user.workouts = user.workouts.concat(savedWorkout._id)
-    await user.save()
-    response.json(savedWorkout.toJSON())
+  const savedWorkout = await workout.save()
+  user.workouts = user.workouts.concat(savedWorkout._id)
+  await user.save()
+  response.json(savedWorkout.toJSON())
+  
   } catch(exception) {
     next(exception)
   }
