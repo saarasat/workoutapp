@@ -28,6 +28,15 @@ export const App = (props) => {
     props.initializeSettings()
   })
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      settingsService.setToken(user.token)
+    }
+  }, [])
+
   const handleLogin = async (event) => {
     event.preventDefault()
     console.log('logging in with', username, password)
@@ -35,6 +44,10 @@ export const App = (props) => {
       const user = await loginService.login({
         username, password,
       })
+
+      window.localStorage.setItem(
+        'loggedUser', JSON.stringify(user)
+      )
       settingsService.setToken(user.token)
       setUser(user)
       setUsername('')
