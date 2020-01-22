@@ -4,7 +4,11 @@ const settingsSchema = new mongoose.Schema({
 
   age: { type: Number },
   weight: { type: Number },
-  height: { type: Number }
+  height: { type: Number },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 
 })
 

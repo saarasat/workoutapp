@@ -12,6 +12,12 @@ const userSchema = mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Workout'
     }
+  ],
+  settings: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Settings'
+    }
   ]
 })
 

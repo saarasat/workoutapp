@@ -5,4 +5,5 @@ content-Type: application/json
   "age": 25,
   "weight": 65,
   "height": 165
+  "userId": "5e27dd5d7c79eb1914ec0f5c"
 }
