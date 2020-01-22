@@ -10,37 +10,36 @@ import SingleResult from './SingleResult'
 const Workout = (props) => {
   const [showReport, setShowReport] = useState(false)
   const [visible, setVisible] = useState(false)
-  const [workoutDate, setWorkoutDate] = useState('')
-  const [showDate, setShowDate] = useState(false)
+  const [workoutDate, setWorkoutDate] = useState(new Date())
 
   const changeDay = (date) => {
-    setWorkoutDate({date})
+    setWorkoutDate(date)
   } 
 
   const showDay = () => {
     setVisible(false)
-    setShowDate(true)
   }
  
   const createWorkout = async (event) => {
     event.preventDefault()    
+    if (workoutDate === '') return
+
     const sport = event.target.sport.value
     let hours = event.target.hours.value
     let minutes = event.target.minutes.value
-    if (workoutDate === '') return
-    if (hours < 10) {
-      hours = "0" + hours     
-    } 
-    if (minutes < 10) {
-      minutes = "0" + minutes
-    }
+    
+    if (hours < 10) hours = "0" + hours     
+    if (minutes < 10) minutes = "0" + minutes
+    let km = 0
+    if (props.type === "Walking & running" || props.type === "Cycling") km = Number(event.target.km.value)
+  
     const time = hours + ":" + minutes
     const calories = countCalories(sport, hours, minutes)
-    const date = new Date(workoutDate.date)
+    const date = new Date(workoutDate)
     const type = props.type
-    const day = weekdays[workoutDate.date.getDay()]
-    const month = months[workoutDate.date.getMonth()]
-    props.createNewWorkout(sport, type, time, calories, date, day, month)
+    const day = weekdays[workoutDate.getDay()]
+    const month = months[workoutDate.getMonth()] + " " + workoutDate.getFullYear()
+    props.createNewWorkout(sport, type, time, calories, km, date, day, month)
     setShowReport(true)
   }
 
@@ -49,18 +48,14 @@ const Workout = (props) => {
     let latestWeight = props.settings[props.settings.length-1].weight
     let doneActivity = sports.filter(activity => activity.sport === sport)[0]
     let workoutTime = Number(hours) + Number(minutes/60) 
-    if (latestWeight < 64.5) {
-      return Math.round(doneActivity["59"] * (latestWeight/59) * workoutTime)
-    } else if (latestWeight >= 64.5 && latestWeight < 76) {
-      return Math.round(doneActivity["70"] * (latestWeight/70) * workoutTime)
-    } else if (latestWeight >= 76 && latestWeight < 87.5) {
-      return Math.round(doneActivity["82"] * (latestWeight/82) * workoutTime)
-    }
+
+    if (latestWeight < 64.5) return Math.round(doneActivity["59"] * (latestWeight/59) * workoutTime)
+    else if (latestWeight >= 64.5 && latestWeight < 76) return Math.round(doneActivity["70"] * (latestWeight/70) * workoutTime)
+    else if (latestWeight >= 76 && latestWeight < 87.5) return Math.round(doneActivity["82"] * (latestWeight/82) * workoutTime)
     return Math.round(doneActivity["93"] * (latestWeight/93) * workoutTime)
   }
 
   const sportsByType = () => sports.filter(sport => sport.type === props.type)
- 
 
   const hourOptions = createOptions(0,24)
   const minuteOptions = createOptions(0,59)
@@ -72,21 +67,22 @@ const Workout = (props) => {
      
       <h1>Workout</h1>
       <div className="container">
+        {showReport && props.workouts.length > 0 ? <SingleResult workout={props.workouts[props.workouts.length-1]}/> : 
+  
         <Form onSubmit={createWorkout}>
           <Row>
             <Col><Form.Label>Date</Form.Label></Col>
-            <Col> {showDate === false ?
-            <button className="button-save" onClick={() => setVisible(true)}>Set Date</button>
-            : <p>Date set</p>} 
+            <Col className="date"> {<div className="date" onClick={() => setVisible(true)}>
+              {workoutDate.getDate() + "." + (workoutDate.getMonth()+1) + "." + workoutDate.getFullYear()} 
+              </div>}
             </Col>
-            <Modal show={visible} onHide={() => setVisible(false)}>
-             
-                <ModalBody>
-                  <div>
-                  <Calendar onClickDay={(returnValue, event) => changeDay(returnValue)} >
-                  </Calendar>
-                  </div>
-                </ModalBody>
+            <Modal show={visible} onHide={() => setVisible(false)}> 
+              <ModalBody>
+                <div>
+                  <Calendar onClickDay={(returnValue, event) =>  changeDay(returnValue)} />
+                </div>
+              </ModalBody>
+              
               <Modal.Footer className="justify-content-center">
                 <Button onClick={() => setVisible(false)} variant="secondary">Cancel</Button>
                 <Button onClick={() => showDay()} variant="save"> Ok</Button>
@@ -97,7 +93,7 @@ const Workout = (props) => {
           <Row>
             <Col><Form.Label>Sport</Form.Label></Col>
             <Col>
-              <Form.Control name="sport" as="select">
+              <Form.Control name="sport" as="select" className="select-dark">
                 {sportsByType().map(item =>
                   <option key={item.id}>{item.sport}</option>
                 )}
@@ -125,7 +121,7 @@ const Workout = (props) => {
             </Col>
           </Row>
           {props.type === "Walking & running" || props.type === "Cycling" ?
-            <Row>
+          <Row>
             <Col><Form.Label>Km</Form.Label></Col>
             <Col>
               <InputGroup className="mb-3">
@@ -144,11 +140,9 @@ const Workout = (props) => {
               </InputGroup>
             </Col>
             </Row> : ""}
-            <button className="button-save" type="submit">Save</button>
+          <button className="button-save" type="submit">Save</button>
         </Form>
-      </div>
-      <div>
-      {showReport ? <SingleResult workout={props.workouts[props.workouts.length-1]}/> : null}
+        }
       </div>
     </div>
   )

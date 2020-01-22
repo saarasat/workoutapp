@@ -7,6 +7,10 @@ export const getIcon = (sportType) => {
   return types.filter(type => type.type === sportType).map(item => item.icon)
 } 
 
+export const getMenuIcon = (icon, color) => {
+  return <FontAwesomeIcon key={icon} className={`menu icon ${color}`} icon={icon} />
+}
+
 export const types = [
   {
     "type":"Gym",

@@ -2,16 +2,16 @@
 @import "nav.css";
 @import "buttons.css";
 @import "calendar.css";
-
+@import "reports.css";
 
 body {
   background-color: #212529;
   color: white;
   margin-bottom: 3em;
   margin-top: 3em;
-  text-align: center;
-  
+  text-align: center;  
 }
+
 .container {
   margin-top: 2em;
 }
@@ -23,6 +23,17 @@ body {
 
 .image {
   color: white;
+}
+
+select option {
+  background-color: #212529;
+  color: white;
+}
+
+select {
+  background-color: #212529 !important;
+  color: white;
+  border:  #00bf8a; 
 }
 
 h1 {
@@ -53,9 +64,29 @@ a:hover {
   color: #00bf8a; 
 }
 
-.form {
-  text-align: left;
-  padding: 30px 30px 30px 40px;
+
+.gray {
+  color: #F8f5E0;
+}
+
+.blue {
+  color: #26B9D1; 
+}
+
+.green {
+  color: #00bf8a;
+}
+
+.dark-red {
+  color: #900C3F
+}
+
+.red {
+  color: #DE685F;
+}
+
+.yellow {
+  color: #A6A691;
 }
 
 @font-face {

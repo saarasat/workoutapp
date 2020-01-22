@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 
 const settingsSchema = new mongoose.Schema({
 
-  age: { type: Number, min: 10, max: 120 },
-  weight: { type: Number, min: 0, max: 250 },
-  height: { type: Number, min: 50, max: 250 }
+  age: { type: Number },
+  weight: { type: Number },
+  height: { type: Number }
 
 })
 

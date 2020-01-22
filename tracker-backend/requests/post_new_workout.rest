@@ -1,10 +1,17 @@
-POST http://localhost:3002/api/times
+POST http://localhost:3002/api/workouts
 content-Type: application/json
 
 {
   "sport": "Waliking",
   "time": "12:22",
+  "type": "Walking",
+  "calories": 333,
   "date": "2019-10-19T22:46:33.102Z",
   "day": "Fri",
-  "month": "October"
+  "month": "October",
+  "userId": "5e27dd5d7c79eb1914ec0f5c"
 }
+
+  
+  
+  

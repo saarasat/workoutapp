@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Accordion, Card } from 'react-bootstrap'
 import MonthlyWorkouts from './WorkoutsMonthly'
-import { reversedMonths as months } from './Units'
 
 const WorkoutList = ({workouts}) => {
   const [byMonth, setByMonth] = useState('')

@@ -13,9 +13,7 @@ import { initializeWorkouts } from './reducers/workoutReducer'
 import { faRunning, faArchive, faStopwatch, faUser } from '@fortawesome/free-solid-svg-icons'
 
 
-
 export const App = (props) => {
-
 
   useEffect(() => {
     props.initializeWorkouts()

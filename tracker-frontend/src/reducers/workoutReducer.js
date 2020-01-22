@@ -7,7 +7,7 @@ const byTime = (d1, d2) => d2.date-d1.date
 const workoutReducer = (state = [], action) => {
   switch (action.type) {
   case 'INITIALIZE_WORKOUTS':
-    const data = action.data.map(time => ({ id:time.id, sport: time.sport, type: time.type, calories: time.calories, time: time.time, date: new Date(time.date), day: time.day, month: time.month })).sort(byTime)
+    const data = action.data.map(time => ({ id:time.id, sport: time.sport, type: time.type, calories: time.calories, km: time.km, time: time.time, date: new Date(time.date), day: time.day, month: time.month })).sort(byTime)
     return data
   case 'ADD_NEW_WORKOUT':
     const newWorkout = action.data
@@ -18,18 +18,18 @@ const workoutReducer = (state = [], action) => {
   }
 }
 
-export const createNewWorkout = (sport, type, time, calories, date, day, month) => {
+export const createNewWorkout = (sport, type, time, calories, km, date, day, month) => {
   return async (dispatch) => {
     const newWorkout = {
       sport,
       type,
       time,
       calories,
+      km,
       date,
       day,
       month
     }
-    console.log(newWorkout)
     const dispatchableWorkout = await settingsService.create('workouts', newWorkout)
     dispatch({
       data: dispatchableWorkout,

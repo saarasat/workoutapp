@@ -22,6 +22,10 @@ const workoutSchema = new mongoose.Schema({
     minlength: 1,
     require: true
   },
+  km: {
+    type: Number,
+    minlength: 1,
+  },
   date: {
     type: Date,
     require: true
@@ -33,8 +37,11 @@ const workoutSchema = new mongoose.Schema({
   month: {
     type: String,
     require: true
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
   }
-  
 })
 
 workoutSchema.set('toJSON', {

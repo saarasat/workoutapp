@@ -1,64 +1,65 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { connect } from 'react-redux'
-import { Button, Col, Form, Row } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 import { createOptions } from './Units'
 import { createNewSettings } from '../reducers/settingsReducer'
+import DropDown from './DropDown'
 
 
 const Profile = (props) => {
-
-  const createSettings = async (event) => {
+  const [showAge, setShowAge] = useState(true)
+  const [showHeight, setShowHeight] = useState(true)
+  const [showWeight, setShowWeight] = useState(true)
+  const [age, setAge] = useState(0)
+  const [height, setHeight] = useState(0)
+  const [weight, setWeight] = useState(0)
+ 
+  const createAgeSettings = async (event) => {
     event.preventDefault()
-    const age = event.target.age.value
-    const weight = event.target.weight.value
-    const height = event.target.height.value
-    props.createNewSettings(age, weight, height)
+    const newAge = event.target.age.value  
+    props.createNewSettings(newAge, weight, height)
+    setAge(newAge)
+    console.log(age)
+    setShowAge(true)
   }
 
-  let ageOptions = createOptions(10,100)
-  let weightOptions = createOptions(40,150)
-  let heightOptions = createOptions(100,220)
+  const createHeightSettings = async (event) => {
+    event.preventDefault()
+    const newHeight = event.target.height.value
+    props.createNewSettings(age, weight, newHeight)
+    setHeight(newHeight)
+    setShowHeight(true)
+  }
+  const createWeightSettings = async (event) => {
+    event.preventDefault()
+    const newWeight = event.target.weight.value
+    props.createNewSettings(age, newWeight, height)
+    setWeight(newWeight)
+    setShowWeight(true)
+  }
+
+  useEffect(() => {
+    if (props.settings.length > 0) {
+      setAge(props.settings[props.settings.length-1].age)
+      setHeight(props.settings[props.settings.length-1].height)
+      setWeight(props.settings[props.settings.length-1].weight)
+    }
+  },[props.settings])
 
   return (
     <div className="container">
-      <h1>Set profile</h1>
+      <h1>Profile</h1>
       <div className="container">
-        <Form onSubmit={createSettings}>
-          <Row>
-            <Col size="mb-4"><Form.Label>Age</Form.Label></Col>
-            <Col>
-              <Form.Control name="age" as="select" default="4">
-                {ageOptions.map(value =>
-                  <option key={value}>{value}</option>
-                )}
-              </Form.Control>
-            </Col>
-          </Row> 
-          <br></br>
-          <Row>
-            <Col><Form.Label>Height</Form.Label></Col>
-            <Col>
-            <Form.Control name="height" as="select">
-            {heightOptions.map(value =>
-              <option key={value}>{value}</option>
-            )}
-            </Form.Control>
-            </Col>
-          </Row>
-          <br></br>
-          <Row>
-            <Col><Form.Label>Weight</Form.Label></Col>
-            <Col>
-              <Form.Control name="weight" as="select">
-              {weightOptions.map(value =>
-                <option key={value}>{value}</option>
-              )}
-              </Form.Control>
-            </Col>
-          </Row>
-          <button type="submit" className="button-save">Save</button>
-        </Form>
-      </div>
+          {showAge ? <Card.Header onClick={() => setShowAge(false)}>
+            Age: {age !== 0 ? age : "Not yet defined"} </Card.Header> 
+          : <DropDown onSub={createAgeSettings} options={createOptions(10,100)} value="age" label="Age" setShow={() => setShowAge(true)}/>}        
+          {showHeight ? <Card.Header onClick={() => setShowHeight(false)}>
+            Height: {height !== 0 ? height + " cm" : "Not yet defined"} </Card.Header> 
+          : <DropDown onSub={createHeightSettings} options={createOptions(100,220)} value="height" label="Height"/>}
+          {showWeight ? <Card.Header onClick={() => setShowWeight(false)}>
+            Weight: {weight !== 0 ? weight + " kg" : "Not yet defined"} </Card.Header> 
+          : <DropDown onSub={createWeightSettings} options={createOptions(40,200)} value="weight" label="Weight"/>}
+        </div>
     </div>
   )
 }

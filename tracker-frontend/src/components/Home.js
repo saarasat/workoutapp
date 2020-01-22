@@ -6,7 +6,7 @@ const Home = () => {
 
   return (
     <div className="container">
-      <h1>Add Workout</h1>
+      <h1>Add a workout</h1>
       <div className="container">
         {types.map(item => 
         <div key={item.type}>
