@@ -1,6 +1,6 @@
 /* eslint-disable no-case-declarations */
 
-import settingsService from '../services/settingsService'
+import settingsService from '../services/dataService'
 
 const byTime = (d1, d2) => d2.date-d1.date
 

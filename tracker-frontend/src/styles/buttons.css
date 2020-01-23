@@ -1,3 +1,9 @@
+
+
+.btn {
+  border: none;
+}
+
 .btn-circle {
   width: 80px;
   height: 80px;
@@ -10,6 +16,11 @@
   margin: 10px;
 }
 
+.btn-xxl {
+  padding: 1rem 1.5rem;
+  font-size: 1.5rem;
+}
+
 .btn-change {
   background-color:#26B9D1;
   color: white;
@@ -18,7 +29,6 @@
 .btn-start {
   background-color:#00bf8a;
   color: white;
-  border: none;
 }
 
 .btn-pause {
@@ -26,29 +36,19 @@
   color: white;
 }
 
-.button-settings-save {
-  margin: 0.1em;
+.btn-save {
   background-color: #00bf8a;
   color: white;
-  border: none;
-  padding: 0.5em 0.5em 0.5em 0.5em;
   font-size: 0.8em;
-  border-radius: 6%;
 }
 
-.button-settings-cancel {
-  margin: 0.1em;
+.btn-cancel {
   background-color: #F8f5E0;
   color: #212529;
-  border: none;
-  padding: 0.5em 0.5em 0.5em 0.5em;
   font-size: 0.8em;
-  border-radius: 6%;
 }
 
-
-.btn-xxl {
-  
-  padding: 1rem 1.5rem;
-  font-size: 1.5rem;
+.btn-icon {
+  background-color: transparent;
+  border: none;
 }

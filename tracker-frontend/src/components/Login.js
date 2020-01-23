@@ -1,29 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { Button, Col, Form, Row } from 'react-bootstrap'
 
 
-const Login = ({handleLogin, username, password, setUsername, setPassword}) => {
+const Login = ({
+   handleSubmit,
+   handleUsernameChange,
+   handlePasswordChange,
+   handleCancel,
+   username,
+   password
+  }) => {
+
   return (
     <div>
-    <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-      <div>username
-        <input
-          type="text"
-          value={username}
-          name="Username"
-          onChange={setUsername}
-        />
-      </div>
-      <div>password
-      <input
-        type="password"
-        value={password}
-        name="Password"
-        onChange={setPassword}
-      />
-      </div>
-      <button type="submit">login</button>
-      </form>
+    <h2>Sporttivartti</h2>
+      <h4>Login</h4>
+      <Form onSubmit={handleSubmit}>
+        <Row className="form-row">
+          <Col>
+            <Form.Label>Username</Form.Label>
+          </Col>
+          <Col>
+            <Form.Control value={username} onChange={handleUsernameChange} />       
+          </Col>
+        </Row>
+        <Row className="form-row">
+          <Col>
+            <Form.Label>Password</Form.Label>
+          </Col>
+          <Col>
+            <Form.Control type="password" value={password} onChange={handlePasswordChange} />       
+          </Col>
+        </Row>
+          <Button className="btn-save" type="submit">login</Button>
+          <Button className="btn-cancel" onClick={handleCancel}>cancel</Button>
+      </Form>
     </div>
   )
 }

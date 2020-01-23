@@ -1,4 +1,4 @@
-import settingsService from '../services/settingsService'
+import dataService from '../services/dataService'
 
 const settingsReducer = (state = [], action) => {
   switch (action.type) {
@@ -18,7 +18,7 @@ export const createNewSettings = (age, weight, height) => {
       weight,
       height
     }
-    const dispatchableSettings = await settingsService.create('settings', newSettings)
+    const dispatchableSettings = await dataService.create('settings', newSettings)
     dispatch({
       data: dispatchableSettings,
       type: 'ADD_NEW_SETTINGS'
@@ -28,7 +28,7 @@ export const createNewSettings = (age, weight, height) => {
 
 export const initializeSettings = () => {
   return async (dispatch) => {
-    const data = await settingsService.getAll('settings')
+    const data = await dataService.getAll('settings')
     dispatch({
       data,
       type: 'INITIALIZE'

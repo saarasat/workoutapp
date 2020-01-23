@@ -1,0 +1,29 @@
+
+.gray {
+  color: #F8f5E0;
+}
+
+.blue {
+  color: #26B9D1; 
+}
+
+.green {
+  color: #00bf8a;
+}
+
+.dark-red {
+  color: #900C3F
+}
+
+.red {
+  color: #DE685F;
+}
+
+.yellow {
+  color: #A6A691;
+}
+
+.dark {
+  background-color: #212529;
+  color: white;
+}

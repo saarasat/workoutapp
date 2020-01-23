@@ -8,10 +8,6 @@ import { faFireAlt, faMedal, faClock } from '@fortawesome/free-solid-svg-icons'
 
 
 const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
-  
-  console.log(workouts[0].date.getFullYear())
-  console.log(workouts[0].date.getMonth()+1)
-  console.log(workouts[0].date.getDate())
  
   return (
     <div>
@@ -33,9 +29,9 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
                 <td><Icon icon={faFireAlt} color="red"></Icon></td>  
               </tr>
               <tr>
-                <td className="result-total">{workouts.length}</td> 
-                <td className="result-total">{totalTime}</td>
-                <td className="result-total">{totalCalories}</td>  
+                <td className="results-total-column">{workouts.length}</td> 
+                <td className="results-total-column">{totalTime}</td>
+                <td className="results-total-column">{totalCalories}</td>  
               </tr>
               <tr>
                 <td>Workouts</td> 
@@ -51,8 +47,8 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
             <Row className="result-list-row" key={item.id}>
               <Col xs={2} className="result-icon">{getIcon(item.type)}</Col>
               <Col xs={3} className="result-sport">{item.sport}</Col>
-              <Col xs={3} className="result-number">{item.day} {item.date.getDate()}.{(item.date.getMonth()+1)}.{item.date.getFullYear()}</Col>
-              <Col xs={1} className="result-number">{item.time}</Col>
+              <Col xs={3} className="result-time">{item.day} {item.date.getDate()}.{(item.date.getMonth()+1)}.{item.date.getFullYear()}</Col>
+              <Col xs={1} className="result-time">{item.time}</Col>
               <Col xs={3} className="result-calories">{item.calories} kcal</Col>
             </Row>
           )}

@@ -70,9 +70,9 @@ const Workout = (props) => {
         {showReport && props.workouts.length > 0 ? <SingleResult workout={props.workouts[props.workouts.length-1]}/> : 
   
         <Form onSubmit={createWorkout}>
-          <Row>
-            <Col><Form.Label>Date</Form.Label></Col>
-            <Col className="date"> {<div className="date" onClick={() => setVisible(true)}>
+          <Row className="form-row">
+            <Col md={6} xs={4}><Form.Label>Date</Form.Label></Col>
+            <Col md={6} xs={8} className="date"> {<div className="date" onClick={() => setVisible(true)}>
               {workoutDate.getDate() + "." + (workoutDate.getMonth()+1) + "." + workoutDate.getFullYear()} 
               </div>}
             </Col>
@@ -90,9 +90,9 @@ const Workout = (props) => {
             </Modal>
           </Row>
 
-          <Row>
-            <Col><Form.Label>Sport</Form.Label></Col>
-            <Col>
+          <Row className="form-row">
+            <Col md={6} xs={4}><Form.Label>Sport</Form.Label></Col>
+            <Col md={6} xs={8}>
               <Form.Control name="sport" as="select" className="select-dark">
                 {sportsByType().map(item =>
                   <option key={item.id}>{item.sport}</option>
@@ -100,10 +100,9 @@ const Workout = (props) => {
               </Form.Control>
             </Col>
           </Row>
-          <br></br>
-          <Row>
-            <Col><Form.Label>Time</Form.Label></Col>
-            <Col>
+          <Row className="form-row">
+            <Col md={6} xs={4}><Form.Label>Time</Form.Label></Col>
+            <Col md={6} xs={8}>
               <InputGroup className="mb-3">
                 <InputGroup.Prepend>
                 </InputGroup.Prepend>
@@ -121,9 +120,9 @@ const Workout = (props) => {
             </Col>
           </Row>
           {props.type === "Walking & running" || props.type === "Cycling" ?
-          <Row>
-            <Col><Form.Label>Km</Form.Label></Col>
-            <Col>
+          <Row className="form-row">
+            <Col md={6} xs={4}><Form.Label>Km</Form.Label></Col>
+            <Col md={6} xs={8}>
               <InputGroup className="mb-3">
                 <InputGroup.Prepend>
                 </InputGroup.Prepend>
@@ -140,7 +139,7 @@ const Workout = (props) => {
               </InputGroup>
             </Col>
             </Row> : ""}
-          <button className="button-save" type="submit">Save</button>
+          <Button className="btn-save" type="submit">Save</Button>
         </Form>
         }
       </div>

@@ -7,7 +7,7 @@
   margin-top: 1em;
 }
 
-.result-total {
+.results-total-column {
   border-top: none;
   font-weight: 500;
 }
@@ -22,7 +22,7 @@
   padding-bottom: 0.6em;
 }
 
-.result-number {
+.result-time {
   font-size: 0.8em;
   font-weight: 300;
   padding: 3px;
@@ -46,42 +46,17 @@
   font-size: 0.8em;
 }
 
-.menu-icon {
-  font-size: 1.6em;
-  font-weight: 300;
-}
-
-.menu-header {
-  background-color: #212529;
-}
-
-.menu-sport {
-  text-align: left;
-  font-size: 1.2em;
-  font-weight: 300;
-}
-
-.form {
-  text-align: left;
-  padding: 30px 30px 30px 40px;
-}
-
-.form-row {
-  margin-top: 1.5em;
-  margin-bottom: 1em;
-  margin-right: 1em;
-}
-
-.date {
+.result-nav {
+  margin: 1.5em 0.5em 1.5em 0.5em;
+  justify-content: space-between;
   font-weight: 500;
-  border: 1px white;
-
 }
 
-.date:hover {
-  color: #116A3C;
+.result-single-row {
+  margin: 1em 0.5em 1em 0.5em;
+  justify-content: space-between;
+  text-align: center;
 }
-
 
 .select-dark {
   background-color: #212529;

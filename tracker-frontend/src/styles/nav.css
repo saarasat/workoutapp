@@ -1,12 +1,23 @@
+
 .navbar-top {
-  padding: 1em 1em 1em 1em; 
-  text-align: left;
+  padding: 1em 1em 1em 1em;
   background-color: #212529;
   z-index: 100;
   overflow: hidden;
   position: fixed;
   top: 0px;
   width: 100%;
+  display: block;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.logo {
+  text-align: left;
+}
+
+.logout {
+  text-align: end;
 }
 
 .navbar {  
@@ -17,9 +28,7 @@
   width: 100%;
   font-weight: 300;
   font-size: 0.8em;
-  justify-content: center;
 }
-
 
 .nav-row {
   text-align: center;
