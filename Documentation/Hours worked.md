@@ -39,4 +39,8 @@
 | 15.1. | 3    | Used time to find the icons for the project and added them |
 |       | 2    | Used time to find a calendar-component and initialized it |
 | 16.1. | 3    | Worked on showing the single result |
-| Total | 76   | 
+| 18.1. | 3    | Worked on updating the settings |
+| 22.1. | 8    | Added user-control |
+| 23.1. | 2    | Refactored login-form and css-files |
+| 25.1. | 6    | Added personal programs |
+| Total | 95   | 
