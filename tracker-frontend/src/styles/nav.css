@@ -5,11 +5,8 @@
   z-index: 100;
   overflow: hidden;
   position: fixed;
-  top: 0px;
+  top: 0;
   width: 100%;
-  display: block;
-  justify-content: space-evenly;
-  flex-direction: row;
 }
 
 .logo {
@@ -21,13 +18,14 @@
 }
 
 .navbar {  
-  padding: 0.5em 1.5em 0.5em 1.5em;
+  padding: 1em 1em 1em 1em;
   background-color: #212529;
   position: fixed;
   bottom: 0;
   width: 100%;
   font-weight: 300;
-  font-size: 0.8em;
+  font-size: 0.63em;
+  justify-content: space-between;
 }
 
 .nav-row {

@@ -28,12 +28,10 @@ workoutsRouter.post('/', async (request, response, next) => {
     const decodedToken = jwt.verify(token, process.env.SECRET)
     if (!token || !decodedToken.id) {
       return response.status(401).json({ error: 'token missing or invalid' })
-    }
-  
+    }  
 
   const user = await User.findById(decodedToken.id)
   
-  console.log(user)
   const workout = new Workout({
     sport: body.sport,
     type: body.type,
@@ -45,8 +43,6 @@ workoutsRouter.post('/', async (request, response, next) => {
     month: body.month,
     userId: user._id
   })
-
-  console.log(workout)
 
   const savedWorkout = await workout.save()
   user.workouts = user.workouts.concat(savedWorkout._id)
@@ -67,14 +63,16 @@ workoutsRouter.get('/:id', (request, response) => {
   } else {
     response.status(404).end()
   }
-  
 })
 
-workoutsRouter.delete('/:id', (request, response) => {
-  const id = Number(request.params.id)
-  times = workouts.filter(time => time.id !== id)
-
-  response.status(204).end()
+workoutsRouter.delete('/:id', async (request, response, next) => {
+  try {
+    await Workout.findByIdAndRemove(request.params.id)
+    console.log("here")
+    response.status(204).end()
+  } catch (exception) {
+    next(exception)
+  }
 })
 
 module.exports = workoutsRouter

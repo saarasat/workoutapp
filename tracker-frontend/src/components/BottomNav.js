@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Row, Col } from 'react-bootstrap'
-import { faRunning, faArchive, faStopwatch, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faRunning, faArchive, faStopwatch, faUser, faDumbbell } from '@fortawesome/free-solid-svg-icons'
 import Icon from './Icon'
 
 
@@ -12,6 +12,12 @@ const BottomNav = () => {
       <Col>
         <Row className="nav-row green"><Icon icon={faRunning}></Icon></Row>
         <Row className="nav-row">Training</Row>
+      </Col>
+    </Link>
+    <Link to="/programs">
+      <Col>
+        <Row className="nav-row green"><Icon icon={faDumbbell}></Icon></Row>
+        <Row className="nav-row">Programs</Row>
       </Col>
     </Link>
     <Link to="/stopwatch">

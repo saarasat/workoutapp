@@ -6,6 +6,7 @@ import { createNewWorkout } from '../reducers/workoutReducer'
 import { createOptions, weekdays, months } from './Units'
 import { sports } from './Sports'
 import SingleResult from './SingleResult'
+import { Link, Redirect } from 'react-router-dom'
 
 const Workout = (props) => {
   const [showReport, setShowReport] = useState(false)
@@ -67,7 +68,7 @@ const Workout = (props) => {
      
       <h1>Workout</h1>
       <div className="container">
-        {showReport && props.workouts.length > 0 ? <SingleResult workout={props.workouts[props.workouts.length-1]}/> : 
+        {showReport && props.workouts.length > 0 ? <Redirect to={`/workouts/${props.workouts[props.workouts.length-1].id}`} /> : 
   
         <Form onSubmit={createWorkout}>
           <Row className="form-row">
@@ -81,8 +82,7 @@ const Workout = (props) => {
                 <div>
                   <Calendar onClickDay={(returnValue, event) =>  changeDay(returnValue)} />
                 </div>
-              </ModalBody>
-              
+              </ModalBody>              
               <Modal.Footer className="justify-content-center">
                 <Button onClick={() => setVisible(false)} variant="secondary">Cancel</Button>
                 <Button onClick={() => showDay()} variant="save"> Ok</Button>

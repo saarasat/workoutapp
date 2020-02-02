@@ -18,6 +18,18 @@ const userSchema = mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Settings'
     }
+  ],
+  programs: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Programs'
+    }
+  ],
+  moves: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Moves'
+    }
   ]
 })
 

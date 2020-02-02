@@ -1,6 +1,6 @@
 /* eslint-disable no-case-declarations */
 
-import settingsService from '../services/dataService'
+import dataService from '../services/dataService'
 
 const byTime = (d1, d2) => d2.date-d1.date
 
@@ -13,6 +13,9 @@ const workoutReducer = (state = [], action) => {
     const newWorkout = action.data
     newWorkout.date = new Date(action.data.date)
     return [...state, newWorkout]
+  case 'DELETE_WORKOUT':
+    const remainingData = action.data.map(time => ({ id:time.id, sport: time.sport, type: time.type, calories: time.calories, km: time.km, time: time.time, date: new Date(time.date), day: time.day, month: time.month })).sort(byTime)
+    return remainingData
   default:
     return state
   }
@@ -30,7 +33,7 @@ export const createNewWorkout = (sport, type, time, calories, km, date, day, mon
       day,
       month
     }
-    const dispatchableWorkout = await settingsService.create('workouts', newWorkout)
+    const dispatchableWorkout = await dataService.create('workouts', newWorkout)
     dispatch({
       data: dispatchableWorkout,
       type: 'ADD_NEW_WORKOUT'
@@ -38,9 +41,21 @@ export const createNewWorkout = (sport, type, time, calories, km, date, day, mon
   }
 }
 
+export const deleteWorkout = (id) => {
+
+  return async (dispatch) => {
+    const data = await dataService.delete('workouts', id)
+    console.log(data)
+    dispatch({
+      data: data,
+      type: 'DELETE_WORKOUT'
+    })
+  }
+}
+
 export const initializeWorkouts = () => {
   return async (dispatch) => {
-    const data = await settingsService.getAll('workouts')
+    const data = await dataService.getAll('workouts')
     dispatch({
       data,
       type: 'INITIALIZE_WORKOUTS'

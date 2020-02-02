@@ -34,18 +34,5 @@ export const months = [
   'December'
 ]
 
-export const reversedMonths = [
-  'December',
-  'November',
-  'October',
-  'September',
-  'August',
-  'July',
-  'June',
-  'May',
-  'April',
-  'March',
-  'February',
-  'January'
-]
+
 

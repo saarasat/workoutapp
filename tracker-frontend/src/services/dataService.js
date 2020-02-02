@@ -6,6 +6,10 @@ const setToken = newToken => {
   token = `bearer ${newToken}`
 }
 
+const destroyToken = () => {
+  token = null
+}
+
 const getAll = async (value) => {
   const response = await axios.get(`/api/${value}`)
   return response.data
@@ -19,13 +23,32 @@ const create = async (value, newObject) => {
   return response.data
 }
 
-const update = (value, id, newObject) => {
-  return axios.put(`/api/${value}/${id}`, newObject)
+const replace = async (value, id, newObject) => {
+  console.log(value)
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.put(`/api/${value}/${id}`, newObject, config)
+  return response.data
 }
+
+const deleteOne = async (value, id) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  const response = await axios.delete(`/api/${value}/${id}`, config)
+  let workouts = ''
+  if (response.status === 204) {
+    workouts = getAll(value)
+  }
+  return workouts
+}
+
 
 export default {
   getAll: getAll,
   create: create,
-  update: update,
+  update: replace,
+  delete: deleteOne,
   setToken: setToken
 }

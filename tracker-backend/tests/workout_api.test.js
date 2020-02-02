@@ -4,6 +4,8 @@ const helper = require('./test_helper')
 const Workout = require('../models/workout')
 const app = require('../app')
 
+
+
 const api = supertest(app)
 
 beforeEach(async () => {
@@ -15,6 +17,37 @@ beforeEach(async () => {
   workoutObject = new Workout(helper.initialWorkouts[1])
   await workoutObject.save()
 
+  supertest(app)
+  .post('/login')
+  .send({
+    username: process.env.TEST_USER,
+    password: process.env.TEST_PASSWORD,
+  })
+  .end((err, response) => {
+    token = response.body.token; // save the token!;
+  });
+
+})
+
+describe('GET /', () => {
+  // token not being sent - should respond with a 401
+  test('It should require authorization', () => {
+    return supertest(app)
+      .get('/')
+      .then((response) => {
+        expect(response.statusCode).toBe(401);
+      });
+  });
+  // send the token - should respond with a 200
+  test('It responds with JSON', () => {
+    return supertest(app)
+      .get('/')
+      .set('Authorization', `Bearer ${token}`)
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        expect(response.type).toBe('application/json');
+      });
+});
 })
 
 test('workouts are returned as json', async () => {
@@ -81,9 +114,4 @@ test('a workout without time cannot be added ', async () => {
 
   expect(response.body.length).toBe(helper.initialWorkouts.length)
 
-})
-
-
-afterAll(() => {
-  mongoose.connection.close()
 })

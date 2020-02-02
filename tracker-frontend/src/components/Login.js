@@ -21,7 +21,7 @@ const Login = ({
             <Form.Label>Username</Form.Label>
           </Col>
           <Col>
-            <Form.Control value={username} onChange={handleUsernameChange} />       
+            <Form.Control className="dark" value={username} onChange={handleUsernameChange} />       
           </Col>
         </Row>
         <Row className="form-row">
@@ -29,7 +29,7 @@ const Login = ({
             <Form.Label>Password</Form.Label>
           </Col>
           <Col>
-            <Form.Control type="password" value={password} onChange={handlePasswordChange} />       
+            <Form.Control className="dark" type="password" value={password} onChange={handlePasswordChange} />       
           </Col>
         </Row>
           <Button className="btn-save" type="submit">login</Button>

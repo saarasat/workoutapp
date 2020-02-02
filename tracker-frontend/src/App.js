@@ -6,6 +6,8 @@ import Home from './components/Home'
 import Login from './components/Login'
 import TopNav from './components/TopNav'
 import BottomNav from './components/BottomNav'
+import Program from './components/Program'
+import ProgramList from './components/ProgramList'
 import Profile from './components/Profile'
 import Workout from './components/Workout'
 import WorkoutList from './components/WorkoutList'
@@ -15,6 +17,9 @@ import loginService from './services/loginService'
 import dataService from './services/dataService'
 import { initializeSettings } from './reducers/settingsReducer'
 import { initializeWorkouts } from './reducers/workoutReducer'
+import { initializePrograms } from './reducers/programReducer'
+import { initializeMoves } from './reducers/moveReducer'
+import SingleResult from './components/SingleResult'
 
 
 export const App = (props) => {
@@ -23,12 +28,21 @@ export const App = (props) => {
   const [password, setPassword]  = useState('')
   const [user, setUser] = useState(null)
 
+  
   useEffect(() => {
     props.initializeWorkouts()
-  })
+  }, [])
 
   useEffect(() => {
     props.initializeSettings()
+  })
+
+  useEffect(() => {
+    props.initializePrograms()
+  })
+
+  useEffect(() => {
+    props.initializeMoves()
   })
 
   useEffect(() => {
@@ -67,6 +81,8 @@ export const App = (props) => {
     window.localStorage.clear()
   }
 
+  
+ 
   return (
     <div>
       {user ?
@@ -75,9 +91,14 @@ export const App = (props) => {
         <div className="body">
           <Route exact path="/login" render={() => <Login />} />
           <Route exact path="/" render={() => <Home />} />
+          <Route exact path="/programs" render={()=> <ProgramList/>} />
+          <Route exact path="/newProgram" render={()=> <Program/>} />
           <Route exact path="/stopwatch" render={()=> <Stopwatch></Stopwatch>} />
           <Route exact path="/workouts" render={() => <WorkoutList />} />
-          <Route exact path="/training/:type" render={({match}) => <Workout type={(match.params.type)}/>} />    <Route exact path="/settings" render={() => <Profile />} />
+          <Route exact path="/training/:type" render={({match}) => <Workout type={(match.params.type)}/>} />
+          <Route exact path="/workouts/:id" render={({match}) => <SingleResult id={(match.params.id)}/>} />          
+          <Route exact path="/programs/:id" render={({match}) => <ProgramList id={(match.params.id)}/>} />          
+          <Route exact path="/settings" render={() => <Profile />} />
         </div>
         <BottomNav/>
       </Router>
@@ -96,4 +117,6 @@ export const App = (props) => {
   )
 }
 
-export default connect(null, { initializeSettings, initializeWorkouts })(App)
+
+
+export default connect(null, { initializeSettings, initializePrograms, initializeWorkouts, initializeMoves })(App)
