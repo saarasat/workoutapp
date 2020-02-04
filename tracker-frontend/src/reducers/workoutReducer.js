@@ -45,7 +45,6 @@ export const deleteWorkout = (id) => {
 
   return async (dispatch) => {
     const data = await dataService.delete('workouts', id)
-    console.log(data)
     dispatch({
       data: data,
       type: 'DELETE_WORKOUT'

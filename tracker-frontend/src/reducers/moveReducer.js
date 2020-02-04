@@ -12,8 +12,6 @@ const moveReducer = (state = [], action) => {
   }
 }
 
-
-
 export const createNewMove = (name) => {
   return async (dispatch) => {
     const newMove = {

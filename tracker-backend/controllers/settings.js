@@ -4,7 +4,7 @@ const Settings = require('../models/settings')
 const User = require('../models/user')
 
 settingsRouter.get('/', async (request, response) => {
-  const settings = await Settings.find({}).populate('user', { username: 1, name: 1 })
+  const settings = await Settings.find({}).populate('user', { username: 1, name: 1, userId: 1 })
   
   response.json(settings.map(settings => settings.toJSON()))
 })
@@ -47,8 +47,8 @@ settingsRouter.post('/', async (request, response, next) => {
   user.settings = user.settings.concat(savedSettings._id)
   await user.save()
   response.json(savedSettings.toJSON())
-  } catch(expeption) {
-    next(expeption)
+  } catch(exception) {
+    next(exception)
   }
 })
 

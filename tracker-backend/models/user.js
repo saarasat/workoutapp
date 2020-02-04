@@ -5,7 +5,6 @@ const userSchema = mongoose.Schema({
   username: {
     type: String
   },
-  name: String,
   passwordHash: String,
   workouts: [
     {

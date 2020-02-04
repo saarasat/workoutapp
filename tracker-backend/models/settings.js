@@ -7,7 +7,8 @@ const settingsSchema = new mongoose.Schema({
   height: { type: Number },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'User',
+    require: true
   }
 
 })

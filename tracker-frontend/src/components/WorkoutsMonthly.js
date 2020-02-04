@@ -43,15 +43,15 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
             
         <div>
           {workouts.map(item =>
-            <Row className="result-list-row" key={item.id}>
-              <Link to={`/workouts/${item.id}`}>
-              <Col xs={2} className="result-icon">{getIcon(item.type)}</Col>
-              <Col xs={3} className="result-sport">{item.sport}</Col>
-              <Col xs={3} className="result-time">{item.day} {item.date.getDate()}.{(item.date.getMonth()+1)}.{item.date.getFullYear()}</Col>
-              <Col xs={1} className="result-time">{item.time}</Col>
-              <Col xs={3} className="result-calories">{item.calories} kcal</Col>
-              </Link>
-            </Row>
+            <Link to={`/workouts/${item.id}`}>
+              <Row className="result-list-row" key={item.id}>
+                <Col xs={2} className="result-icon">{getIcon(item.type)}</Col>
+                <Col xs={3} className="result-sport">{item.sport}</Col>
+                <Col xs={3} className="result-time">{item.day} {item.date.getDate()}.{(item.date.getMonth()+1)}.{item.date.getFullYear()}</Col>
+                <Col xs={1} className="result-time">{item.time}</Col>
+                <Col xs={3} className="result-calories">{item.calories} kcal</Col>  
+              </Row>
+            </Link>
           )}
         </div>  
     </div>

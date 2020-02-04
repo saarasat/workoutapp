@@ -5,8 +5,7 @@ import { Button, Col, Form, InputGroup, Row, Modal, ModalBody } from 'react-boot
 import { createNewWorkout } from '../reducers/workoutReducer'
 import { createOptions, weekdays, months } from './Units'
 import { sports } from './Sports'
-import SingleResult from './SingleResult'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 const Workout = (props) => {
   const [showReport, setShowReport] = useState(false)
@@ -44,9 +43,11 @@ const Workout = (props) => {
     setShowReport(true)
   }
 
-
   const countCalories = (sport, hours, minutes) => {
-    let latestWeight = props.settings[props.settings.length-1].weight
+    let latestWeight = 0
+    if (props.settings.length !== 0) {
+      latestWeight = props.settings[props.settings.length-1].weight
+    } 
     let doneActivity = sports.filter(activity => activity.sport === sport)[0]
     let workoutTime = Number(hours) + Number(minutes/60) 
 

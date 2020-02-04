@@ -8,7 +8,6 @@ export const createOptions = (start, end) => {
   return array
 }
 
-
 export const weekdays = [
   'Sun',
   'Mon',
@@ -33,6 +32,3 @@ export const months = [
   'November',
   'December'
 ]
-
-
-

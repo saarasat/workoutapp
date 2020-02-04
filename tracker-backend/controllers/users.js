@@ -8,11 +8,13 @@ usersRouter.get('/', async (request, response) => {
     .find({}).populate('workouts', { sport: 1, type: 1, time: 1, calories: 1, km: 1, date: 1, day: 1, month: 1 })
     .find({}).populate('settings', { age: 1, height: 1, weight: 1 })
     .find({}).populate('programs', { name: 1, moves: 1 })
+    .find({}).populate('moves', { name: 1 })
   response.json(users.map(u => u.toJSON()))
 })
 
 
 usersRouter.post('/', async (request, response, next) => {
+
   try {
     const body = request.body
 
@@ -21,8 +23,11 @@ usersRouter.post('/', async (request, response, next) => {
 
     const user = new User({
       username: body.username,
-      name: body.name,
       passwordHash,
+      settings: [],
+      workouts: [],
+      programs: [],
+      moves: []
     })
 
     const savedUser = await user.save()

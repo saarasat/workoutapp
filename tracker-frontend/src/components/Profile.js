@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Card } from 'react-bootstrap'
 import { createOptions } from './Units'
@@ -13,13 +13,12 @@ const Profile = (props) => {
   const [age, setAge] = useState(0)
   const [height, setHeight] = useState(0)
   const [weight, setWeight] = useState(0)
- 
+
   const createAgeSettings = async (event) => {
     event.preventDefault()
     const newAge = event.target.age.value  
     props.createNewSettings(newAge, weight, height)
     setAge(newAge)
-    console.log(age)
     setShowAge(true)
   }
 
@@ -30,6 +29,7 @@ const Profile = (props) => {
     setHeight(newHeight)
     setShowHeight(true)
   }
+  
   const createWeightSettings = async (event) => {
     event.preventDefault()
     const newWeight = event.target.weight.value
@@ -52,13 +52,13 @@ const Profile = (props) => {
       <div className="container">
           {showAge ? <Card.Header onClick={() => setShowAge(false)}>
             Age: {age !== 0 ? age : "Not yet defined"} </Card.Header> 
-          : <DropDown onSub={createAgeSettings} options={createOptions(10,100)} value="age" label="Age" setShow={() => setShowAge(true)}/>}        
+          : <DropDown onSubmit={createAgeSettings} options={createOptions(10,100)} value="age" label="Age" setShow={() => setShowAge(true)}/>}        
           {showHeight ? <Card.Header onClick={() => setShowHeight(false)}>
             Height: {height !== 0 ? height + " cm" : "Not yet defined"} </Card.Header> 
-          : <DropDown onSub={createHeightSettings} options={createOptions(100,220)} value="height" label="Height"/>}
+          : <DropDown onSubmit={createHeightSettings} options={createOptions(100,220)} value="height" label="Height"/>}
           {showWeight ? <Card.Header onClick={() => setShowWeight(false)}>
             Weight: {weight !== 0 ? weight + " kg" : "Not yet defined"} </Card.Header> 
-          : <DropDown onSub={createWeightSettings} options={createOptions(40,200)} value="weight" label="Weight"/>}
+          : <DropDown onSubmit={createWeightSettings} options={createOptions(40,200)} value="weight" label="Weight"/>}
         </div>
     </div>
   )

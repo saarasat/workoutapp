@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 
 const programSchema = new mongoose.Schema({
-
   name: { type: String },
-  moves: [],
+  moves: [ {
+    type: mongoose.Schema.Types.Mixed
+  }],
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'

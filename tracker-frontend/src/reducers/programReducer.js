@@ -6,10 +6,8 @@ const programReducer = (state = [], action) => {
     return action.data
   case 'ADD_NEW_PROGRAM':
     state = [...state, action.data]
-    console.log(state)
     return state
   case 'UPDATE_PROGRAM':
-    console.log(action.data)
     state = [...state, action.data]
     return state
   default:
@@ -17,14 +15,36 @@ const programReducer = (state = [], action) => {
   }
 }
 
+export const addMoveToProgram = (programId, moves) => {
+  return async dispatch => {
+    console.log("here")
+    const updated = await dataService.addItem('programs', programId, 'moves', moves)
+    dispatch({
+      type: 'UPDATE_PROGRAM',
+      data: updated,
+    })
+  }
+}
+
+export const deleteMoveFromProgram = (programId, moves) => {
+  console.log(programId)
+  console.log(moves)
+  return async (dispatch) => {
+    console.log("here")
+    const updated = await dataService.updateItem('programs', programId, 'moves', moves)
+    console.log(updated)
+    dispatch({
+      type: 'UPDATE_PROGRAM',
+      data: updated,
+    })
+  }
+}
+
 export const updateProgram = (newProgram, id) => {
   return async (dispatch) => {
     const program = newProgram
     const newId = id
-    console.log(newId)
-    console.log(program)
-    const updatedProgram = await dataService.update('programs', program, id)
-    console.log(updatedProgram)
+    const updatedProgram = await dataService.update('programs', program, newId)
     dispatch({
       data: updatedProgram,
       type: 'UPDATE_PROGRAM'

@@ -1,22 +1,22 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState } from 'react'
+import {Button} from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Button, Col, Form, Row } from 'react-bootstrap'
-import Icon from './Icon'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { createNewProgram } from '../reducers/programReducer'
+import ProgramForm from './ProgramForm'
 
 const ProgramList = ({programs }) => {
-  
+  const [showForm, setShowForm] = useState(false)
+
   return (
     <div className="container">
-      <h1>Programs</h1>
-        {programs.map(program => 
+      {showForm ? <ProgramForm /> : <Button onclick={setShowForm(true)}>Create new program</Button>}
+      <h1>Programs </h1>
+        {programs.reverse().map(program => 
+        <Link key={program.id} to={`/programs/${program.id}`}>
         <p className="program-header" key={program.id}>
-          <Link to={`/programs/${program.id}`}></Link>
           {program.name}
-          </p>)}
-          <Link to="/newProgram"><Button>This</Button></Link>
+          </p></Link>)}
     </div>
   )
 }

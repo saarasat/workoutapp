@@ -5,7 +5,7 @@ import MonthlyWorkouts from './WorkoutsMonthly'
 
 const WorkoutList = ({workouts}) => {
   const [byMonth, setByMonth] = useState('')
-
+  
   const countTotalTime = (workouts) => {
     const timesOnly = workouts.map(workout => workout.time.split(':'))
     const hours = timesOnly.reduce((total, time) => total + Number(time[0]),0)
