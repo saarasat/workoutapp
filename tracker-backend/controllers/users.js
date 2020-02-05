@@ -7,16 +7,18 @@ usersRouter.get('/', async (request, response) => {
   const users = await User.find({})
     .find({}).populate('workouts', { sport: 1, type: 1, time: 1, calories: 1, km: 1, date: 1, day: 1, month: 1 })
     .find({}).populate('settings', { age: 1, height: 1, weight: 1 })
-    .find({}).populate('programs', { name: 1, moves: 1 })
-    .find({}).populate('moves', { name: 1 })
   response.json(users.map(u => u.toJSON()))
 })
-
 
 usersRouter.post('/', async (request, response, next) => {
 
   try {
     const body = request.body
+    if (!body.password || body.password.length < 3) {
+      return response.status(400).send({
+        error: 'password minimum length 3'
+      })
+    }
 
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(body.password, saltRounds)

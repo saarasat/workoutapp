@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDumbbell, faBiking, faMusic, faRunning, faHome, faVolleyballBall, faDog, faHiking, faEllipsisH, faSwimmer, faSkiing, faFistRaised } from '@fortawesome/free-solid-svg-icons'
+import { faDumbbell, faBiking, faMusic, faRunning, faHome, faVolleyballBall, faDog, faHiking, faEllipsisH, faSwimmer, faSkiing, faFistRaised, faStar } from '@fortawesome/free-solid-svg-icons'
 
 
 export const getIcon = (sportType) => {
@@ -12,6 +12,10 @@ export const getMenuIcon = (icon, color) => {
 }
 
 export const types = [
+  {
+    "type":"My programs",
+    "icon":<FontAwesomeIcon key={13} className="menu-icon orange" icon={faStar} />
+  },
   {
     "type":"Gym",
     "icon":<FontAwesomeIcon key={1} className="menu-icon yellow" icon={faDumbbell} />
@@ -61,6 +65,38 @@ export const types = [
     "icon":<FontAwesomeIcon key={12} className="menu-icon green" icon={faEllipsisH} />
   }
 ]
+
+export const difficultyLevels = [
+  {
+    "id":1,
+    "level": "Light",
+    "type": "My program",
+    "59": 177,
+    "70": 211,
+    "82": 245,
+    "93": 279
+  },
+  {
+    "id":2,
+    "level": "Medium",
+    "type": "My program",
+    "59": 413,
+    "70": 493,
+    "82": 572,
+    "93": 651
+  },
+  {
+    "id":3,
+    "level": "Hard",
+    "type": "My program",
+    "59": 472,
+    "70": 563,
+    "82": 654,
+    "93": 745
+  }
+]
+
+
 
 export const sports = [
   {

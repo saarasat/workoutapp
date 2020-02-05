@@ -14,8 +14,13 @@ const getConfig = () => ({
   headers: { Authorization: token }
 })
 
+const getAllUsers = async () => {
+  const response = await axios.get(`/api/users`)
+  return response.data
+}
+
 const getAll = async (value) => {
-  const response = await axios.get(`/api/${value}`,  getConfig())
+  const response = await axios.get(`/api/${value}`, getConfig())
   return response.data
 }
 
@@ -24,26 +29,11 @@ const create = async (value, newObject) => {
   return response.data
 }
 
-const replace = async (value, newObject, id) => {
+const replace = async (value, id, newObject) => {
   const response = await axios.put(`/api/${value}/${id}`, newObject, getConfig())
-  return response.data
-}
-
-const addItem = async (value, id, item, moves) => {
-  console.log(moves)
-  const response = await axios.post(`/api/programs/${id}/moves`, moves, getConfig())
   console.log(response.data)
   return response.data
 }
-
-const updateItem = async (value, id, item, moves) => {
-  console.log(moves)
-  const response = await axios.put(`/api/programs/${id}/moves`, moves, getConfig())
-  console.log(response)
-  return response.data
-}
-
-
 
 const deleteOne = async (value, id) => {
   const response = await axios.delete(`/api/${value}/${id}`, getConfig())
@@ -55,10 +45,9 @@ const deleteOne = async (value, id) => {
 }
 
 export default {
+  getAllUsers : getAllUsers,
   getAll: getAll,
   create: create,
-  addItem: addItem,
-  updateItem: updateItem,
   update: replace,
   delete: deleteOne,
   setToken: setToken,

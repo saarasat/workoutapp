@@ -11,9 +11,24 @@ const getTokenFrom = request => {
   return null
 }
 
-workoutsRouter.get('/', async (request, response) => {  
-  const workouts = await Workout.find({}).populate('user', { username: 1, name: 1, userId: 1 })
-  response.json(workouts.map(workout => workout.toJSON()))
+workoutsRouter.get('/', async (request, response, next) => {  
+
+  const token = getTokenFrom(request)
+  let user = ''
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }  
+
+    user = await User.findById(decodedToken.id)
+
+  } catch(exception) {
+    next(exception)
+  }
+  const workouts = await Workout.find({userId : user.id}).populate('user', { username: 1, name: 1, userId: 1 })
+  response.json(workouts.filter(workout => workout.toJSON()))
 })
 
 workoutsRouter.post('/', async (request, response, next) => {
@@ -39,7 +54,8 @@ workoutsRouter.post('/', async (request, response, next) => {
       date: new Date(body.date),
       day: body.day,
       month: body.month,
-      userId: user._id
+      userId: user._id,
+      username: user.username
     })
 
     const savedWorkout = await workout.save()

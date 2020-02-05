@@ -11,8 +11,22 @@ const getTokenFrom = request => {
   return null
 }
 
-programsRouter.get('/', async (request, response) => {
-  const programs = await Program.find({}).populate('user', { username: 1, name: 1, userId: 1 })
+programsRouter.get('/', async (request, response, next) => {
+  const token = getTokenFrom(request)
+  let user = ''
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }  
+
+    user = await User.findById(decodedToken.id)
+
+  } catch(exception) {
+    next(exception)
+  }
+  const programs = await Program.find({userId : user.id}).populate('user', { username: 1, name: 1, userId: 1 })
   response.json(programs.map(programs => programs.toJSON()))
 })
 
@@ -32,6 +46,7 @@ programsRouter.post('/', async (request, response, next) => {
     const programs = new Program({
       name: body.name,
       moves: body.moves,
+      difficulty: body.difficulty,
       userId: user._id 
     })
 
@@ -45,7 +60,7 @@ programsRouter.post('/', async (request, response, next) => {
   }
 })
 
-programsRouter.post('/:id/moves', async (request, response) => {
+programsRouter.post('/:id/moves', async (request, response, next) => {
   const moves = request.body
   const token = getTokenFrom(request)
   try {
@@ -53,15 +68,12 @@ programsRouter.post('/:id/moves', async (request, response) => {
     if (!token || !decodedToken.id) {
       return response.status(401).json({ error: 'token missing or invalid' })
     }
-    const user = await User.findById(decodedToken.id)
     const program = await Program.findById(request.params.id)
     if (!program.moves) {
       program.moves = []
     }
     program.moves = program.moves.concat(moves)
-    const savedProgram = await program.save()
-    user.programs = user.programs.concat(savedProgram._id)
-    await user.save()
+    await program.save()
     
     response.json(program.toJSON())
   
@@ -70,13 +82,20 @@ programsRouter.post('/:id/moves', async (request, response) => {
   }
 })
 
-
-
-programsRouter.put('/:id/moves', async (request, response) => {
-  const moves = request.body
-  const program = await Program.findByIdAndUpdate(request.params.id, moves)
-  await program.save()
-  response.json(program.toJSON())
+programsRouter.put('/:id', async (request, response, next) => {
+  const {name, difficulty, moves} = request.body
+  const program = {name, difficulty, moves}
+  const token = getTokenFrom(request)
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }
+    const updatedProgram = await Program.findByIdAndUpdate(request.params.id, program, {new:true})
+    response.json(updatedProgram.toJSON())
+  } catch(exception) {
+    next(exception)
+  }
 })
 
 

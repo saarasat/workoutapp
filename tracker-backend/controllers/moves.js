@@ -12,7 +12,21 @@ const getTokenFrom = request => {
 }
 
 movesRouter.get('/', async (request, response) => {
-  const moves = await Move.find({}).populate('user', { username: 1, name: 1, userId: 1 })
+  const token = getTokenFrom(request)
+  let user = ''
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }  
+
+    user = await User.findById(decodedToken.id)
+
+  } catch(exception) {
+    next(exception)
+  }
+  const moves = await Move.find({userId : user.id}).populate('user', { username: 1, name: 1, userId: 1 })
   
   response.json(moves.map(moves => moves.toJSON()))
 })

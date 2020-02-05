@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import Moves from './Moves'
 import { createNewMove } from '../reducers/moveReducer'
-import { createNewProgram, updateProgram } from '../reducers/programReducer'
+import { createNewProgram } from '../reducers/programReducer'
 
 const Program = ({id, programs}) => {
   const [program, setProgram] = useState({})  
@@ -36,4 +36,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, { updateProgram, createNewProgram, createNewMove })(Program)
+export default connect(mapStateToProps, { createNewProgram, createNewMove })(Program)

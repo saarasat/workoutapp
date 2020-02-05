@@ -1,7 +1,16 @@
 const mongoose = require('mongoose')
 
 const programSchema = new mongoose.Schema({
-  name: { type: String },
+  name: 
+  { type: String,
+    required: true,
+    minLength: 3
+  },
+  difficulty: { 
+    type: String,
+    required: true,
+    minLength: 3
+  },
   moves: [ {
     type: mongoose.Schema.Types.Mixed
   }],

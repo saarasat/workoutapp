@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Card } from 'react-bootstrap'
+import { Button, Card } from 'react-bootstrap'
 import { createOptions } from './Units'
 import { createNewSettings } from '../reducers/settingsReducer'
+import { deleteUser } from '../reducers/usersReducer'
 import DropDown from './DropDown'
 
 
@@ -38,6 +39,10 @@ const Profile = (props) => {
     setShowWeight(true)
   }
 
+  const removeUser = () => {
+    props.deleteUser(props.id)
+  }
+
   useEffect(() => {
     if (props.settings.length > 0) {
       setAge(props.settings[props.settings.length-1].age)
@@ -60,6 +65,10 @@ const Profile = (props) => {
             Weight: {weight !== 0 ? weight + " kg" : "Not yet defined"} </Card.Header> 
           : <DropDown onSubmit={createWeightSettings} options={createOptions(40,200)} value="weight" label="Weight"/>}
         </div>
+        <div className="container">
+          <Button onClick={removeUser} className="dark-red">Remove account</Button>
+
+        </div>
     </div>
   )
 }
@@ -70,4 +79,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { createNewSettings })(Profile)
+export default connect(mapStateToProps, { deleteUser, createNewSettings })(Profile)

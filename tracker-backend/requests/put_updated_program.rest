@@ -1,0 +1,14 @@
+PUT http://localhost:3002/api/programs/5e3acd060f59682248b3b9ff
+content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InV1c2kiLCJpZCI6IjVlM2E5ODgzMTIwN2EyNWVmZDEwMDA3YyIsImlhdCI6MTU4MDkxMDU3MSwiZXhwIjoxNTgwOTk2OTcxfQ.tyEEheq08LsHLNl4JJDAKv4r-OfHpY0i_q4ev0Yas0A
+
+{
+  "name": "Testinimi",
+  "difficulty": "Hard",
+  "userId": "5e3a98831207a25efd10007c",
+  "moves": [{"kg": 0, "reps": 0, "name": "taas uusi", "id": 570032}],
+  "id": "5e3acd060f59682248b3b9ff"
+}
+
+  
+  

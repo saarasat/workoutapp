@@ -6,6 +6,7 @@ import programReducer from './reducers/programReducer'
 import moveReducer from './reducers/moveReducer'
 import loginReducer from './reducers/loginReducer'
 import usersReducer from './reducers/usersReducer'
+import notificationReducer from './reducers/notificationReducer'
 
 
 const reducer = combineReducers({
@@ -15,6 +16,7 @@ const reducer = combineReducers({
   moves: moveReducer,
   user: loginReducer,
   users: usersReducer,
+  notification: notificationReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))

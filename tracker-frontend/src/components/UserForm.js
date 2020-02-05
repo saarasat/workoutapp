@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import Notification from './Notification'
+import { setNotification } from '../reducers/notificationReducer'
 
-const UserForm = ({createNewUser}) => {
-  const [notification, setNotification] = useState('')
+const UserForm = ({createNewUser, setNotification}) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
-  const handleSubmit = (event) => {
-
+  const handleSubmit = async (event) => {
     event.preventDefault()
     if (confirmPassword != password) {
       setNotification("Passwords must match")
@@ -17,7 +18,11 @@ const UserForm = ({createNewUser}) => {
       setConfirmPassword('')
       return
     }
-    createNewUser(username, password)
+    await createNewUser(username, password)
+    setUsername('')
+    setPassword('')
+    setConfirmPassword('')
+    
   }
 
   const handleUsernameChange = (event) => {
@@ -68,9 +73,9 @@ const UserForm = ({createNewUser}) => {
           <Button className="btn-cancel">cancel</Button>
           </Link>
       </Form>
-      {notification}
+      <Notification />
     </div>
   )
 }
 
-export default UserForm
+export default connect(null, {setNotification})(UserForm)

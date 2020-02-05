@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -7,18 +7,11 @@ import { createNewProgram, addMoveToProgram, deleteMoveFromProgram } from '../re
 import Icon from './Icon'
 
 
-const Moves = ({ program,  moves, createNewMove, addMoveToProgram, deleteMove, updateMoveValues }) => {
+const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFromProgram }) => {
   const [move, setMove] = useState('move name')
   const [kg, setKg] = useState(0)
   const [reps, setReps] = useState(0)
-  const [programMoves, setProgramMoves] = useState([])
   const [newMoveForm, setNewMoveForm] = useState(false)
-
-  useEffect(() => {
-    if (program && program.moves.length > 0) {
-      setProgramMoves(program.moves)
-    }
-  },[])
 
   const createId = () => Math.round(Math.random()*1000000)
 
@@ -31,8 +24,9 @@ const Moves = ({ program,  moves, createNewMove, addMoveToProgram, deleteMove, u
       reps: Number(reps),
       kg: Number(kg)
     }
-    await addMoveToProgram(program.id, programMove)
-    setProgramMoves([...programMoves, programMove])
+    const updatedMoves = [...program.moves, programMove]
+    const updatedProgram = {...program, moves:updatedMoves}
+    await addMoveToProgram(program.id, updatedProgram)
     setMove('')
     setReps(0)
     setKg(0)    
@@ -41,14 +35,15 @@ const Moves = ({ program,  moves, createNewMove, addMoveToProgram, deleteMove, u
   const addANewMove = async (event) => {
     event.preventDefault()
     const newMove = event.target.newMove.value 
-    createNewMove(newMove)
+    await createNewMove(newMove)
     event.target.newMove.value = ''
     setNewMoveForm(false)
   }
 
-  const handleDeletion = (moveId) => {
+  const handleDeletion = async (moveId) => {
     const updatedMoves = program.moves.filter(move => move.id !== moveId)
-    deleteMoveFromProgram(program.id, updatedMoves)
+    const updatedProgram = {...program, moves:updatedMoves}
+    await deleteMoveFromProgram(program.id, updatedProgram)
   }
 
   const handleRepChange = (event) => {
@@ -98,6 +93,19 @@ const Moves = ({ program,  moves, createNewMove, addMoveToProgram, deleteMove, u
       </Row>
 
     </Form>
+    {program && program.moves.length > 0 ? 
+    program.moves.map(move => 
+    <Row key={move.id}>
+      <Col>{move.name}</Col>
+      <Col>{move.reps}</Col>
+      <Col>{move.kg}</Col>
+      <Col>
+        <button className="btn-icon logout" onClick={() => handleDeletion(move.id)}>
+          <Icon icon={faTrash} color="gray"></Icon>
+        </button>
+      </Col>
+    </Row>)
+    : null}
     {newMoveForm ? 
     <Form onSubmit={addANewMove}>
       <Form.Group>
@@ -109,17 +117,6 @@ const Moves = ({ program,  moves, createNewMove, addMoveToProgram, deleteMove, u
         <Button className="btn-cancel" onClick={() => setNewMoveForm(false)}>Cancel</Button>
       </Form.Group>
     </Form> : null}
-      {programMoves && program && program.moves.length > 0 ?  
-        programMoves.map(move =>
-          <p key={move.id}>
-            {move.name}
-            {move.reps}
-            {move.kg}
-            <button className="btn-icon logout" onClick={() => handleDeletion(move.id)}>
-              <Icon icon={faTrash} color="gray"></Icon>
-            </button>
-        </p>) 
-        : null}
     </div>
   )
 }

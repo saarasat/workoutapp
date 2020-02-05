@@ -5,6 +5,8 @@ const usersReducer = (state = [], action) => {
   switch (action.type) {
   case 'INIT_USERS':
     return action.data
+  case 'DELETE_USER':
+    return state.filter(u => u.id !== action.id)
   default:
     return state
   }
@@ -12,12 +14,23 @@ const usersReducer = (state = [], action) => {
 
 export const initializeUsers = () => {
   return async dispatch => {
-    const users = await dataService.getAll('users')
+    const users = await dataService.getAllUsers()
     dispatch({
       type: 'INIT_USERS',
       data: users,
     })
   }
 }
+
+export const deleteUser = (id) => {
+  return async dispatch => {
+    const users = await dataService.delete('users', id)
+    dispatch({
+      type: 'DELETE_USER',
+      data: users,
+    })
+  }
+}
+
 
 export default usersReducer

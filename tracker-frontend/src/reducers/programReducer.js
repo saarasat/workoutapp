@@ -3,35 +3,25 @@ import dataService from '../services/dataService'
 const programReducer = (state = [], action) => {
   switch (action.type) {
   case 'INITIALIZE_PROGRAMS':
-    return action.data
+    return action.data.reverse()
   case 'ADD_NEW_PROGRAM':
     state = [...state, action.data]
-    return state
+    return state.reverse()
+  case 'REMOVE_MOVES':
+    state = state.filter(b => b.id !== action.id)
+    return state.reverse()
   case 'UPDATE_PROGRAM':
-    state = [...state, action.data]
-    return state
+    const id = action.data.id
+    return state.map(b => b.id !== id ? b : action.data)
   default:
-    return state
+    return state.reverse()
   }
 }
 
-export const addMoveToProgram = (programId, moves) => {
+export const addMoveToProgram = (programId, program) => {
+  console.log(program)
   return async dispatch => {
-    console.log("here")
-    const updated = await dataService.addItem('programs', programId, 'moves', moves)
-    dispatch({
-      type: 'UPDATE_PROGRAM',
-      data: updated,
-    })
-  }
-}
-
-export const deleteMoveFromProgram = (programId, moves) => {
-  console.log(programId)
-  console.log(moves)
-  return async (dispatch) => {
-    console.log("here")
-    const updated = await dataService.updateItem('programs', programId, 'moves', moves)
+    const updated = await dataService.update('programs', programId, program)
     console.log(updated)
     dispatch({
       type: 'UPDATE_PROGRAM',
@@ -40,23 +30,24 @@ export const deleteMoveFromProgram = (programId, moves) => {
   }
 }
 
-export const updateProgram = (newProgram, id) => {
+
+export const deleteMoveFromProgram = (programId, program) => {
+  console.log(program)
   return async (dispatch) => {
-    const program = newProgram
-    const newId = id
-    const updatedProgram = await dataService.update('programs', program, newId)
+    const updated = await dataService.update('programs', programId, program)
+    console.log(updated)
     dispatch({
-      data: updatedProgram,
-      type: 'UPDATE_PROGRAM'
+      type: 'UPDATE_PROGRAM',
+      data: updated,
     })
   }
 }
 
-
-export const createNewProgram = (name, moves) => {
+export const createNewProgram = (name, difficulty, moves) => {
   return async (dispatch) => {
     const newProgram = {
       name,
+      difficulty,
       moves
     }
     const dispatchableProgram = await dataService.create('programs', newProgram)

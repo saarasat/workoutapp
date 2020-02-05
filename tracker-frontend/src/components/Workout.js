@@ -4,7 +4,7 @@ import Calendar from 'react-calendar'
 import { Button, Col, Form, InputGroup, Row, Modal, ModalBody } from 'react-bootstrap'
 import { createNewWorkout } from '../reducers/workoutReducer'
 import { createOptions, weekdays, months } from './Units'
-import { sports } from './Sports'
+import { sports, difficultyLevels } from './Sports'
 import { Redirect } from 'react-router-dom'
 
 const Workout = (props) => {
@@ -27,14 +27,18 @@ const Workout = (props) => {
     const sport = event.target.sport.value
     let hours = event.target.hours.value
     let minutes = event.target.minutes.value
-    
+    let difficulty = ''
+    if (props.type === "My programs") {
+      let program = props.programs.find(program => program.name === sport)
+      difficulty = program.difficulty
+    }
     if (hours < 10) hours = "0" + hours     
     if (minutes < 10) minutes = "0" + minutes
     let km = 0
     if (props.type === "Walking & running" || props.type === "Cycling") km = Number(event.target.km.value)
   
     const time = hours + ":" + minutes
-    const calories = countCalories(sport, hours, minutes)
+    const calories = countCalories(sport, hours, minutes, difficulty)
     const date = new Date(workoutDate)
     const type = props.type
     const day = weekdays[workoutDate.getDay()]
@@ -43,12 +47,15 @@ const Workout = (props) => {
     setShowReport(true)
   }
 
-  const countCalories = (sport, hours, minutes) => {
+  const countCalories = (sport, hours, minutes, difficulty) => {
     let latestWeight = 0
     if (props.settings.length !== 0) {
       latestWeight = props.settings[props.settings.length-1].weight
     } 
-    let doneActivity = sports.filter(activity => activity.sport === sport)[0]
+    let doneActivity = ''
+    if (props.type === "My programs") doneActivity = difficultyLevels.find(d => d.level === difficulty) 
+    else doneActivity = sports.filter(activity => activity.sport === sport)[0]
+    
     let workoutTime = Number(hours) + Number(minutes/60) 
 
     if (latestWeight < 64.5) return Math.round(doneActivity["59"] * (latestWeight/59) * workoutTime)
@@ -58,6 +65,7 @@ const Workout = (props) => {
   }
 
   const sportsByType = () => sports.filter(sport => sport.type === props.type)
+  
 
   const hourOptions = createOptions(0,24)
   const minuteOptions = createOptions(0,59)
@@ -91,16 +99,25 @@ const Workout = (props) => {
             </Modal>
           </Row>
 
+          {props.type == "My programs" ?
+          <Row className="form-row">
+            <Col md={6} xs={4}><Form.Label>Program</Form.Label></Col>
+            <Col md={6} xs={8}>
+              <Form.Control name="sport" as="select" className="select-dark">
+                {props.programs.map(item => <option key={item.id}>{item.name}</option>)}
+              </Form.Control>
+            </Col>
+          </Row>
+          :
           <Row className="form-row">
             <Col md={6} xs={4}><Form.Label>Sport</Form.Label></Col>
             <Col md={6} xs={8}>
               <Form.Control name="sport" as="select" className="select-dark">
-                {sportsByType().map(item =>
-                  <option key={item.id}>{item.sport}</option>
-                )}
+                {sportsByType().map(item => <option key={item.id}>{item.sport}</option>)}
               </Form.Control>
             </Col>
           </Row>
+          }
           <Row className="form-row">
             <Col md={6} xs={4}><Form.Label>Time</Form.Label></Col>
             <Col md={6} xs={8}>
@@ -151,7 +168,8 @@ const Workout = (props) => {
 const mapStateToProps = (state) => {
   return {
     settings: state.settings,
-    workouts: state.workouts
+    workouts: state.workouts,
+    programs: state.programs,
   }
 }
 

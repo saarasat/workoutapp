@@ -43,7 +43,7 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
             
         <div>
           {workouts.map(item =>
-            <Link to={`/workouts/${item.id}`}>
+            <Link key={item.id} to={`/workouts/${item.id}`}>
               <Row className="result-list-row" key={item.id}>
                 <Col xs={2} className="result-icon">{getIcon(item.type)}</Col>
                 <Col xs={3} className="result-sport">{item.sport}</Col>

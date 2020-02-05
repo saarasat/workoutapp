@@ -73,6 +73,11 @@ a:hover {
   color: #00bf8a; 
 }
 
+.notification {
+  font-weight: 300;
+  margin: 1em;
+}
+
 
 @font-face {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
