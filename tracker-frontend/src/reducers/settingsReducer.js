@@ -11,10 +11,9 @@ const settingsReducer = (state = [], action) => {
     return state
   }
 }
-export const createNewSettings = (age, weight, height) => {
+export const createNewSettings = (weight, height) => {
   return async (dispatch) => {
     const newSettings = {
-      age,
       weight,
       height
     }

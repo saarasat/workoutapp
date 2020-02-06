@@ -22,9 +22,9 @@ export const initializeUsers = () => {
   }
 }
 
-export const deleteUser = (id) => {
+export const deleteUser = (user) => {
   return async dispatch => {
-    const users = await dataService.delete('users', id)
+    const users = await dataService.deleteUser('users', user)
     dispatch({
       type: 'DELETE_USER',
       data: users,

@@ -66,3 +66,7 @@
 .select-dark {
   background-color: #212529;
 }
+
+.progressBar {
+  height: 25px;
+}

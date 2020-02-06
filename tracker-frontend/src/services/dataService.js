@@ -19,6 +19,11 @@ const getAllUsers = async () => {
   return response.data
 }
 
+const deleteUser = async (user) => {
+  
+  const response = await axios.delete(`/api/users/`, getConfig())
+}
+
 const getAll = async (value) => {
   const response = await axios.get(`/api/${value}`, getConfig())
   return response.data

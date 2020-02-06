@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Button, Form } from 'react-bootstrap'
-import { setNotification } from '../reducers/notificationReducer'
 import { createNewMove } from '../reducers/moveReducer'
 import { createNewProgram, initializePrograms } from '../reducers/programReducer'
 

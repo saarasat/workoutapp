@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 
 const settingsSchema = new mongoose.Schema({
 
-  age: { type: Number },
   weight: { type: Number },
   height: { type: Number },
   userId: {

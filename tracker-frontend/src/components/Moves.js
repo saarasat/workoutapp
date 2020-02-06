@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Button, Col, Form, Row } from 'react-bootstrap'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { createNewMove } from '../reducers/moveReducer'
 import { createNewProgram, addMoveToProgram, deleteMoveFromProgram } from '../reducers/programReducer'
-import Icon from './Icon'
+import MovesList from './MovesList'
+
 
 
 const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFromProgram }) => {
@@ -91,21 +91,11 @@ const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFrom
           <Button className="btn-save" type="submit">Add</Button>
         </Col>
       </Row>
-
     </Form>
-    {program && program.moves.length > 0 ? 
-    program.moves.map(move => 
-    <Row key={move.id}>
-      <Col>{move.name}</Col>
-      <Col>{move.reps}</Col>
-      <Col>{move.kg}</Col>
-      <Col>
-        <button className="btn-icon logout" onClick={() => handleDeletion(move.id)}>
-          <Icon icon={faTrash} color="gray"></Icon>
-        </button>
-      </Col>
-    </Row>)
-    : null}
+    {program && program.moves.length > 0 ?
+    <MovesList items={program.moves} handleDeletion={handleDeletion}/>
+    : null
+    }
     {newMoveForm ? 
     <Form onSubmit={addANewMove}>
       <Form.Group>
@@ -118,6 +108,7 @@ const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFrom
       </Form.Group>
     </Form> : null}
     </div>
+    
   )
 }
   const mapStateToProps = (state, ownProps) => {

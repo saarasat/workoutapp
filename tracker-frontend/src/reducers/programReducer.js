@@ -19,10 +19,9 @@ const programReducer = (state = [], action) => {
 }
 
 export const addMoveToProgram = (programId, program) => {
-  console.log(program)
+  
   return async dispatch => {
     const updated = await dataService.update('programs', programId, program)
-    console.log(updated)
     dispatch({
       type: 'UPDATE_PROGRAM',
       data: updated,
@@ -32,10 +31,8 @@ export const addMoveToProgram = (programId, program) => {
 
 
 export const deleteMoveFromProgram = (programId, program) => {
-  console.log(program)
   return async (dispatch) => {
     const updated = await dataService.update('programs', programId, program)
-    console.log(updated)
     dispatch({
       type: 'UPDATE_PROGRAM',
       data: updated,

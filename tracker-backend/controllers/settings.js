@@ -46,13 +46,12 @@ settingsRouter.post('/', async (request, response, next) => {
 
   const user = await User.findById(decodedToken.id)
 
-  if (body.age === undefined || body.height === undefined || body.weight === undefined) {
+  if (body.height === undefined || body.weight === undefined) {
     return response.status(400).json({
       error: 'Settings missing'
     })
   }
   const settings = new Settings({
-    age: body.age,
     weight: body.weight,
     height: body.height,
     userId: user._id
