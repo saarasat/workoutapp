@@ -2,7 +2,11 @@ const mongoose = require('mongoose')
 
 const moveSchema = new mongoose.Schema({
 
-  name: { type: String },
+  name: { 
+    type: String,
+    minlength: 5,
+    maxlength: 30,
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,

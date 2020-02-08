@@ -3,10 +3,10 @@ import { connect } from 'react-redux'
 import { Button, Form } from 'react-bootstrap'
 import { createNewMove } from '../reducers/moveReducer'
 import { createNewProgram, initializePrograms } from '../reducers/programReducer'
+import {withRouter} from 'react-router-dom'
 
 
-
-const ProgramForm = ({ createNewProgram, hideForm }) => {
+const ProgramForm = ({ createNewProgram, history }) => {
 
   const createProgram = async (event) => {
     event.preventDefault()
@@ -14,7 +14,7 @@ const ProgramForm = ({ createNewProgram, hideForm }) => {
     const newDifficulty = event.target.difficulty.value
     const newMoves = []    
     createNewProgram(newName, newDifficulty, newMoves)
-    hideForm()
+    history.push("/programs")
   }
 
   return (
@@ -49,4 +49,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { initializePrograms, createNewProgram, createNewMove })(ProgramForm)
+export default withRouter(connect(mapStateToProps, { initializePrograms, createNewProgram, createNewMove })(ProgramForm))

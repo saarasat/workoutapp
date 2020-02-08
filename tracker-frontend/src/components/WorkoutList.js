@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { Accordion, Card } from 'react-bootstrap'
 import MonthlyWorkouts from './WorkoutsMonthly'
-import { initializeWorkouts } from '../reducers/workoutReducer'
 
-const WorkoutList = ({workouts, initializeWorkouts}) => {
+const WorkoutList = ({workouts }) => {
   const [byMonth, setByMonth] = useState('')
-
-  useEffect(() => {
-    initializeWorkouts()
-  })
-
 
   const countTotalTime = (workouts) => {
     const timesOnly = workouts.map(workout => workout.time.split(':'))
@@ -83,4 +77,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, {initializeWorkouts})(WorkoutList)
+export default connect(mapStateToProps)(WorkoutList)

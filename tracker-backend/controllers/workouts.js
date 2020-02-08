@@ -2,14 +2,7 @@ const jwt = require('jsonwebtoken')
 const workoutsRouter = require('express').Router()
 const Workout = require('../models/workout')
 const User = require('../models/user')
-
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
-  }
-  return null
-}
+const getTokenFrom = require('./token')
 
 workoutsRouter.get('/', async (request, response, next) => {  
 
@@ -24,11 +17,13 @@ workoutsRouter.get('/', async (request, response, next) => {
 
     user = await User.findById(decodedToken.id)
 
+    const workouts = await Workout.find({userId : user.id}).populate('user', { username: 1, name: 1, userId: 1 })
+    response.json(workouts.filter(workout => workout.toJSON()))
+    
   } catch(exception) {
     next(exception)
   }
-  const workouts = await Workout.find({userId : user.id}).populate('user', { username: 1, name: 1, userId: 1 })
-  response.json(workouts.filter(workout => workout.toJSON()))
+
 })
 
 workoutsRouter.post('/', async (request, response, next) => {

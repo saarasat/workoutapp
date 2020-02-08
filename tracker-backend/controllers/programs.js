@@ -2,14 +2,7 @@ const jwt = require('jsonwebtoken')
 const programsRouter = require('express').Router()
 const Program = require('../models/program')
 const User = require('../models/user')
-
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
-  }
-  return null
-}
+const getTokenFrom = require('./token')
 
 programsRouter.get('/', async (request, response, next) => {
   const token = getTokenFrom(request)
@@ -22,12 +15,13 @@ programsRouter.get('/', async (request, response, next) => {
     }  
 
     user = await User.findById(decodedToken.id)
+    const programs = await Program.find({userId : user.id}).populate('user', { username: 1, name: 1, userId: 1 })
+    response.json(programs.map(programs => programs.toJSON()))
 
   } catch(exception) {
     next(exception)
   }
-  const programs = await Program.find({userId : user.id}).populate('user', { username: 1, name: 1, userId: 1 })
-  response.json(programs.map(programs => programs.toJSON()))
+
 })
 
 programsRouter.post('/', async (request, response, next) => {
@@ -98,6 +92,16 @@ programsRouter.put('/:id', async (request, response, next) => {
   }
 })
 
+
+programsRouter.delete('/:id', async (request, response, next) => {
+  try {
+    await Program.findByIdAndRemove(request.params.id)
+  
+    response.status(204).end()
+  } catch (exception) {
+    next(exception)
+  }
+})
 
 
 

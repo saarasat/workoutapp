@@ -52,7 +52,18 @@ export const handleLogin = (username, password) => {
         data: user,
       })
     } catch (exception) {
-      setTimeout(() => {}, 5000)
+      dispatch({
+        type: 'SET_NOTIFICATION',
+        content: {
+          message: 'wrong username of password', 
+          type: 'error'
+        },
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR_NOTIFICATION',
+        })
+      }, 5000)
     } 
   }
 }

@@ -2,17 +2,12 @@ const jwt = require('jsonwebtoken')
 const movesRouter = require('express').Router()
 const Move = require('../models/move')
 const User = require('../models/user')
+const getTokenFrom = require('./token')
 
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
-  }
-  return null
-}
 
-movesRouter.get('/', async (request, response) => {
+movesRouter.get('/', async (request, response, next) => {
   const token = getTokenFrom(request)
+
   let user = ''
   try {
     const decodedToken = jwt.verify(token, process.env.SECRET)

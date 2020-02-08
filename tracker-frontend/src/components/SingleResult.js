@@ -5,8 +5,6 @@ import { Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { faFireAlt, faClock, faMapMarkerAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
-
-
 import { deleteWorkout } from '../reducers/workoutReducer'
 
 const SingleResult = ({workout, deleteWorkout}) => {

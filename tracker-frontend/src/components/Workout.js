@@ -5,10 +5,9 @@ import { Button, Col, Form, InputGroup, Row, Modal, ModalBody } from 'react-boot
 import { createNewWorkout } from '../reducers/workoutReducer'
 import { createOptions, weekdays, months } from './Units'
 import { sports, difficultyLevels } from './Sports'
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 const Workout = (props) => {
-  const [showReport, setShowReport] = useState(false)
   const [visible, setVisible] = useState(false)
   const [workoutDate, setWorkoutDate] = useState(new Date())
 
@@ -44,7 +43,7 @@ const Workout = (props) => {
     const day = weekdays[workoutDate.getDay()]
     const month = months[workoutDate.getMonth()] + " " + workoutDate.getFullYear()
     props.createNewWorkout(sport, type, time, calories, km, date, day, month)
-    setShowReport(true)
+    props.history.push(`/workouts`)
   }
 
   const countCalories = (sport, hours, minutes, difficulty) => {
@@ -67,18 +66,11 @@ const Workout = (props) => {
   const sportsByType = () => sports.filter(sport => sport.type === props.type)
   
 
-  const hourOptions = createOptions(0,24)
-  const minuteOptions = createOptions(0,59)
-  const kmOptions = createOptions(0,200)
-  const meterOptions = createOptions(0,9)
-
   return (
     <div className="container">
      
       <h1>Workout</h1>
       <div className="container">
-        {showReport && props.workouts.length > 0 ? <Redirect to={`/workouts/${props.workouts[props.workouts.length-1].id}`} /> : 
-  
         <Form onSubmit={createWorkout}>
           <Row className="form-row">
             <Col md={6} xs={4}><Form.Label>Date</Form.Label></Col>
@@ -94,12 +86,12 @@ const Workout = (props) => {
               </ModalBody>              
               <Modal.Footer className="justify-content-center">
                 <Button onClick={() => setVisible(false)} variant="secondary">Cancel</Button>
-                <Button onClick={() => showDay()} variant="save"> Ok</Button>
+                <Button variant="dark" onClick={() => showDay()} variant="save"> Ok</Button>
               </Modal.Footer>
             </Modal>
           </Row>
 
-          {props.type == "My programs" ?
+          {props.type === "My programs" ?
           <Row className="form-row">
             <Col md={6} xs={4}><Form.Label>Program</Form.Label></Col>
             <Col md={6} xs={8}>
@@ -125,12 +117,12 @@ const Workout = (props) => {
                 <InputGroup.Prepend>
                 </InputGroup.Prepend>
                 <Form.Control name="hours" as="select">
-                {hourOptions.map(item =>
+                {createOptions(0,24).map(item =>
                   <option key={item}>{item}</option>
                 )}
                 </Form.Control> : 
                 <Form.Control name="minutes" as="select">
-                {minuteOptions.map(item =>
+                {createOptions(0,59).map(item =>
                   <option key={item}>{item}</option>
                 )}
                 </Form.Control>
@@ -145,21 +137,21 @@ const Workout = (props) => {
                 <InputGroup.Prepend>
                 </InputGroup.Prepend>
                 <Form.Control name="km" as="select">
-                {kmOptions.map(item =>
+                {createOptions(0,250).map(item =>
                   <option key={item}>{item}</option>
                 )}
                 </Form.Control> : 
                 <Form.Control name="meters" as="select">
-                {meterOptions.map(item =>
+                {createOptions(0,1).map(item =>
                   <option key={item}>{item}</option>
                 )}
                 </Form.Control>
               </InputGroup>
             </Col>
             </Row> : ""}
-          <Button className="btn-save" type="submit">Save</Button>
+          <Button variant="dark"  className="btn-save" type="submit">Save</Button>
         </Form>
-        }
+        
       </div>
     </div>
   )
@@ -174,4 +166,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect (mapStateToProps, { createNewWorkout })(Workout)
+export default withRouter(connect(mapStateToProps, { createNewWorkout })(Workout))

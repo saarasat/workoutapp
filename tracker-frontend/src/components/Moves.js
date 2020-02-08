@@ -34,10 +34,11 @@ const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFrom
 
   const addANewMove = async (event) => {
     event.preventDefault()
-    const newMove = event.target.newMove.value 
+    const newMove = move
     await createNewMove(newMove)
     event.target.newMove.value = ''
     setNewMoveForm(false)
+
   }
 
   const handleDeletion = async (moveId) => {
@@ -60,6 +61,7 @@ const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFrom
 
   return (
     <div>
+      <h1>{program.name}</h1>
       <Form onSubmit={addMoves}>
       <Row>
         <Col xs={4}>
@@ -74,13 +76,13 @@ const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFrom
           <p className="green" onClick={() => setNewMoveForm(!newMoveForm)}><i>New move</i></p>
         </Col>
 
-        <Col xs={3}>
+        <Col xs={4}>
           <Form.Group>
             <Form.Label>Reps</Form.Label>
             <Form.Control onChange={handleRepChange} value={reps} name="reps" type="number" placeholder={reps}/>
           </Form.Group>
         </Col>
-        <Col xs={3}>
+        <Col xs={2}>
           <Form.Group>
             <Form.Label>Kg</Form.Label>
             <Form.Control onChange={handleKgChange} value={kg} name="kg" type="number" placeholder={kg}/>

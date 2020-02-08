@@ -4,13 +4,47 @@
   margin-top: 1.5em;
   margin-bottom: 1em;
   margin-right: 2.5em;
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+
 }
 
 .form-date {
   font-weight: 500;
   border: 1px white;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  align-content: center;
+  text-align: center;
+  justify-content: center;
+
 }
 
 .form-date:hover {
   color: #116A3C;
+}
+
+.form-control-plaintext {
+  color: white;
+  border: 1px solid white;
+  border-radius: 8%;
+  align-content: center;
+  text-align: center;
+}
+
+select {
+  background-color: #212529 !important;
+  color: white;
+  border:  #00bf8a; 
+}
+
+select option {
+  background-color: #212529;
+  color: white;
+}
+
+select ::selection {
+  background-color: #212529;
+  color: white;
 }

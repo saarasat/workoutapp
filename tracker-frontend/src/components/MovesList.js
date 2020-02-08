@@ -1,12 +1,13 @@
 import React from 'react'
-import {  Col, Row } from 'react-bootstrap'
+import {  Col, Row, Card } from 'react-bootstrap'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import {SortableContainer, SortableElement} from 'react-sortable-hoc';
 import Icon from './Icon'
 
 
 const SortableItem = SortableElement(({name, reps, kg, id, handleDeletion}) => (
-  <Row>
+  <Card.Header>
+    <Row>
     <Col xs={4}>{name}</Col>
     <Col xs={2}> x {reps}</Col>
     <Col xs={3}>{kg} kg</Col>
@@ -15,8 +16,11 @@ const SortableItem = SortableElement(({name, reps, kg, id, handleDeletion}) => (
         <Icon icon={faTrash} color="gray"></Icon>
       </button>
     </Col>
-  </Row>
+    </Row>
+  </Card.Header>
 ))
+
+
 
 const MovesList = SortableContainer(({items, handleDeletion}) => {
   return (

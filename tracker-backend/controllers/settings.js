@@ -5,7 +5,6 @@ const User = require('../models/user')
 
 settingsRouter.get('/', async (request, response) => {
 
-
   const token = getTokenFrom(request)
   let user = ''
   try {
@@ -16,12 +15,12 @@ settingsRouter.get('/', async (request, response) => {
     }  
 
     user = await User.findById(decodedToken.id)
-
+    const settings = await Settings.find({userId : user.id}).populate('user', { username: 1, name: 1, userId: 1 })  
+    response.json(settings.map(settings => settings.toJSON()))
+  
   } catch(exception) {
     next(exception)
   }
-  const settings = await Settings.find({userId : user.id}).populate('user', { username: 1, name: 1, userId: 1 })  
-  response.json(settings.map(settings => settings.toJSON()))
 })
 
 const getTokenFrom = request => {
@@ -52,6 +51,7 @@ settingsRouter.post('/', async (request, response, next) => {
     })
   }
   const settings = new Settings({
+    date: new Date(body.date),
     weight: body.weight,
     height: body.height,
     userId: user._id

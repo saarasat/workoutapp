@@ -6,13 +6,25 @@ import Notification from './Notification'
 import { setNotification } from '../reducers/notificationReducer'
 
 const UserForm = ({createNewUser, setNotification}) => {
+  const [show, setShow] = useState(true)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    if (confirmPassword != password) {
+    if (username.length < 3 || username.length > 50) {
+      setNotification("username must have 3-50 characters")
+      setUsername('')
+      return
+    }
+    if (password.length < 6 || password.length > 50) {
+      setNotification("password must have 6-50 characters")
+      setPassword('')
+      setConfirmPassword('')
+      return
+    }
+    if (confirmPassword !== password) {
       setNotification("Passwords must match")
       setPassword('')
       setConfirmPassword('')
@@ -22,6 +34,8 @@ const UserForm = ({createNewUser, setNotification}) => {
     setUsername('')
     setPassword('')
     setConfirmPassword('')
+    setNotification('Account created!')
+    setShow(!show)
     
   }
 
@@ -42,6 +56,8 @@ const UserForm = ({createNewUser, setNotification}) => {
   return (
     <div>
     <h2>Sporttivartti</h2>
+      {show ?
+      <div>
       <h4>Create new account</h4>
       <Form onSubmit={handleSubmit}>
         <Row className="form-row">
@@ -73,6 +89,14 @@ const UserForm = ({createNewUser, setNotification}) => {
           <Button className="btn-cancel">cancel</Button>
           </Link>
       </Form>
+      
+      </div>
+      :
+      
+      <Link to="/login">
+        <Button className="btn-save">To login</Button>
+      </Link>
+      }
       <Notification />
     </div>
   )

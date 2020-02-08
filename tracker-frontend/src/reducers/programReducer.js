@@ -7,15 +7,51 @@ const programReducer = (state = [], action) => {
   case 'ADD_NEW_PROGRAM':
     state = [...state, action.data]
     return state.reverse()
-  case 'REMOVE_MOVES':
-    state = state.filter(b => b.id !== action.id)
-    return state.reverse()
+  case 'DELETE_PROGRAM':
+    state = state.filter(p => p.id !== action.id)
+    return state.reverse() 
   case 'UPDATE_PROGRAM':
     const id = action.data.id
     return state.map(b => b.id !== id ? b : action.data)
   default:
     return state.reverse()
   }
+}
+
+export const initializePrograms = () => {
+  return async (dispatch) => {
+    const data = await dataService.getAll('programs')
+    dispatch({
+      data,
+      type: 'INITIALIZE_PROGRAMS'
+    })
+  }
+}
+
+export const createNewProgram = (name, difficulty, moves) => {
+  return async (dispatch) => {
+    const newProgram = {
+      name,
+      difficulty,
+      moves
+    }
+    const dispatchableProgram = await dataService.create('programs', newProgram)
+    dispatch({
+      data: dispatchableProgram,
+      type: 'ADD_NEW_PROGRAM'
+    })
+  }
+}
+
+export const deleteProgram = (programId) => {
+  return async dispatch => {
+    const updated = await dataService.delete('programs', programId)
+    dispatch({
+      type: 'DELETE_PROGRAM',
+      data: updated
+    })
+  }
+
 }
 
 export const addMoveToProgram = (programId, program) => {
@@ -40,29 +76,6 @@ export const deleteMoveFromProgram = (programId, program) => {
   }
 }
 
-export const createNewProgram = (name, difficulty, moves) => {
-  return async (dispatch) => {
-    const newProgram = {
-      name,
-      difficulty,
-      moves
-    }
-    const dispatchableProgram = await dataService.create('programs', newProgram)
-    dispatch({
-      data: dispatchableProgram,
-      type: 'ADD_NEW_PROGRAM'
-    })
-  }
-}
 
-export const initializePrograms = () => {
-  return async (dispatch) => {
-    const data = await dataService.getAll('programs')
-    dispatch({
-      data,
-      type: 'INITIALIZE_PROGRAMS'
-    })
-  }
-}
 
 export default programReducer

@@ -4,6 +4,10 @@ const settingsSchema = new mongoose.Schema({
 
   weight: { type: Number },
   height: { type: Number },
+  date: {
+    type: Date,
+    require: true
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',

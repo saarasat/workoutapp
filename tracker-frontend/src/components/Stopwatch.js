@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from 'react-bootstrap'
 import { useStopwatch } from '../hooks/index'
 
+
 const Stopwatch = () => {
   const {
     timerOn,
@@ -20,18 +21,18 @@ const Stopwatch = () => {
   let tensOfSeconds = time.substring(time.length - 1, time.length)
 
   return (
-    <div>
-      <div className="container">
-        <h1>Duration</h1>
-        <h2>{minutes}:{seconds}:{tensOfSeconds}</h2>
+    <div className="stopwatch-container">
+        <h1 className="stopwatch-time">{minutes}:{seconds}:{tensOfSeconds}</h1>
+        <div >
         <Button onClick={handleStartPause} variant={timerOn ? "pause" : "start"} className="btn-circle">
           {timerOn ? 'Pause' : 'Start'}
         </Button>
         <Button onClick={resetTimer} variant="change" className="btn-circle">
           Reset
         </Button>
+        </div>
       </div>
-    </div>
+    
   )
 }
 

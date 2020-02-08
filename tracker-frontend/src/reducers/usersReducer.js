@@ -32,5 +32,4 @@ export const deleteUser = (user) => {
   }
 }
 
-
 export default usersReducer

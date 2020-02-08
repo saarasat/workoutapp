@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { handleLogin } from '../reducers/loginReducer'
 
@@ -12,6 +12,7 @@ const Login = (props) => {
     const username = event.target.username.value
     const password = event.target.password.value
     props.handleLogin(username, password)
+    props.history.push("/")
   }
   
   return (
@@ -45,4 +46,4 @@ const Login = (props) => {
   )
 }
 
-export default connect(null, { handleLogin })(Login)
+export default withRouter(connect(null, { handleLogin })(Login))

@@ -1,21 +1,37 @@
 import dataService from '../services/dataService'
+const byTime = (d1, d2) => d1.date-d2.date
+
 
 const settingsReducer = (state = [], action) => {
   switch (action.type) {
   case 'INITIALIZE':
-    return action.data
+    let data = action.data
+    if (data.length > 0) {
+      data = action.data.map(settings => ({id: settings.id, weight: settings.weight, height: settings.height, date: new Date(settings.date)})).sort(byTime)
+    }
+    return data
   case 'ADD_NEW_SETTINGS':
-    state = [...state, action.data]
-    return state
+    const newSettings = action.data
+    newSettings.date = new Date(action.data.date)
+    state = [...state, newSettings]
+    return state.sort(byTime)
+  case 'DELETE_SETTINGS':
+    const remainingData = action.data.map(settings => ({id: settings.id, weight: settings.weight, height: settings.height, date: new Date(settings.date)})).byTime()
+    return remainingData
+  case 'UPDATE_SETTINGS':
+    const id = action.data.id
+    return state.map(b => b.id !== id ? b : action.data).sort(byTime)
   default:
     return state
   }
 }
-export const createNewSettings = (weight, height) => {
+
+export const createNewSettings = (weight, height, date) => {
   return async (dispatch) => {
     const newSettings = {
       weight,
-      height
+      height,
+      date
     }
     const dispatchableSettings = await dataService.create('settings', newSettings)
     dispatch({
@@ -34,5 +50,29 @@ export const initializeSettings = () => {
     })
   }
 }
+
+
+export const deleteSettings = (id) => {
+
+  return async (dispatch) => {
+    const data = await dataService.delete('settings', id)
+    dispatch({
+      data: data,
+      type: 'DELETE_SETTINGS'
+    })
+  }
+}
+
+export const updateSettings = (id, newSettings) => {
+  
+  return async dispatch => {
+    const updated = await dataService.update('settings', id, newSettings)
+    dispatch({
+      type: 'UPDATE_SETTINGS',
+      data: updated,
+    })
+  }
+}
+
 
 export default settingsReducer

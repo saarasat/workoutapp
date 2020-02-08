@@ -42,6 +42,15 @@
   font-size: 0.8em;
 }
 
+.btn-header-save {
+  background-color: #309976;
+  color: white;
+  margin-top: 1em;
+  padding: 0em 2em 0em 2em;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
 .btn-cancel {
   background-color: #F8f5E0;
   color: #212529;
@@ -58,6 +67,5 @@
   border: none;
   padding: 0.1em;
   margin: 0.1em;
-  
   text-underline-position: below;
 }

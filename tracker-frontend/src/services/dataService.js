@@ -14,14 +14,10 @@ const getConfig = () => ({
   headers: { Authorization: token }
 })
 
-const getAllUsers = async () => {
-  const response = await axios.get(`/api/users`)
-  return response.data
-}
-
 const deleteUser = async (user) => {
-  
-  const response = await axios.delete(`/api/users/`, getConfig())
+  const userId = user.userId
+  const response = await axios.delete(`/api/users/${userId}`, getConfig())
+  return response.data
 }
 
 const getAll = async (value) => {
@@ -36,7 +32,6 @@ const create = async (value, newObject) => {
 
 const replace = async (value, id, newObject) => {
   const response = await axios.put(`/api/${value}/${id}`, newObject, getConfig())
-  console.log(response.data)
   return response.data
 }
 
@@ -50,11 +45,11 @@ const deleteOne = async (value, id) => {
 }
 
 export default {
-  getAllUsers : getAllUsers,
   getAll: getAll,
   create: create,
   update: replace,
   delete: deleteOne,
   setToken: setToken,
-  destroyToken: destroyToken
+  destroyToken: destroyToken,
+  deleteUser: deleteUser,
 }

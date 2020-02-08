@@ -2,27 +2,20 @@
 import React from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 
-const DropDown = ({options, value, label, setShow, onSubmit}) => {
+const DropDown = ({options, value, label, onChange }) => {
+
   
   return (
-    <Form onSubmit={onSubmit}>
       <Row className="form-row">
-        <Col lg={6} md={6} xs={4}><Form.Label>{label}</Form.Label></Col>
-        <Col lg={4} md={4} xs={4}>
-          <Form.Control name={value} as="select">
+        <Col xs={8}><Form.Label>{label}</Form.Label></Col>
+        <Col xs={4}>
+          <Form.Control onChange={onChange} plaintext={true} className="form-control-profile" name={value} as="select">
             {options.map(option =>
             <option key={option}>{option}</option>
             )}
           </Form.Control>
         </Col>
-        <Col lg={1} md={1} xs={2}>
-          <Button type="submit" className="btn-save">Save</Button>
-        </Col>
-        <Col lg={1} md={1} xs={2}>
-          <Button className="btn-cancel" onClick={setShow}>Cancel</Button>
-        </Col>
       </Row> 
-    </Form>
   )
 }
 
