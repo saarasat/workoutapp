@@ -74,3 +74,18 @@
 .weight-graph {
   height: 300px;
 }
+
+.p-months-best {
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.result-calories-value {
+  margin: 0;
+  padding: 0;
+}
+
+.result-km-value {
+  margin: 0;
+  padding: 0;
+}

@@ -22,7 +22,7 @@ const Stopwatch = () => {
 
   return (
     <div className="container">
-        <h1>Stopwatch</h1>
+      <h1>Stopwatch</h1>
         <h2 className="stopwatch-time">{minutes}:{seconds}:{tensOfSeconds}</h2>
         <div >
         <Button onClick={handleStartPause} variant={timerOn ? "pause" : "start"} className="btn-circle">

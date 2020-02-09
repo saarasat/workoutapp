@@ -18,7 +18,7 @@ export const types = [
   },
   {
     "type":"Gym",
-    "icon":<FontAwesomeIcon key={1} className="menu-icon yellow" icon={faDumbbell} />
+    "icon":<FontAwesomeIcon key={1} className="menu-icon gray" icon={faDumbbell} />
   },  
   {
     "type":"Walking & running",

@@ -24,17 +24,17 @@ const ProgramForm = ({ createNewProgram, history }) => {
       <Form onSubmit={createProgram}>
         <Form.Group>
           <Form.Label>Name</Form.Label>
-          <Form.Control name="name" type="text"></Form.Control>
+          <Form.Control name="name" type="text" className="select-dark"></Form.Control>
         </Form.Group>
         <Form.Group>
           <Form.Label>Difficulty</Form.Label>
-          <Form.Control name="difficulty" as="select">
+          <Form.Control name="difficulty" as="select" className="select-dark">
             <option key={1}>Light</option>
             <option key={2}>Medium</option>
             <option key={3}>Hard</option>
           </Form.Control>
         </Form.Group>
-        <Button className="select-save" type="submit">Create</Button>
+        <Button className="btn-header-save" variant="dark" type="submit">Create</Button>
       </Form>
       </div>
     </>

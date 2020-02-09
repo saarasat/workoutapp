@@ -37,6 +37,7 @@ const create = async (value, newObject) => {
 
 const replace = async (value, id, newObject) => {
   const response = await axios.put(`/api/${value}/${id}`, newObject, getConfig())
+  console.log(response)
   return response.data
 }
 

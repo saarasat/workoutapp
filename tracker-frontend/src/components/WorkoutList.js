@@ -14,8 +14,8 @@ const WorkoutList = ({workouts }) => {
     let totalMinutes = minutes % 60
     let time = ''
     if (totalHours < 10 && totalMinutes < 10) return time.concat("0",totalHours, ":0",totalMinutes) 
-    if (totalHours > 10 && totalMinutes < 10) return time.concat(totalHours,":0",totalMinutes )
-    if (totalHours < 10 && totalMinutes > 10) return time.concat("0",totalHours,":",totalMinutes)
+    if (totalHours >= 10 && totalMinutes < 10) return time.concat(totalHours,":0",totalMinutes )
+    if (totalHours < 10 && totalMinutes >= 10) return time.concat("0",totalHours,":",totalMinutes)
     return totalHours + ':' + totalMinutes
   }
 

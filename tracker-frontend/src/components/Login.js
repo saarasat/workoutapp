@@ -36,11 +36,11 @@ const Login = (props) => {
             <Form.Control className="dark" type="password" name="password" />       
           </Col>
         </Row>
-          <Button className="btn-save" type="submit">login</Button>
-          <Button className="btn-cancel">cancel</Button>
+          <Button className="btn-save" variant="dark" type="submit">login</Button>
+          <Button className="btn-cancel" variant="dark">cancel</Button>
       </Form>
       <Link to="/newAccount">
-        <p className="green">Create new account</p>
+        <h5 className="login green">Create a new account</h5>
       </Link>
     </div>
   )

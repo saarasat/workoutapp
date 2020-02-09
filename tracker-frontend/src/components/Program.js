@@ -1,12 +1,13 @@
 import React, {useState} from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Button, Carousel } from 'react-bootstrap'
-import { faCheckCircle, faWeightHanging } from '@fortawesome/free-solid-svg-icons'
+import { faTrophy } from '@fortawesome/free-solid-svg-icons'
 import Icon from './Icon'
 import { createNewMove } from '../reducers/moveReducer'
 import { createNewProgram } from '../reducers/programReducer'
 
-const Program = ({program}) => {
+const Program = (props) => {
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState(null)
 
@@ -15,38 +16,42 @@ const Program = ({program}) => {
     setDirection(e.direction)
   }
 
+  const handleFinish = () => {
+    props.history.push("/training/My%20programs")
+  }
+
   return (
     <>
-    {program ? 
+    {props.program ? 
       <div>
-        <h1>{program.name}</h1>
-        {program.moves.length > 0 ?
+        <h1>{props.program.name}</h1>
+        {props.program.moves.length > 0 ?
         <Carousel 
-         
           interval={20000000} 
           activeIndex={index} 
           direction={direction} 
           onSelect={handleSelect}
           slide={false}        >
-          {program.moves.map(move => 
+          {props.program.moves.map(move => 
             <Carousel.Item >
               <div className="carousel-move">
                 <h3 className="carousel-headline">{move.name}</h3>
-                <h4>x {move.reps}</h4>
-                <h4><Icon icon={faWeightHanging}/>{move.kg} kg</h4>
+                <h4 className="green">x {move.reps}</h4>
+                <h4>{move.kg} kg</h4>
               </div>
             </Carousel.Item>
-
           )}
-                      <Carousel.Item>
-              <h3>Well done!</h3>
-              <button className="btn-icon logout"            onClick={handleSelect}>
-                 <Icon icon={faCheckCircle} color="green" ></Icon></button>
-            </Carousel.Item>
+          <Carousel.Item>
+          <div className="carousel-move">
+            <h1><Icon icon={faTrophy} color="orange"></Icon></h1>
+            <h3>Well done!</h3>
+            <Button className="btn-header-save" variant="dark" onClick={handleFinish}>Save your workout</Button>
+            </div>
+          </Carousel.Item>
         </Carousel>
         : null}
       </div> 
-    : null}
+    :null}
     </>
   )
 }
@@ -63,4 +68,4 @@ const mapStateToProps = (state, ownProps) => {
 
 
 
-export default connect(mapStateToProps, { createNewProgram, createNewMove })(Program)
+export default withRouter(connect(mapStateToProps, { createNewProgram, createNewMove })(Program))

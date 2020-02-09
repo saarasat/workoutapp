@@ -11,7 +11,16 @@
   font-size: 0.8em;
 }
 
-
 .carousel-headline {
   padding-top: 4em;
+}
+
+.program-move {
+  text-align: left;
+}
+
+.program-header {
+  text-align: left;
+  margin-bottom: 0;
+  font-weight: 500;
 }

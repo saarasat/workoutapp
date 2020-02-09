@@ -20,7 +20,9 @@ body {
   margin-top: 2em;
 }
 
-
+.login {
+  margin-top: 1em;
+}
 
 h1 {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -31,6 +33,12 @@ h1 {
 h2 {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-top: 1em;
+  font-weight: 200;
+}
+
+h5 {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-top: 0.5em;
   font-weight: 200;
 }
 

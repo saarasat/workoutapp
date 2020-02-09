@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { Button, Col, Form, Row } from 'react-bootstrap'
+import { Button, Col, Form, Row, Card } from 'react-bootstrap'
 import { createNewMove } from '../reducers/moveReducer'
 import { createNewProgram, addMoveToProgram, deleteMoveFromProgram } from '../reducers/programReducer'
 import MovesList from './MovesList'
+import MoveForm from './MoveForm'
 
 
 
@@ -39,13 +40,6 @@ const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFrom
     setNewMoveForm(false)
 
   }
-
-  const handleDeletion = async (moveId) => {
-    const updatedMoves = program.moves.filter(move => move.id !== moveId)
-    const updatedProgram = {...program, moves:updatedMoves}
-    await deleteMoveFromProgram(program.id, updatedProgram)
-  }
-
   const handleRepChange = (event) => {
     setReps(event.target.value)
   }
@@ -58,11 +52,18 @@ const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFrom
     setMove(event.target.value)
   }
 
+  const addNewMoves = async (program, items) => {
+    const updatedProgram = {...program, moves:items}
+    await addMoveToProgram(program.id, updatedProgram)
+  }
+
   return (
-    <div>
-      <h1>{program.name}</h1>
+    <>
+      {program ? 
+      <div className="container">
       <Form onSubmit={addMoves}>
-      <Row>
+      <h1>{program.name}</h1>
+      <Row className="form-row">
         <Col xs={4}>
           <Form.Group>
             <Form.Label>Move</Form.Label>
@@ -72,44 +73,42 @@ const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFrom
              )}
             </Form.Control>
           </Form.Group>
-          <p className="green" onClick={() => setNewMoveForm(!newMoveForm)}><i>New move</i></p>
         </Col>
-
         <Col xs={4}>
           <Form.Group>
             <Form.Label>Reps</Form.Label>
-            <Form.Control onChange={handleRepChange} value={reps} name="reps" type="number" placeholder={reps}/>
+            <Form.Control onChange={handleRepChange} value={reps} className="select-dark" name="reps" type="number" placeholder={reps}/>
           </Form.Group>
         </Col>
-        <Col xs={2}>
+        <Col xs={3}>
           <Form.Group>
             <Form.Label>Kg</Form.Label>
-            <Form.Control onChange={handleKgChange} value={kg} name="kg" type="number" placeholder={kg}/>
+            <Form.Control onChange={handleKgChange} value={kg} className="select-dark" name="kg" type="number" placeholder={kg}/>
           </Form.Group>
         </Col>
-        <Col xs={2}>
+        <Col className="header-col" xs={1}>
           <Form.Label></Form.Label>
-          <Button className="btn-save" type="submit">Add</Button>
+        <Button className="btn-save" variant="light" type="submit">Add</Button>
         </Col>
       </Row>
+      <p className="green" onClick={() => setNewMoveForm(!newMoveForm)}><i>New move</i></p>
     </Form>
-    {program && program.moves.length > 0 ?
-    <MovesList items={program.moves} handleDeletion={handleDeletion}/>
-    : null
-    }
     {newMoveForm ? 
-    <Form onSubmit={addANewMove}>
-      <Form.Group>
-        <Form.Label>
-          Name:
-        </Form.Label>
-        <Form.Control name="newMove" type="text" placeholder="name of the move" />
-        <Button className="btn-save" type="submit">Add new move</Button>
-        <Button className="btn-cancel" onClick={() => setNewMoveForm(false)}>Cancel</Button>
-      </Form.Group>
-    </Form> : null}
-    </div>
+    <MoveForm addANewMove={addANewMove} hide={() => setNewMoveForm(!newMoveForm)}/> 
+    :
+    <Card.Header className="program-header">
+      <Row>
+        <Col className="program-move" xs={6}>Move</Col>
+        <Col xs={3}>Reps</Col>
+        <Col xs={3}>Kg</Col>
+      </Row>
+    </Card.Header>}
+
+    {program && program.moves.length > 0 ?
+    <MovesList items={program.moves} id={program.id} addMoves={addNewMoves} /> : null}
     
+    </div>: null}
+    </>
   )
 }
   const mapStateToProps = (state, ownProps) => {

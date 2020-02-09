@@ -1,14 +1,28 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link }  from 'react-router-dom'
 import { Row,  Col } from 'react-bootstrap'
 import Icon from './Icon'
 import { getIcon } from './Sports'
-import { faFireAlt, faMedal, faClock } from '@fortawesome/free-solid-svg-icons'
+import { faFireAlt, faMedal, faClock, faTrophy } from '@fortawesome/free-solid-svg-icons'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
 
 const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
- 
+  const [bestId, setBestId] = useState(0)
+
+  const getBest = () => {
+    let best = 0
+    workouts.forEach(workout => {
+      if (Number(workout.calories) > best) {
+        best = workout.calories
+        setBestId(workout.id)
+      }
+    })
+  }
+  
+  useEffect(() => {
+    getBest()
+  })
 
   const getWeek = (data) => {
     var date = new Date(data);
@@ -117,7 +131,7 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
             options={options}
           />
         <div>
-          <table className="results-total" > 
+          <table className="results-total"> 
             <tbody>
               <tr>
                 <td><Icon icon={faMedal} color="green"></Icon></td> 
@@ -139,16 +153,33 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
         </div>
             
         <div>
-          {workouts.map(item =>
+          {workouts.map(item => 
+            <>
+            {bestId === item.id ? 
             <Link key={item.id} to={`/workouts/${item.id}`}>
               <Row className="result-list-row" key={item.id}>
-                <Col xs={2} className="result-icon">{getIcon(item.type)}</Col>
+                <Col xs={2} className="result-icon"><Icon icon={faTrophy} color="orange"></Icon><p className="p-months-best">Month's Best</p></Col>
                 <Col xs={3} className="result-sport">{item.sport}</Col>
-                <Col xs={3} className="result-time">{item.day} {item.date.getDate()}.{(item.date.getMonth()+1)}.{item.date.getFullYear()}</Col>
-                <Col xs={1} className="result-time">{item.time}</Col>
-                <Col xs={3} className="result-calories">{item.calories} kcal</Col>  
+                <Col xs={3} className="result-time"><b>{item.day} {item.date.getDate()}.{(item.date.getMonth()+1)}.{item.date.getFullYear()}</b></Col>
+                <Col xs={1} className="result-time"><b>{item.time}</b></Col>
+                <Col xs={3} className="result-calories"><b>{item.calories} kcal</b></Col>
               </Row>
             </Link>
+            : <Link key={item.id} to={`/workouts/${item.id}`}>
+            <Row className="result-list-row" key={item.id}>
+              <Col xs={2} className="result-icon">{getIcon(item.type)}</Col>
+              <Col xs={3} className="result-sport">{item.sport}</Col>
+              <Col xs={3} className="result-time">{item.day} {item.date.getDate()}.{(item.date.getMonth()+1)}.{item.date.getFullYear()}</Col>
+              <Col xs={1} className="result-time">{item.time}</Col>
+              <Col xs={3} className="result-calories">
+                <p className="result-calories-value orange">{item.calories} kcal</p>
+                {item.km ? <p className="result-km-value blue">{item.km} km</p> : null}
+              </Col>  
+              
+            </Row>
+          </Link>}
+          </>
+          
           )}
         </div> 
         <div>

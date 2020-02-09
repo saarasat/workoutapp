@@ -12,6 +12,7 @@
 
 .form-col {
   padding-top: 5px;
+  padding-left: 2em;
 }
 
 .form-date {
@@ -42,18 +43,20 @@
   margin: 0.4em;
 }
 
-select {
-  background-color: #212529 !important;
-  color: white;
-  border:  #00bf8a; 
-}
-
-select option {
+.select-dark {
   background-color: #212529;
   color: white;
 }
 
-select ::selection {
+.select-dark::after {
   background-color: #212529;
   color: white;
 }
+
+.select-dark ::selection {
+  background-color: #212529;
+  color: white;
+}
+
+
+

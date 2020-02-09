@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Badge, Button, Col, Row } from 'react-bootstrap'
+import { Badge, Col, Row, Card } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { createNewProgram, deleteProgram } from '../reducers/programReducer'
@@ -18,11 +18,6 @@ const ProgramList = ({ programs, deleteProgram }) => {
     if (difficulty === "Hard") return "red"
   }
 
-  
-  const handleDeletion = (id) => {
-    deleteProgram(id)
-  }
-
   const toggleHeader = () => {
     setShowHeader(!showHeader)
     setShow(!show)
@@ -38,26 +33,44 @@ const ProgramList = ({ programs, deleteProgram }) => {
       {show ? <ProgramForm hideForm={toggleHeader} /> : null}
       <div className="container">
         {programs.map(program =>
-          <Row className="menu-header">
+        <Card.Header>
+          <Row key={program.id}>
             <Col xs={8}>
               <Link key={program.id} to={`/startProgram/${program.id}`}>
-              <p className="program-header" key={program.id}> 
-                {program.name} 
-                <Badge className={programLevel(program.difficulty)}>{program.difficulty}</Badge>
-              </p>
-                </Link>
-            </Col>
-            <Col className="program-list-icon" xs={3}>
-              <Link key={program.id} to={`/programs/${program.id}`}> 
-                <Icon color="orange" icon={faEdit}></Icon>
+                <p className="program-header" key={program.id}> 
+                  {program.name} 
+                  <Badge className={programLevel(program.difficulty)}>{program.difficulty}</Badge>
+                </p>
               </Link>
             </Col>
+            <Col className="program-list-icon" xs={2}>
+              <Link key={program.id} to={`/programs/${program.id}`}> 
+                <Icon icon={faEdit}></Icon>
+              </Link>
+            </Col>
+            <Col className="program-list-icon" xs={2}>
+              <button className="btn-icon" onClick={() => deleteProgram(program.id)}>
+              <Icon color="gray" icon={faTrash}></Icon>
+              </button>
+            </Col>
           </Row>
+        </Card.Header>
         )}
       </div>
-      <Link to="/newProgram">
-      <Button variant="dark" className="btn-header-save">new</Button>
-      </Link>
+      <div className="container">
+      <Card.Header>
+        <Row>
+          <Col xs={8}>
+            <Link to={`/newProgram`}>
+              <p className="program-header">Add new program</p>
+            </Link>
+          </Col>
+          <Col xs={4}>
+            <Icon color="green" icon={faPlus}></Icon>
+          </Col>
+        </Row>
+      </Card.Header>
+      </div>
     </div>
   )
 }
