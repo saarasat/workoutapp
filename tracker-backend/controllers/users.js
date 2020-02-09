@@ -2,6 +2,10 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
+const Settings = require('../models/settings')
+const Program = require('../models/program')
+const Move = require('../models/move')
+const Workout = require('../models/workout')
 
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({})
@@ -39,5 +43,23 @@ usersRouter.post('/', async (request, response, next) => {
     next(exception)
   }
 })
+
+usersRouter.delete('/:id', async (request, response, next) => {
+  try {
+    const user = await User.findById(request.params.id)
+    
+    await Settings.find({userId: request.params.id}).remove()
+    await Program.find({userId: request.params.id}).remove()
+    await Move.find({userId: request.params.id}).remove()
+    await Workout.find({userId: request.params.id}).remove()
+    await User.findByIdAndRemove(request.params.id)
+  
+    response.status(204).end()
+  } catch (exception) {
+    next(exception)
+  }
+})
+
+
 
 module.exports = usersRouter

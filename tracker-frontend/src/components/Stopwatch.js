@@ -21,8 +21,9 @@ const Stopwatch = () => {
   let tensOfSeconds = time.substring(time.length - 1, time.length)
 
   return (
-    <div className="stopwatch-container">
-        <h1 className="stopwatch-time">{minutes}:{seconds}:{tensOfSeconds}</h1>
+    <div className="container">
+        <h1>Stopwatch</h1>
+        <h2 className="stopwatch-time">{minutes}:{seconds}:{tensOfSeconds}</h2>
         <div >
         <Button onClick={handleStartPause} variant={timerOn ? "pause" : "start"} className="btn-circle">
           {timerOn ? 'Pause' : 'Start'}

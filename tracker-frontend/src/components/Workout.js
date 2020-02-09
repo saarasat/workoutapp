@@ -151,6 +151,7 @@ const Workout = (props) => {
             </Row> : ""}
           <Button variant="dark"  className="btn-save" type="submit">Save</Button>
         </Form>
+        {props.type === "My programs" ? <Button className="btn-redirect" onClick={() => props.history.push("/newProgram")}>Create custom program</Button> : null}
         
       </div>
     </div>

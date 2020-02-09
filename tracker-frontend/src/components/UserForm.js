@@ -4,6 +4,7 @@ import { Button, Col, Form, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Notification from './Notification'
 import { setNotification } from '../reducers/notificationReducer'
+import { createNewUser } from '../reducers/usersReducer'
 
 const UserForm = ({createNewUser, setNotification}) => {
   const [show, setShow] = useState(true)
@@ -102,4 +103,4 @@ const UserForm = ({createNewUser, setNotification}) => {
   )
 }
 
-export default connect(null, {setNotification})(UserForm)
+export default connect(null, {setNotification, createNewUser})(UserForm)

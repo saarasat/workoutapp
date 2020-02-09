@@ -56,8 +56,6 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
 
   }
 
-  
-
   const options = {
     chart: {
       type: 'column'

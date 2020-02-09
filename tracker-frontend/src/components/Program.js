@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { connect } from 'react-redux'
-import { Carousel } from 'react-bootstrap'
-import { faWeightHanging } from '@fortawesome/free-solid-svg-icons'
+import { Button, Carousel } from 'react-bootstrap'
+import { faCheckCircle, faWeightHanging } from '@fortawesome/free-solid-svg-icons'
 import Icon from './Icon'
 import { createNewMove } from '../reducers/moveReducer'
 import { createNewProgram } from '../reducers/programReducer'
@@ -27,17 +27,22 @@ const Program = ({program}) => {
           activeIndex={index} 
           direction={direction} 
           onSelect={handleSelect}
-          slide={false}
-          nextIcon={<span></span>}
-          prevIcon={<span></span>}
-        >
+          slide={false}        >
           {program.moves.map(move => 
-            <Carousel.Item className="carousel-move"> 
-              <h3>{move.name}</h3>
-              <h4>x {move.reps}</h4>
-              <h4><Icon icon={faWeightHanging}/>{move.kg} kg</h4>
-            </Carousel.Item>  
+            <Carousel.Item >
+              <div className="carousel-move">
+                <h3 className="carousel-headline">{move.name}</h3>
+                <h4>x {move.reps}</h4>
+                <h4><Icon icon={faWeightHanging}/>{move.kg} kg</h4>
+              </div>
+            </Carousel.Item>
+
           )}
+                      <Carousel.Item>
+              <h3>Well done!</h3>
+              <button className="btn-icon logout"            onClick={handleSelect}>
+                 <Icon icon={faCheckCircle} color="green" ></Icon></button>
+            </Carousel.Item>
         </Carousel>
         : null}
       </div> 

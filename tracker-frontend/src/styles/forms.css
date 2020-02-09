@@ -10,6 +10,10 @@
 
 }
 
+.form-col {
+  padding-top: 5px;
+}
+
 .form-date {
   font-weight: 500;
   border: 1px white;
@@ -31,6 +35,11 @@
   border-radius: 8%;
   align-content: center;
   text-align: center;
+}
+
+.profile-form-header {
+  border: 1px solid snow;
+  margin: 0.4em;
 }
 
 select {

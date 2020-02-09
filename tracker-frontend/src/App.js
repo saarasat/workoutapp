@@ -1,28 +1,11 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
-import Home from './components/Home'
-import Login from './components/Login'
-import Moves from './components/Moves'
-import TopNav from './components/TopNav'
-import BottomNav from './components/BottomNav'
-import Program from './components/Program'
-import ProgramForm from './components/ProgramForm'
-import ProgramList from './components/ProgramList'
-import Profile from './components/Profile'
-import Workout from './components/Workout'
-import WorkoutList from './components/WorkoutList'
-import Stopwatch from './components/Stopwatch'
-import SingleResult from './components/SingleResult'
-import UserForm from './components/UserForm'
-
-import dataService from './services/dataService'
+import PageRouter from './components/PageRouter'
 import { initializeSettings } from './reducers/settingsReducer'
 import { initializeWorkouts } from './reducers/workoutReducer'
 import { initializePrograms } from './reducers/programReducer'
 import { initializeMoves } from './reducers/moveReducer'
-import { handleLogin, handleLogout, initUser } from './reducers/loginReducer'
+import { initUser } from './reducers/loginReducer'
 import { initializeUsers } from './reducers/usersReducer'
 
 export const App = (props) => {
@@ -36,46 +19,11 @@ export const App = (props) => {
   }, [])
 
   const user = props.user
-  console.log(user)
 
-  const createNewUser = (username, password) => {
-    const newUser = {username: username, password: password}
-    dataService.create('users', newUser)
-  }
+
   return (
     <div>
-      <Router>
-      {user ?
-        <div>
-          <TopNav handleLogout={props.handleLogout} />
-          <div className="body">
-            <Route exact path="/" render={() => <Home />} />
-            <Route exact path="/programs" render={()=> <ProgramList/>} />
-            <Route exact path="/newProgram" render={()=> <ProgramForm/>} />
-            <Route exact path="/moves" render={({match})=> <Moves id={(match.params.id)}/>} />
-            <Route exact path="/stopwatch" render={()=> <Stopwatch></Stopwatch>} />
-            <Route exact path="/workouts" render={() => <WorkoutList />} />
-            <Route exact path="/training/:type" render={({match}) => <Workout type={(match.params.type)}/>} />
-            <Route exact path="/workouts/:id" render={({match}) => <SingleResult id={(match.params.id)}/>} />          
-            <Route exact path="/programs/:id" render={({match}) => <Moves id={(match.params.id)}/>} />          
-            <Route exact path="/startProgram/:id" render={({match}) => <Program id={(match.params.id)}/>} />          
-            <Route exact path="/settings" render={() => <Profile id={user.id}/>} />
-          </div>
-          <BottomNav/>
-        </div> 
-        :
-        <> 
-          <Route path="/">
-            <>
-            <Switch>
-              <Route exact path="/newAccount" render={() => <UserForm createNewUser={createNewUser} />} />
-              <Route path="/" render={() => <Login />} />
-            </Switch>
-            </>
-          </Route>
-        </>
-        }
-      </Router>
+      <PageRouter user={user}></PageRouter>
     </div>
   )
 }
@@ -87,4 +35,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { handleLogout, handleLogin, initUser, initializeUsers, initializeSettings, initializePrograms, initializeWorkouts, initializeMoves })(App)
+export default connect(mapStateToProps, { initUser, initializeUsers, initializeSettings, initializePrograms, initializeWorkouts, initializeMoves })(App)

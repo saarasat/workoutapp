@@ -20,7 +20,9 @@ const settingsReducer = (state = [], action) => {
     return remainingData
   case 'UPDATE_SETTINGS':
     const id = action.data.id
-    return state.map(b => b.id !== id ? b : action.data).sort(byTime)
+    const updatedSettings = action.data
+    updatedSettings.date = new Date(action.data.date)
+    return state.map(b => b.id !== id ? b : updatedSettings).sort(byTime)
   default:
     return state
   }

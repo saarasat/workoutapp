@@ -17,13 +17,13 @@ movesRouter.get('/', async (request, response, next) => {
     }  
 
     user = await User.findById(decodedToken.id)
-
+    const moves = await Move.find({userId : user.id}).populate('user', { username: 1, name: 1, userId: 1 })
+  
+    response.json(moves.map(moves => moves.toJSON()))
   } catch(exception) {
     next(exception)
   }
-  const moves = await Move.find({userId : user.id}).populate('user', { username: 1, name: 1, userId: 1 })
-  
-  response.json(moves.map(moves => moves.toJSON()))
+
 })
 
 movesRouter.post('/', async (request, response, next) => {

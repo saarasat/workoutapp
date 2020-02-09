@@ -3,7 +3,7 @@ content-Type: application/json
 
 {
   "username": "testi",
-  "password": "testit",
+  "password": "testi",
   "workouts": "[ ]",
   "settings": "[ ]",
   "moves": "[ ]",

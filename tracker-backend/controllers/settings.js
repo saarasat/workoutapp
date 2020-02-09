@@ -3,7 +3,7 @@ const settingsRouter = require('express').Router()
 const Settings = require('../models/settings')
 const User = require('../models/user')
 
-settingsRouter.get('/', async (request, response) => {
+settingsRouter.get('/', async (request, response, next) => {
 
   const token = getTokenFrom(request)
   let user = ''
@@ -65,5 +65,22 @@ settingsRouter.post('/', async (request, response, next) => {
     next(exception)
   }
 })
+
+settingsRouter.put('/:id', async (request, response, next) => {
+  const {date, weight, height} = request.body
+  const settings = {date, weight, height}
+  const token = getTokenFrom(request)
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }
+    const updatedSettings = await Settings.findByIdAndUpdate(request.params.id, settings, {new:true})
+    response.json(updatedSettings.toJSON())
+  } catch(exception) {
+    next(exception)
+  }
+})
+
 
 module.exports = settingsRouter

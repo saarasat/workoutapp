@@ -14,9 +14,14 @@ const getConfig = () => ({
   headers: { Authorization: token }
 })
 
-const deleteUser = async (user) => {
-  const userId = user.userId
-  const response = await axios.delete(`/api/users/${userId}`, getConfig())
+const deleteUser = async (id) => {
+  const response = await axios.delete(`/api/users/${id}`, getConfig())
+  destroyToken()
+  return response.data
+}
+
+const createUser = async (newObject) => {
+  const response = await axios.post(`/api/users`, newObject)
   return response.data
 }
 
@@ -52,4 +57,5 @@ export default {
   setToken: setToken,
   destroyToken: destroyToken,
   deleteUser: deleteUser,
+  createUser: createUser
 }

@@ -23,7 +23,7 @@ export const setNotification = (message, type='success') => {
       dispatch({
         type: 'CLEAR_NOTIFICATION',
       })
-    }, 5000)
+    }, 8000)
   }
 }
 

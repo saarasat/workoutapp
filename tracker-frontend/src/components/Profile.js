@@ -48,7 +48,6 @@ const Profile = (props) => {
   }
 
   const countBMI = () => {
-    console.log(data)
     const bmi = Number(weight / ((height/100)*(height/100))).toFixed(1)
     if (bmi < 17) return (<h4 className="orange">{bmi} Underweight</h4>)
     if (bmi >= 17 && bmi < 18.5) return (<h4 className="yellow">{bmi} Underweight</h4>)
@@ -102,9 +101,16 @@ const Profile = (props) => {
     legend: false,
     series: [{
       data: data.length > 0 ? data : 0,
-      pointIntervalUnit: 'week',
       lineColor: '#00bf8a',
-      lineWidth: 4,
+      lineWidth: 3,
+      cursor: 'pointer',
+      marker: {
+        enabled: true,
+        lineWidth: 3,
+        radius: 2,
+        fillColor: '#00bf8a',
+        lineColor: '#00bf8a'
+      },    
       color: '#00bf8a',
       showInLegend: false,
       name: 'weight',
@@ -112,20 +118,12 @@ const Profile = (props) => {
         events: {
             click: function () {
                 if (this.series.data.length > 1) {
-                    return (
-                      <Alert variant="light" onClose={() => setShow(false)} dismissible>
-                        Do you want to remove this weight?
-                        <div className="d-flex justify-content-end">
-                          <Button onClick={handleDeletion(this.id)} variant="outline-success">
-                            
-                          </Button>
-                        </div>
-                      </Alert>
-                    )
+                    setWorkoutDate(this.x)
+                    props.setNotification('You can modify the data for this day above')
                 }
             }
         }
-    }
+      }
     }],
   }
 
@@ -135,9 +133,7 @@ const Profile = (props) => {
       (setting.date.getDate() === workoutDate.getDate() 
       && setting.date.getMonth() === workoutDate.getMonth()
       && setting.date.getFullYear() === workoutDate.getFullYear()))
-    
-    console.log(dateToSave)
-    event.preventDefault()
+      event.preventDefault()
     if (weight === 0) {
       props.setNotification('Weight required')
       return
@@ -149,9 +145,11 @@ const Profile = (props) => {
     if (dateToSave) {
       const newSettings = {weight: weight, height: height, date: dateToSave.date}
       await props.updateSettings(dateToSave.id, newSettings)
+      setData(props.settings.map(setting => ({x: setting.date, y: setting.weight})))      
     }
     else {
       await props.createNewSettings(weight, height, workoutDate)
+      setData(props.settings.map(setting => ({x: setting.date, y: setting.weight})))
     }
     setShow(!show)
 
@@ -170,19 +168,24 @@ const Profile = (props) => {
   }
 
   const removeUser = async (event) => {
-    await props.deleteUser(props.user)
-    handleLogout()
+    const id = props.user.userId
+    await props.deleteUser(id)
+    props.handleLogout()
   }
 
-
+  const hide = () => {
+    setShowHeight(true)
+  }
 
   return (
     <div className="container">
       <h1>Profile</h1>
       <div className="container">
+        
         <Form onSubmit={createSettings}>
-          <Row className="form-date" onClick={() => setVisible(true)}>
-            Date:  {workoutDate.getDate() + "." + (workoutDate.getMonth()+1) + "." + workoutDate.getFullYear()} </Row>
+          
+          <Card.Header className="profile-form-header" onClick={() => setVisible(true)}>
+            Date:  {workoutDate.getDate() + "." + (workoutDate.getMonth()+1) + "." + workoutDate.getFullYear()} </Card.Header>
           <Modal show={visible} onHide={() => setVisible(false)}> 
           <ModalBody>
             <div>
@@ -194,17 +197,17 @@ const Profile = (props) => {
             <Button onClick={() => setVisible(false)} variant="save"> Ok</Button>
           </Modal.Footer>
           </Modal>
-          {showHeight ? <Card.Header onClick={() => setShowHeight(!showHeight)}>
+          {showHeight ? <Card.Header className="profile-form-header" onClick={() => setShowHeight(!showHeight)}>
             Height: {height !== 0 ? height + " cm" : "Not yet defined"} </Card.Header> 
-          : <DropDown placeholder={weight} onChange={handleHeightChange} workoutDate={workoutDate} options={createOptions(100,220)} value="height" label="Height"/>}
-          {showWeight ? <Card.Header onClick={() => setShowWeight(!showWeight)}>
+          : <DropDown hide={hide} placeholder={weight} onChange={handleHeightChange} workoutDate={workoutDate} options={createOptions(100,220)} value="height" label="Height"/>}
+          {showWeight ? <Card.Header className="profile-form-header" onClick={() => setShowWeight(!showWeight)}>
             Weight: {weight !== 0 ? weight + " kg" : "Not yet defined"} </Card.Header> 
-          : <DropDown  onChange={handleWeightChange} options={createOptions(40,200)} value="weight" label="Weight"/>}
+          : <DropDown onChange={handleWeightChange} options={createOptions(40,200)} value="weight" label="Weight"/>}
           <div className="container">
           <Button type="submit" className="btn-save">Save</Button>
           </div>
         </Form>
-        <Notification />
+        
         </div>
         <div className="container">          
           <HighchartsReact
@@ -213,6 +216,7 @@ const Profile = (props) => {
             constructorType={'chart'}
             options={options}
           />
+          <Notification />
           </div>
           <div className="container">
             {height > 0 && weight > 0 ?  

@@ -34,9 +34,8 @@ const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFrom
 
   const addANewMove = async (event) => {
     event.preventDefault()
-    const newMove = move
-    await createNewMove(newMove)
-    event.target.newMove.value = ''
+    const moveToAdd = event.target.newMove.value
+    await createNewMove(moveToAdd)
     setNewMoveForm(false)
 
   }
