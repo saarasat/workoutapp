@@ -19,7 +19,8 @@ After logging in the user can logout from the upper right corner of the topnav.
 
 #### Creating settings
 
-![](https://github.com/saarasat/workoutapp/blob/master/Documentation/images/ProfilePage.png)
+<img src="/Documentation/images/ProfilePage.png" width="270" height="480" />
+
 
 First up, it is the best to add the settings. That way each workout can have calories added to them.
 
