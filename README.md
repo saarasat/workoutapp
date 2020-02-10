@@ -106,7 +106,7 @@ Moves can be added to the program by clicking the pen-icon
 2. Add the move you wish to have for future
 
 <img src="/Documentation/images/ProgramForn.png" width="216" height="384" />
-<img src="/Documentation/images/NewMove.png" width="216" height="384" />
+<img src="/Documentation/images/MoveForm.png" width="216" height="384" />
 
 3. The move shows up in the dropdown
 4. Add a move to the program:
