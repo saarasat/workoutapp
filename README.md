@@ -1,23 +1,25 @@
-# Workout application
+# Sporttivartti - (Mobile) Workout application  
 
 Application for keeping track of exercising activity and results. Best used on a mobile device.
 
-Can be found at [https://sporttivartti.herokuapp.com/](sporttivartti.herokuapp.com)
+Can be found at [sporttivartti.herokuapp.com](https://sporttivartti.herokuapp.com/)
 
-### Creating an account, logging in and out
+### User manual
+
+#### Creating an account, logging in and out
 
 The app requires a username (between 3-50 characters) and a password (between 6-50 characters)
 
-There are test credentials you can try to run the app:
+There are test credentials you can use to try the app out:
 
-- Username: Testuser
-- Password: password123
+- Username: "Testuser"
+- Password: "password123"
 
 After logging in the user can logout from the upper right corner of the topnav.
 
-### Creating settings
+#### Creating settings
 
-[Profile page]()
+![](https://github.com/saarasat/workoutapp/blob/master/Documentation/images/ProfilePage.png)
 
 First up, it is the best to add the settings. That way each workout can have calories added to them.
 
