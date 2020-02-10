@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {connect} from 'react-redux'
 import HighchartsReact from 'highcharts-react-official'
 import Highcharts from 'highcharts'
@@ -7,6 +7,7 @@ import { setNotification } from '../reducers/notificationReducer'
 
 
 const WeightGraph = ({data, setSettingsDate, setNotification }) => {
+
 
   const options = {
     title: {
@@ -27,6 +28,9 @@ const WeightGraph = ({data, setSettingsDate, setNotification }) => {
         text: false, 
       },
       floor: 40,
+      minorTickInterval: 1,
+      minorGridLineColor: '#ceccc1',
+      minorGridLineWidth: '0.3px',
       labels: {
         style: {
         color: '#FFFFFF'
@@ -42,6 +46,7 @@ const WeightGraph = ({data, setSettingsDate, setNotification }) => {
           day: '%e %b'
       },
       labels: {
+        enabled: data.length > 1 ? true : false,
         style: {
         color: '#FFFFFF'
         }
@@ -52,7 +57,7 @@ const WeightGraph = ({data, setSettingsDate, setNotification }) => {
     },
     legend: false,
     series: [{
-      data: data.length > 0 ? data : 0,
+      data: data.length > 0 ? data : [new Date(), 70],
       lineColor: '#00bf8a',
       lineWidth: 3,
       cursor: 'pointer',
@@ -71,7 +76,7 @@ const WeightGraph = ({data, setSettingsDate, setNotification }) => {
             click: function () {
                 if (this.series.data.length > 1) {
                     setSettingsDate(this.x)
-                    setNotification('You can modify the data for this day above')
+                    setNotification('You can modify the data for this day by inserting new values above')
                 }
             }
         }
@@ -80,14 +85,13 @@ const WeightGraph = ({data, setSettingsDate, setNotification }) => {
   }  
 
   return (
-    <div className="container">
-    <HighchartsReact
-      className="weight-graph"
-      highcharts={Highcharts}
-      constructorType={'chart'}
-      options={options}
-    />
-    <Notification />
+    <div className="graph-container">
+      <HighchartsReact
+        className="weight-graph"
+        highcharts={Highcharts}
+        constructorType={'chart'}
+        options={options}
+      />
     </div>
   )
 }

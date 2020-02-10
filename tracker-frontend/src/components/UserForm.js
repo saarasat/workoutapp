@@ -6,12 +6,11 @@ import Notification from './Notification'
 import { setNotification } from '../reducers/notificationReducer'
 import { createNewUser } from '../reducers/usersReducer'
 
-const UserForm = ({createNewUser, setNotification}) => {
-  const [show, setShow] = useState(true)
+const UserForm = ({ createNewUser, setNotification }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-
+ 
   const handleSubmit = async (event) => {
     event.preventDefault()
     if (username.length < 3 || username.length > 50) {
@@ -35,9 +34,6 @@ const UserForm = ({createNewUser, setNotification}) => {
     setUsername('')
     setPassword('')
     setConfirmPassword('')
-    setNotification('Account created!')
-    setShow(!show)
-    
   }
 
   const handleUsernameChange = (event) => {
@@ -52,13 +48,10 @@ const UserForm = ({createNewUser, setNotification}) => {
     setConfirmPassword(event.target.value)
   }
 
-
-
   return (
     <div>
     <h2>Sporttivartti</h2>
-      {show ?
-      <div>
+    <div>
       <h4>Create new account</h4>
       <Form onSubmit={handleSubmit}>
         <Row className="form-row">
@@ -85,22 +78,20 @@ const UserForm = ({createNewUser, setNotification}) => {
             <Form.Control className="dark" onChange={handleConfirmPasswordChange} value={confirmPassword} name="confirmPassword" type="password" />       
           </Col>
         </Row>
-          <Button className="btn-save" type="submit">create account</Button>
-          <Link to="/login">
-          <Button className="btn-cancel">cancel</Button>
-          </Link>
+          <Button className="btn-save" variant="dark" type="submit">create account</Button>
+          <Link to="/login"><Button className="btn-cancel" variant="dark">cancel</Button></Link>
       </Form>
-      
-      </div>
-      :
-      
+    </div>
       <Link to="/login">
-        <Button className="btn-save">To login</Button>
+        <div className="container">
+          <Button className="btn-save">To login</Button>
+        </div>
       </Link>
-      }
       <Notification />
     </div>
   )
 }
+
+
 
 export default connect(null, {setNotification, createNewUser})(UserForm)

@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter} from 'react-router-dom'
 import { Badge, Col, Row, Card } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -7,7 +8,11 @@ import { faEdit, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Icon from './Icon'
 
 
-const ProgramList = ({ programs, deleteProgram }) => {
+const ProgramList = (props) => {
+
+  const handleDeletion = async (id) => {
+    await props.deleteProgram(id)
+  }
 
   const programLevel = (difficulty) => {   
     if (difficulty === "Light") return "green"
@@ -19,15 +24,19 @@ const ProgramList = ({ programs, deleteProgram }) => {
     <div className="container">
       <h1>Programs</h1> 
       <div className="container">
-        {programs.map(program =>
+        {props.programs.map(program =>
         <Card.Header key={program.id}>
           <Row key={program.id}>
             <Col xs={8}>
               <Link key={program.id} to={`/startProgram/${program.id}`}>
-                <p className="program-header" key={program.id}> 
-                  {program.name} 
+                <Row>
+                  <p className="program-header" key={program.id}> 
+                    {program.name} 
+                  </p>
+                </Row>
+                <Row>
                   <Badge className={programLevel(program.difficulty)}>{program.difficulty}</Badge>
-                </p>
+                </Row>
               </Link>
             </Col>
             <Col className="program-list-icon" xs={2}>
@@ -36,8 +45,8 @@ const ProgramList = ({ programs, deleteProgram }) => {
               </Link>
             </Col>
             <Col className="program-list-icon" xs={2}>
-              <button className="btn-icon" onClick={() => deleteProgram(program.id)}>
-              <Icon color="gray" icon={faTrash}></Icon>
+              <button className="btn-icon" onClick={() => handleDeletion(program.id)}>
+                <Icon color="gray" icon={faTrash}></Icon>
               </button>
             </Col>
           </Row>
@@ -67,4 +76,4 @@ const mapStateToProps = (state) => {
 
 
 
-export default connect(mapStateToProps, { createNewProgram, deleteProgram })(ProgramList)
+export default withRouter(connect(mapStateToProps, { createNewProgram, deleteProgram })(ProgramList))

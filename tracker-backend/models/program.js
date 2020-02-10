@@ -4,7 +4,8 @@ const programSchema = new mongoose.Schema({
   name: 
   { type: String,
     required: true,
-    minLength: 3
+    minLength: 3,
+    maxLength: 50
   },
   difficulty: { 
     type: String,

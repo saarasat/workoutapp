@@ -5,11 +5,10 @@ import Icon from './Icon'
 import { getIcon } from './Sports'
 import { faFireAlt, faMedal, faClock, faTrophy } from '@fortawesome/free-solid-svg-icons'
 import WorkoutGraph from './WorkoutGraph'
-import { get } from 'mongoose'
 
 const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
   const [bestId, setBestId] = useState(0)
-  const [data, setData] = useState([])
+  const [timeData, setTimeData] = useState([])
 
   const getBest = () => {
     let best = 0
@@ -22,13 +21,12 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
     })
   }
 
-  
+  const createId = Math.round(Math.random()*1000000)
   
   useEffect(() => {
     getBest()
     workouts.map(workout => workout.week = getWeek(workout))
-    console.log(countWeeklyTotals())
-    setData(countWeeklyTotals)
+    setTimeData(countWeeklyTotals)
   },[])  
 
   const countTotalTime = (weeklyWorkouts) => {
@@ -48,8 +46,6 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
     const weeks = Object.values(group)
     let i = 1
     const times = weeks.map(item => ({ x: item[0].week, y:countTotalTime(item)}))
-    console.log(times)
-    console.log(weeks)
     return times
   }
 
@@ -62,14 +58,9 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
     - 3 + (week1.getDay() + 6) % 7) / 7);
   }
 
-
-  
- 
-
-
   return (
-    <div>
-      <WorkoutGraph key={month} data={data}/>
+    <div key={month}>
+      <WorkoutGraph data={timeData}/>
         <div>
           <table className="results-total"> 
             <tbody>
@@ -94,10 +85,10 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
             
         <div>
           {workouts.map(item => 
-            <>
+            <div key={item.id}>
             {bestId === item.id ? 
             <Link key={item.id} to={`/workouts/${item.id}`}>
-              <Row className="result-list-row" key={item.id}>
+              <Row className="result-list-row" >
                 <Col xs={2} className="result-icon"><Icon icon={faTrophy} color="orange"></Icon><p className="p-months-best">Month's Best</p></Col>
                 <Col xs={3} className="result-sport">{item.sport}</Col>
                 <Col xs={3} className="result-time"><b>{item.day} {item.date.getDate()}.{(item.date.getMonth()+1)}.{item.date.getFullYear()}</b></Col>
@@ -105,8 +96,9 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
                 <Col xs={3} className="result-calories"><b>{item.calories} kcal</b></Col>
               </Row>
             </Link>
-            : <Link key={item.id} to={`/workouts/${item.id}`}>
-            <Row className="result-list-row" key={item.id}>
+            : 
+            <Link key={createId} to={`/workouts/${item.id}`}>
+            <Row className="result-list-row">
               <Col xs={2} className="result-icon">{getIcon(item.type)}</Col>
               <Col xs={3} className="result-sport">{item.sport}</Col>
               <Col xs={3} className="result-time">{item.day} {item.date.getDate()}.{(item.date.getMonth()+1)}.{item.date.getFullYear()}</Col>
@@ -116,8 +108,8 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
                 {item.km ? <p className="result-km-value blue">{item.km} km</p> : null}
               </Col>        
             </Row>
-          </Link>}
-          </>
+            </Link>}
+          </div>
           )}
         </div> 
     </div>

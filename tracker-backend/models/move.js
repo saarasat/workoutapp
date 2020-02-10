@@ -6,6 +6,7 @@ const moveSchema = new mongoose.Schema({
     type: String,
     minlength: 5,
     maxlength: 30,
+    required: true
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,

@@ -14,7 +14,7 @@ const CalendarModal = ({visible, hide, changeDay, setDate}) => {
     <Modal show={visible} onHide={hide}> 
       <ModalBody>
         <div>
-          <Calendar onClickDay={(returnValue, event) =>  setThisDate(returnValue)} />
+          <Calendar locale="EN" onClickDay={(returnValue, event) =>  setThisDate(returnValue)} />
         </div>
       </ModalBody>              
       <Modal.Footer className="justify-content-center">

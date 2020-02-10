@@ -6,7 +6,7 @@
 @import "colors.css";
 @import "forms.css";
 @import "program.css";
-
+@import "stopwatch.css";
 
 body {
   background-color: #212529;
@@ -18,6 +18,16 @@ body {
 
 .container {
   margin-top: 30px;
+}
+
+.graph-container {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.form-container {
+  border: 1px solid white;
+  padding: 1.5em;
 }
 
 .login {
@@ -68,13 +78,6 @@ a:hover {
   margin: 1em;
 }
 
-.stopwatch-container {
-  margin-top: 200px;
-}
-
-.stopwatch-time {
-  font-size: 3em;
-}
 
 
 @font-face {

@@ -41,6 +41,8 @@
   background-color: #00bf8a;
   color: white;
   margin-top: 0.5em;
+  margin-left: 0.5em; 
+  margin-right: 0.5em;
 }
 
 .btn-header-save {
@@ -53,7 +55,7 @@
 }
 
 .btn-cancel {
-  background-color: rgb(226, 223, 200);
+  background-color: #e2dfc8;
   color: #212529;
   margin-top: 0.5em;
 }
@@ -61,6 +63,14 @@
 .btn-icon {
   background-color: transparent;
   border: none;
+}
+
+.btn-icon-plus {
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+  background-color: transparent;
+  border: none;
+
 }
 
 .btn-icon-small {

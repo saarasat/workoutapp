@@ -6,10 +6,11 @@ const settingsReducer = (state = [], action) => {
   switch (action.type) {
   case 'INITIALIZE':
     let data = action.data
-    if (data.length > 0) {
+    if (data) {
       data = action.data.map(settings => ({id: settings.id, weight: settings.weight, height: settings.height, date: new Date(settings.date)})).sort(byTime)
+      return data
     }
-    return data
+    return state
   case 'ADD_NEW_SETTINGS':
     const newSettings = action.data
     newSettings.date = new Date(action.data.date)

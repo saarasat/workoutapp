@@ -2,8 +2,14 @@ const mongoose = require('mongoose')
 
 const settingsSchema = new mongoose.Schema({
 
-  weight: { type: Number },
-  height: { type: Number },
+  weight: { 
+    type: Number, 
+    require: true 
+  },
+  height: { 
+    type: Number,
+    require: true
+  },
   date: {
     type: Date,
     require: true

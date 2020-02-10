@@ -12,7 +12,7 @@ const WorkoutGraph = ({data, setNotification}) => {
       type: 'column'
     },
     title: {
-      text: 'Weekyl workout time',
+      text: 'Weekly workout time',
       style: {
         color: '#FFFFFF',
       }
@@ -32,17 +32,24 @@ const WorkoutGraph = ({data, setNotification}) => {
     yAxis: {
       min: 0,
       title: {
-        text: 'h'
-      }
+        text: false
+      },
+      minorTickInterval: 1,
+      gridLineWidth: '1.1px',
+      minorGridLineColor: '#ceccc1',
+      minorGridLineWidth: '0.3px',
+      gridLineColor: '#ceccc1',
     },
     series: [{
       type: 'column',
       data: data ? data : 0, 
       showInLegend: false,
+      color: '#26B9D1'
+
     }],
   }
   return (
-    <div className="container">
+    <div className="graph-container">
       <HighchartsReact
         className="workout-graph"
         highcharts={Highcharts}

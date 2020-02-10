@@ -94,7 +94,12 @@ programsRouter.put('/:id', async (request, response, next) => {
 
 
 programsRouter.delete('/:id', async (request, response, next) => {
+  const token = getTokenFrom(request)
   try {
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }
     await Program.findByIdAndRemove(request.params.id)
   
     response.status(204).end()

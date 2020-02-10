@@ -1,11 +1,13 @@
-
+import {connect} from 'react-redux'
 import dataService from '../services/dataService'
+import { setNotification } from './notificationReducer'
 
 const usersReducer = (state = [], action) => {
   switch (action.type) {
   case 'INIT_USERS':
     return action.data
   case 'ADD_NEW_USER':
+    if (!action.data) return null
     return [...state, action.data]
   case 'DELETE_USER':
     return state.filter(u => u.id !== action.id)
@@ -26,15 +28,41 @@ export const initializeUsers = () => {
 
 export const createNewUser = (username, password) => {
   return async (dispatch) => {
-    const newUser = {
-      username,
-      password
+    try {
+      const newUser = { username, password }
+      const dispatchableUser = await dataService.createUser(newUser)
+      if (dispatchableUser) {
+        dispatch({
+          data: dispatchableUser,
+          type: 'ADD_NEW_USER'
+        })
+        dispatch({
+          type: 'SET_NOTIFICATION',
+          content: {
+            message: 'Account created!', 
+            type: 'error'
+          },
+        })
+        setTimeout(() => {
+          dispatch({
+            type: 'CLEAR_NOTIFICATION',
+          })
+        }, 4000)
+      }
+    } catch (exception) {
+      dispatch({
+        type: 'SET_NOTIFICATION',
+        content: {
+          message: 'username already taken', 
+          type: 'error'
+        },
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR_NOTIFICATION',
+        })
+      }, 5000)
     }
-    const dispatchableUser = await dataService.createUser(newUser)
-    dispatch({
-      data: dispatchableUser,
-      type: 'ADD_NEW_USER'
-    })
   }
 }
 
@@ -50,4 +78,4 @@ export const deleteUser = (id) => {
   }
 }
 
-export default usersReducer
+export default connect(null, {setNotification})(usersReducer)

@@ -43,4 +43,22 @@
 | 22.1. | 8    | Added user-control |
 | 23.1. | 2    | Refactored login-form and css-files |
 | 25.1. | 6    | Added personal programs |
-| Total | 95   | 
+| 2.2.  | 3    | Added functionality for working out on a personal program |
+| 4.2.  | 3    | Refactored user-control |
+|       | 1    | Separated routing to its own component |
+| 5.2.  | 2    | Fetching data of only the current user |
+| 6.2.  | 2    | Added a graph for following weight |
+|       | 2    | Added dragging-function for single program moves |
+| 7.2.  | 1,5  | Added counting BMI |
+|       | 3    | Worked on weight- and workout-graphs |
+| 8.2.  | 2    | Added user removal |
+| 9.2.  | 4    | Refactoring components into smaller parts |
+|       | 2    | Fixed the draggable program-move-list |
+|       | 1    | Added alert for removing the user-account |
+|       | 1    | Worked on appearance |
+| 10.2. | 2    | Fixed the workout-time-graph |
+|       | 4    | Refactoring and cleaning the files |
+|       | 1    | Fixed the program deletion |
+|       | 3    | Worked on routing the heroku-version |
+|       | 2    | Created instructions |
+| Total | 134,5| 

@@ -56,7 +56,7 @@ export const handleLogin = (username, password) => {
       dispatch({
         type: 'SET_NOTIFICATION',
         content: {
-          message: 'wrong username of password', 
+          message: 'wrong username or password', 
           type: 'error'
         },
       })

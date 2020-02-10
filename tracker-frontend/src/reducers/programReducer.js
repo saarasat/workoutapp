@@ -3,18 +3,18 @@ import dataService from '../services/dataService'
 const programReducer = (state = [], action) => {
   switch (action.type) {
   case 'INITIALIZE_PROGRAMS':
-    return action.data.reverse()
+    if (action.data) return action.data.reverse()
+    return state
   case 'ADD_NEW_PROGRAM':
     state = [...state, action.data]
     return state.reverse()
   case 'DELETE_PROGRAM':
-    state = state.filter(p => p.id !== action.id)
-    return state.reverse() 
+    return action.data.reverse() 
   case 'UPDATE_PROGRAM':
     const id = action.data.id
     return state.map(p => p.id !== id ? p : action.data)
   default:
-    return state.reverse()
+    return state
   }
 }
 

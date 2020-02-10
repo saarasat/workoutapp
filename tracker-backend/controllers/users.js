@@ -6,6 +6,8 @@ const Settings = require('../models/settings')
 const Program = require('../models/program')
 const Move = require('../models/move')
 const Workout = require('../models/workout')
+const getTokenFrom = require('./token')
+
 
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({})
@@ -18,6 +20,13 @@ usersRouter.post('/', async (request, response, next) => {
 
   try {
     const body = request.body
+    const existing = await User.find({username: body.username})
+    if (existing.length > 0) {
+      return response.status(400).json({
+        error: 'username already taken'
+      })
+    }
+
     if (!body.password || body.password.length < 3) {
       return response.status(400).send({
         error: 'password minimum length 3'
@@ -64,26 +73,6 @@ usersRouter.delete('/:id', async (request, response, next) => {
     await User.findByIdAndRemove(request.params.id)
   
     response.status(204).end()
-  } catch(exception) {
-    next(exception)
-  }
-})
-
-
-usersRouter.put('/:id', async (request, response, next) => {
-
-  const token = getTokenFrom(request)
-  let user = ''
-  try {
-    const decodedToken = jwt.verify(token, process.env.SECRET)
-
-    if (!token || !decodedToken.id) {
-      return response.status(401).json({ error: 'token missing or invalid' })
-    }  
-
-    user = await User.findById(decodedToken.id)
-   
-    await Settings.find({userId: user.id}).remove()
   } catch(exception) {
     next(exception)
   }

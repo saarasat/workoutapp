@@ -22,7 +22,7 @@ const RemoveAlert = ({confirm, alertText, buttonText, buttonClass}) => {
             <Button onClick={cancelAction} variant="dark" className="btn-cancel">
               Cancel
             </Button>
-            <Button onClick={doTheAction} variant="dark" className="btn-pause">
+            <Button onClick={confirm} variant="dark" className="btn-pause">
               Yes, remove
             </Button>
           </div>

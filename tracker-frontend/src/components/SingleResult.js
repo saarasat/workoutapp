@@ -15,6 +15,7 @@ const SingleResult = ({workout, deleteWorkout}) => {
 
   return (
     <div className="container">
+      <h1> </h1>
       {workout ?
         <>    
           <h2>{workout.sport}</h2>
@@ -34,18 +35,19 @@ const SingleResult = ({workout, deleteWorkout}) => {
             <Col><Icon icon={faMapMarkerAlt} color="yellow"></Icon></Col>
             <Col>{workout.km} km</Col>
           </Row> : null}
-          
-          <Link className="logo" to="/training"></Link>
-            <button className="btn-icon logout" onClick={() => handleDeletion(workout.id)}>
-          <Icon icon={faTrash} color="gray" ></Icon></button>
-          <Row>
-          <Col xs={6}>
-            <Link to="/"><p className="green"> {"<<"} Add a new one </p></Link>
-          </Col>
-          <Col xs={6}>
-            <Link to="/workouts"><p className="green">All reports >></p></Link>
-          </Col>        
-        </Row>
+          <div className="container">
+            <Link className="logo" to="/training"></Link>
+              <button className="btn-icon logout" onClick={() => handleDeletion(workout.id)}>
+            <Icon icon={faTrash} color="gray" ></Icon></button>
+            <Row>
+              <Col xs={6}>
+                <Link to="/"><p className="green"> {"<<"} Add a new one </p></Link>
+              </Col>
+              <Col xs={6}>
+                <Link to="/workouts"><p className="green">All reports >></p></Link>
+              </Col> 
+            </Row>
+          </div>
         </>
       : <>
 

@@ -1,19 +1,24 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import {withRouter} from 'react-router-dom'
 import { Button, Form } from 'react-bootstrap'
 import { createNewMove } from '../reducers/moveReducer'
 import { createNewProgram, initializePrograms } from '../reducers/programReducer'
-import {withRouter} from 'react-router-dom'
+import Notification from './Notification'
+import { setNotification } from '../reducers/notificationReducer'
 
-
-const ProgramForm = ({ createNewProgram, history }) => {
+const ProgramForm = ({ createNewProgram, history, setNotification }) => {
 
   const createProgram = async (event) => {
     event.preventDefault()
     const newName = event.target.name.value
+    if (newName.length < 3 || newName.length > 50) {
+      setNotification('The name should be between 3-50 characters')
+      return
+    }
     const newDifficulty = event.target.difficulty.value
     const newMoves = []    
-    createNewProgram(newName, newDifficulty, newMoves)
+    await createNewProgram(newName, newDifficulty, newMoves)
     history.push("/programs")
   }
 
@@ -37,6 +42,7 @@ const ProgramForm = ({ createNewProgram, history }) => {
         <Button className="btn-header-save" variant="dark" type="submit">Create</Button>
       </Form>
       </div>
+      <Notification />
     </>
   )
 }
@@ -49,4 +55,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, { initializePrograms, createNewProgram, createNewMove })(ProgramForm))
+export default withRouter(connect(mapStateToProps, { initializePrograms, createNewProgram, createNewMove, setNotification })(ProgramForm))

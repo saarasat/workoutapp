@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import { Button, Col, Form, Row } from 'react-bootstrap'
 import { handleLogin } from '../reducers/loginReducer'
+import Notification from './Notification'
 
 
 const Login = (props) => {
@@ -13,6 +14,10 @@ const Login = (props) => {
     const password = event.target.password.value
     props.handleLogin(username, password)
     props.history.push("/")
+  }
+
+  const onCancel = () => {
+    props.history.push("/login")
   }
   
   return (
@@ -37,11 +42,14 @@ const Login = (props) => {
           </Col>
         </Row>
           <Button className="btn-save" variant="dark" type="submit">login</Button>
-          <Button className="btn-cancel" variant="dark">cancel</Button>
+          <Button className="btn-cancel" variant="dark" onClick={onCancel}>cancel</Button>
       </Form>
       <Link to="/newAccount">
         <h5 className="login green">Create a new account</h5>
       </Link>
+      <div className="container">
+        <Notification />
+      </div>
     </div>
   )
 }

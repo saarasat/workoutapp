@@ -42,15 +42,11 @@ const PageRouter = ({handleLogout, user}) => {
           <BottomNav/>
         </div> 
         :
-        <> 
-          <Route path="/">
-            <>
-            <Switch>
-              <Route exact path="/newAccount" render={() => <UserForm />} />
-              <Route path="/" render={() => <Login />} />
-            </Switch>
-            </>
-          </Route>
+        <>   
+          <Switch>
+            <Route exact path="/newAccount" render={() => <UserForm />} />
+            <Route path="/" render={() => <Login />} />
+          </Switch>
         </>
       }
     </Router>

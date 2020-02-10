@@ -3,7 +3,9 @@ import dataService from '../services/dataService'
 const moveReducer = (state = [], action) => {
   switch (action.type) {
   case 'INITIALIZE_MOVES':
-    return action.data
+    if (action.data) {
+      return action.data
+    }
   case 'ADD_NEW_MOVE':
     state = [...state, action.data]
     return state

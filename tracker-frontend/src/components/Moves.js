@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Button, Col, Form, Row, Card } from 'react-bootstrap'
 import { createNewMove } from '../reducers/moveReducer'
 import { createNewProgram, addMoveToProgram, deleteMoveFromProgram } from '../reducers/programReducer'
+import Icon from './Icon'
 import MovesList from './MovesList'
-import MoveForm from './MoveForm'
+import NewMoveForm from './NewMoveForm'
+import { faPlus, faPlay } from '@fortawesome/free-solid-svg-icons'
 
 
 
-const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFromProgram }) => {
+
+const Moves = ({ program, moves, createNewMove, addMoveToProgram }) => {
+  console.log(moves)
   const [move, setMove] = useState('move name')
   const [kg, setKg] = useState(0)
   const [reps, setReps] = useState(0)
@@ -68,9 +73,9 @@ const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFrom
           <Form.Group>
             <Form.Label>Move</Form.Label>
             <Form.Control onChange={handleMoveChange} as="select" className="select-dark" value={move} name="move" placeholder={move}>
-            {moves.reverse().map(item => 
+            {moves.length > 0 ? moves.reverse().map(item => 
              <option key={item.id}>{item.name}</option>
-             )}
+             ) : null}
             </Form.Control>
           </Form.Group>
         </Col>
@@ -88,25 +93,37 @@ const Moves = ({ program, moves, createNewMove, addMoveToProgram, deleteMoveFrom
         </Col>
         <Col className="header-col" xs={1}>
           <Form.Label></Form.Label>
-        <Button className="btn-save" variant="light" type="submit">Add</Button>
+        <button className="btn-icon-plus" type="submit"><Icon color="green" icon={faPlus}></Icon></button>
         </Col>
       </Row>
-      <p className="green" onClick={() => setNewMoveForm(!newMoveForm)}><i>New move</i></p>
     </Form>
     {newMoveForm ? 
-    <MoveForm addANewMove={addANewMove} hide={() => setNewMoveForm(!newMoveForm)}/> 
-    :
-    <Card.Header className="program-header">
-      <Row>
-        <Col className="program-move" xs={6}>Move</Col>
-        <Col xs={3}>Reps</Col>
-        <Col xs={3}>Kg</Col>
-      </Row>
-    </Card.Header>}
+    <NewMoveForm addANewMove={addANewMove} hide={() => setNewMoveForm(!newMoveForm)}/> 
+    : 
+    <>
+      <Button className="green" variant="dark" onClick={() => setNewMoveForm(!newMoveForm)}><i>Missing a move? Add one</i></Button>
+      <Card.Header className="program-header">
+        <Row>
+          <Col className="program-move" xs={6}>Move</Col>
+          <Col xs={3}>Reps</Col>
+          <Col xs={3}>Kg</Col>
+        </Row>
+      </Card.Header>
+    </>}
 
     {program && program.moves.length > 0 ?
-    <MovesList items={program.moves} id={program.id} addMoves={addNewMoves} /> : null}
-    
+    <div>
+      <MovesList items={program.moves} id={program.id} addMoves={addNewMoves} />
+      <Link to={`/startProgram/${program.id}`}>
+        <Card.Header className="program-move">
+          <Row>
+            <Col>Start this program</Col>
+            <Col><Icon color="green" icon={faPlay}></Icon></Col>
+          </Row>
+        </Card.Header>
+      </Link> 
+    </div>
+      : null}
     </div>: null}
     </>
   )

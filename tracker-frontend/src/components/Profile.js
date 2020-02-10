@@ -51,7 +51,8 @@ const Profile = (props) => {
     const dateToSave = props.settings.find(setting => 
       (setting.date.getDate() === settingsDate.getDate() 
       && setting.date.getMonth() === settingsDate.getMonth()
-      && setting.date.getFullYear() === settingsDate.getFullYear()))
+      && setting.date.getFullYear() === settingsDate.getFullYear())
+    )
   
     if (weight === 0 || height == 0) {
       props.setNotification('Height and weight required')
