@@ -109,15 +109,15 @@ Moves can be added to the program by clicking the pen-icon
 <img src="/Documentation/images/MoveForm.png" width="216" height="384" />
 
 3. The move shows up in the dropdown
+
+<img src="/Documentation/images/Program.png" width="216" height="384" />
+
 4. Add a move to the program:
   - Select name
   - Add the amount of repetitions (optional)
   - Add the kgs used (optional)
 
 5. The program can be used from the bottom at "Start this program"
-
-<img src="/Documentation/images/Program.png" width="216" height="384" />
-
 
 ### Working out with a personal program
 
@@ -129,7 +129,7 @@ After doing the program, it can be saved as a workout just like any other workou
 
 <img src="/Documentation/images/DoingAProgram.png" width="216" height="384" />
 
-<img src="/Documentation/images/AddingAProgramWorkout.png" width="216" height="384" />
+<img src="/Documentation/images/AddingAProgamWorkout.png" width="216" height="384" />
 
 
 
