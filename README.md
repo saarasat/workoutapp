@@ -21,19 +21,21 @@ After logging in the user can logout from the upper right corner of the topnav.
 
 #### Creating settings
 
-First up, it is the best to add the settings. That way each workout can have calories added to them.
+First up, it is the best to add the settings by tapping the "Profile"-tab. 
+That way each workout can have calories added to them.
 
 <b>1. First settings:</b>
 - Date: current day by default. Can be changed.
 - Height: in cm
 - Weight: in kg
+
 All three data points are required.
 
 <img src="/Documentation/images/ProfilePage.png" width="216" height="384" />
 
 <b>2. Weight graph:</b> 
-- After inserting the weight of two days, the graph displays weight per day.
-- Data for each can be changed by inserting a new weight for that day
+- After inserting the weight of two separate days, the graph displays weight per day.
+- Data for each day, can be changed by inserting a new weight for that day in the form displayed
 
 <img src="/Documentation/images/ProfileGraph.png" width="216" height="384" />
 
@@ -79,7 +81,7 @@ Each result is clickable and can be checked and removed individually
 
 ### Stopwatch
 
-Stopwatch can be used to measure time of a sport activity
+From the tab "Stopwatch" a stopwatch can be found and used to measure time of a sport activity
 
 <img src="/Documentation/images/Stopwatch.png" width="216" height="384" />
 
@@ -87,12 +89,14 @@ Stopwatch can be used to measure time of a sport activity
 
 The app allows to add personalized workout programs
 
-1. "Programs" in the bottom nav
-2. "Add new program" - header
+1. Click "Programs" in the bottom nav
+2. Click the "Add new program" -header
 3. Program requires a name (between 3-50 characters)
 4. The toughness level should be added as well
 
-<img src="/Documentation/images/ProgramForn.png" width="216" height="384" />
+<img src="/Documentation/images/NewProgram.png" width="216" height="384" />
+
+
 
 ### Adding moves to personal programs
 
@@ -100,19 +104,26 @@ Moves can be added to the program by clicking the pen-icon
 
 1. Click the "Missing a move? Add one"-button
 2. Add the move you wish to have for future
+
+<img src="/Documentation/images/ProgramForn.png" width="216" height="384" />
+<img src="/Documentation/images/NewMove.png" width="216" height="384" />
+
 3. The move shows up in the dropdown
 4. Add a move to the program:
   - Select name
   - Add the amount of repetitions (optional)
   - Add the kgs used (optional)
+
 5. The program can be used from the bottom at "Start this program"
 
 <img src="/Documentation/images/Program.png" width="216" height="384" />
 
 
-### Working out with a persona program
+### Working out with a personal program
 
 After navigating to the "Programs"-tab, the program can also be started from the programlist, by clicking on its name.
+
+<img src="/Documentation/images/Programs.png" width="216" height="384" />
 
 After doing the program, it can be saved as a workout just like any other workout
 
