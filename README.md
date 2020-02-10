@@ -4,6 +4,8 @@ Application for keeping track of exercising activity and results. Best used on a
 
 Can be found at [sporttivartti.herokuapp.com](https://sporttivartti.herokuapp.com/)
 
+[Hours worked on the project](https://github.com/saarasat/workoutapp/blob/master/Documentation/Hours%20worked.md)
+
 ### User manual
 
 #### Creating an account, logging in and out
