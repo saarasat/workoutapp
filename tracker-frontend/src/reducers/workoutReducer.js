@@ -8,16 +8,17 @@ const workoutReducer = (state = [], action) => {
   switch (action.type) {
   case 'INITIALIZE_WORKOUTS':
     const data = action.data.map(time => ({ id:time.id, sport: time.sport, type: time.type, calories: time.calories, km: time.km, time: time.time, date: new Date(time.date), day: time.day, month: time.month })).sort(byTime)
-    return data
+    return data.sort(byTime)
   case 'ADD_NEW_WORKOUT':
     const newWorkout = action.data
     newWorkout.date = new Date(action.data.date)
-    return [...state, newWorkout]
+    state = [...state, newWorkout]
+    return state.sort(byTime)
   case 'DELETE_WORKOUT':
     const remainingData = action.data.map(time => ({ id:time.id, sport: time.sport, type: time.type, calories: time.calories, km: time.km, time: time.time, date: new Date(time.date), day: time.day, month: time.month })).sort(byTime)
     return remainingData
   default:
-    return state
+    return state.sort(byTime)
   }
 }
 

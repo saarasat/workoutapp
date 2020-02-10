@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Alert, Button } from 'react-bootstrap'
 
-const RemoveAlert = ({confirm, removalText}) => {
+const RemoveAlert = ({confirm, alertText, buttonText, buttonClass}) => {
   const [show, setShow] = useState(false)
 
   const cancelAction = () => {
@@ -16,21 +16,21 @@ const RemoveAlert = ({confirm, removalText}) => {
   if (show) {
     return (
       <div className="container">
-        <Alert variant="dark" className="gray" onClose={() => setShow(false)} dismissible>
-          <Alert.Heading>Are you sure you want to remove?</Alert.Heading>
+        <Alert variant="dark" onClose={() => setShow(false)} dismissible>
+          <Alert.Heading>{alertText}</Alert.Heading>
           <div className="d-flex justify-content-end">
-            <Button onClick={doTheAction} variant="dark" className="btn-save">
-              Yes, remove
-            </Button>
             <Button onClick={cancelAction} variant="dark" className="btn-cancel">
               Cancel
+            </Button>
+            <Button onClick={doTheAction} variant="dark" className="btn-pause">
+              Yes, remove
             </Button>
           </div>
         </Alert>
       </div>
     )
   }
-  return <Button onClick={() => setShow(true)}>{removalText}</Button>
+  return <Button className={buttonClass} onClick={() => setShow(true)}>{buttonText}</Button>
 }
 
 

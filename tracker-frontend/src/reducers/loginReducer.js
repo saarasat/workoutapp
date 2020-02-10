@@ -1,6 +1,5 @@
 import loginService from '../services/loginService'
 import dataService from '../services/dataService'
-import { faWindowRestore } from '@fortawesome/free-solid-svg-icons'
 
 const loginReducer = (state = null, action) => {
   switch (action.type) {

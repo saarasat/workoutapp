@@ -12,14 +12,18 @@ export const App = (props) => {
   
   useEffect(() => {
     props.initUser()
-    props.initializeWorkouts()
-    props.initializeSettings()
-    props.initializePrograms()
-    props.initializeMoves()
   }, [])
 
   const user = props.user
 
+  useEffect(() => {
+    if (user) {
+      props.initializeWorkouts()
+      props.initializeSettings()
+      props.initializePrograms()
+      props.initializeMoves()  
+    }
+  })
 
   return (
     <div>

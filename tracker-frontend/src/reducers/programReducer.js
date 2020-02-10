@@ -12,7 +12,7 @@ const programReducer = (state = [], action) => {
     return state.reverse() 
   case 'UPDATE_PROGRAM':
     const id = action.data.id
-    return state.map(b => b.id !== id ? b : action.data)
+    return state.map(p => p.id !== id ? p : action.data)
   default:
     return state.reverse()
   }
@@ -51,11 +51,9 @@ export const deleteProgram = (programId) => {
       data: updated
     })
   }
-
 }
 
 export const addMoveToProgram = (programId, program) => {
-  
   return async dispatch => {
     const updated = await dataService.update('programs', programId, program)
     dispatch({
@@ -75,7 +73,5 @@ export const deleteMoveFromProgram = (programId, program) => {
     })
   }
 }
-
-
 
 export default programReducer

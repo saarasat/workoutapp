@@ -19,11 +19,11 @@ const SelectPrepend = ({label, control, options }) => {
 
   return (
     <Row className="form-row">
-      <Col md={6} xs={4}><Form.Label>{label}</Form.Label></Col>
-      <Col md={6} xs={8}>
+      <Col xs={4}><Form.Label>{label}</Form.Label></Col>
+      <Col xs={8}>
         {correctOptions()}
       </Col>
-  </Row>
+    </Row>
   )
 }
 

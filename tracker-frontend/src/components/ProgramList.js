@@ -1,16 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Badge, Col, Row, Card } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { createNewProgram, deleteProgram } from '../reducers/programReducer'
-import ProgramForm from './ProgramForm'
 import { faEdit, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 import Icon from './Icon'
 
 
 const ProgramList = ({ programs, deleteProgram }) => {
-  const [show, setShow] = useState(false)
-  const [showHeader, setShowHeader] = useState(true)
 
   const programLevel = (difficulty) => {   
     if (difficulty === "Light") return "green"
@@ -18,22 +15,12 @@ const ProgramList = ({ programs, deleteProgram }) => {
     if (difficulty === "Hard") return "red"
   }
 
-  const toggleHeader = () => {
-    setShowHeader(!showHeader)
-    setShow(!show)
-  }
-
   return (
     <div className="container">
-      {showHeader ? 
-      <>
-        <h1>Programs</h1>
-      </> 
-      : null}
-      {show ? <ProgramForm hideForm={toggleHeader} /> : null}
+      <h1>Programs</h1> 
       <div className="container">
         {programs.map(program =>
-        <Card.Header>
+        <Card.Header key={program.id}>
           <Row key={program.id}>
             <Col xs={8}>
               <Link key={program.id} to={`/startProgram/${program.id}`}>
@@ -59,16 +46,12 @@ const ProgramList = ({ programs, deleteProgram }) => {
       </div>
       <div className="container">
       <Card.Header>
-        <Row>
-          <Col xs={8}>
-            <Link to={`/newProgram`}>
-              <p className="program-header">Add new program</p>
-            </Link>
-          </Col>
-          <Col xs={4}>
-            <Icon color="green" icon={faPlus}></Icon>
-          </Col>
-        </Row>
+        <Link to={`/newProgram`}>
+          <Row>
+            <Col xs={8}><p className="program-header">Add new program</p></Col>
+            <Col xs={4}><Icon color="green" icon={faPlus}></Icon></Col>
+          </Row>
+        </Link>
       </Card.Header>
       </div>
     </div>

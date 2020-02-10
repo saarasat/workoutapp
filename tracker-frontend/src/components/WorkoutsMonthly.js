@@ -4,132 +4,72 @@ import { Row,  Col } from 'react-bootstrap'
 import Icon from './Icon'
 import { getIcon } from './Sports'
 import { faFireAlt, faMedal, faClock, faTrophy } from '@fortawesome/free-solid-svg-icons'
-import HighchartsReact from 'highcharts-react-official'
-import Highcharts from 'highcharts'
+import WorkoutGraph from './WorkoutGraph'
+import { get } from 'mongoose'
 
 const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
   const [bestId, setBestId] = useState(0)
+  const [data, setData] = useState([])
 
   const getBest = () => {
     let best = 0
     workouts.forEach(workout => {
+
       if (Number(workout.calories) > best) {
         best = workout.calories
         setBestId(workout.id)
       }
     })
   }
+
+  
   
   useEffect(() => {
     getBest()
-  })
+    workouts.map(workout => workout.week = getWeek(workout))
+    console.log(countWeeklyTotals())
+    setData(countWeeklyTotals)
+  },[])  
 
-  const getWeek = (data) => {
-    var date = new Date(data);
+  const countTotalTime = (weeklyWorkouts) => {
+    const timesOnly = weeklyWorkouts.map(workout => workout.time.split(':'))
+    const hours = timesOnly.reduce((total, time) => total + Number(time[0]),0)
+    const minutes = timesOnly.reduce((total, time) => total + Number(time[1]),0)
+    const totalHours = Math.round((hours + (minutes / 60)))
+    return totalHours
+  }
+
+  const countWeeklyTotals = () => {
+    let group = workouts.reduce((total, workout) => {
+      total[workout.week] = [...total[workout.week] || [], workout];
+      return total;
+     }, {});
+  
+    const weeks = Object.values(group)
+    let i = 1
+    const times = weeks.map(item => ({ x: item[0].week, y:countTotalTime(item)}))
+    console.log(times)
+    console.log(weeks)
+    return times
+  }
+
+  const getWeek = (workout) => {
+    var date = new Date(workout.date);
     date.setHours(0, 0, 0, 0);
     date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
     var week1 = new Date(date.getFullYear(), 0, 4);
     return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000
-                          - 3 + (week1.getDay() + 6) % 7) / 7);
+    - 3 + (week1.getDay() + 6) % 7) / 7);
   }
 
-  const getMonths = () => {
-    let monthsy = divideIntoWeeks().map(workout => workout.week);
-    let unique = monthsy.filter((item, i, ar) => ar.indexOf(item) === i);
-    return unique
-  }
 
-  const workoutTimes = (timeOnly) => {
-    const time = timeOnly.split(':')
-    const hours = ((Number(time[0]))*60) + ((Number(time[1])))
-    return hours
-  }
-
-  const divideIntoWeeks = () => {
-    const byWeeks = workouts.map(workout => ({time: workoutTimes(workout.time), week: getWeek(workout.date)}))
-    return byWeeks
-  }
-
-  const addTimeByWeeks = (digit) => {
-    const weeks =  getMonths()
-    const workoutTimes = divideIntoWeeks()
-    console.log(workoutTimes)
-    
-    const first = workoutTimes.filter(workout => workout.week === digit)
-    console.log(first)
-    const total = first.map(w => w.time)
-    console.log(total)
-    const totaa = total.reduce((tota, value) => tota + value)
-    console.log(totaa)
-    return totaa
-
-  }
-
-  const getData = () => {
-    let array = Array(5)
-
-  }
-
-  const options = {
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: 'Workouts',
-      style: {
-        color: '#FFFFFF',
-      }
-    },
-    chart: {
-      height: '80%',
-      backgroundColor: '#212529',
-    },
-    credits: {
-      text: ''
-    },
-    xAxis: {
-      
-      title: {
-        text: false,
-      },
-    },
-    yAxis: {
-      min: 0,
-      title: {
-          text: false
-      }
-    },
-    tooltip: {
-      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-          '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-      footerFormat: '</table>',
-      shared: true,
-      useHTML: true
-    },
-    series: [{
-      type: 'column',
-      data:[getData()], 
-      showInLegend: false
-    }],
-  }
-
+  
  
+
 
   return (
     <div>
-          <HighchartsReact
-            className="weight-graph"
-            highcharts={Highcharts}
-            constructorType={'chart'}
-            options={options}
-          />
-          <HighchartsReact
-            className="weight-graph"
-            highcharts={Highcharts}
-            constructorType={'chart'}
-            options={options}
-          />
+      <WorkoutGraph key={month} data={data}/>
         <div>
           <table className="results-total"> 
             <tbody>
@@ -174,19 +114,12 @@ const MonthlyWorkouts = ({ workouts, totalCalories, totalTime, month }) => {
               <Col xs={3} className="result-calories">
                 <p className="result-calories-value orange">{item.calories} kcal</p>
                 {item.km ? <p className="result-km-value blue">{item.km} km</p> : null}
-              </Col>  
-              
+              </Col>        
             </Row>
           </Link>}
           </>
-          
           )}
         </div> 
-        <div>
-          {getMonths().map(workout => <p>aika {workout} </p>)}
-          
-        </div>
-
     </div>
   )
 }

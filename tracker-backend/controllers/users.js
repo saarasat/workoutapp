@@ -45,9 +45,18 @@ usersRouter.post('/', async (request, response, next) => {
 })
 
 usersRouter.delete('/:id', async (request, response, next) => {
+
+  const token = getTokenFrom(request)
+  let user = ''
   try {
-    const user = await User.findById(request.params.id)
-    
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }  
+
+    user = await User.findById(decodedToken.id)
+   
     await Settings.find({userId: request.params.id}).remove()
     await Program.find({userId: request.params.id}).remove()
     await Move.find({userId: request.params.id}).remove()
@@ -55,11 +64,29 @@ usersRouter.delete('/:id', async (request, response, next) => {
     await User.findByIdAndRemove(request.params.id)
   
     response.status(204).end()
-  } catch (exception) {
+  } catch(exception) {
     next(exception)
   }
 })
 
 
+usersRouter.put('/:id', async (request, response, next) => {
+
+  const token = getTokenFrom(request)
+  let user = ''
+  try {
+    const decodedToken = jwt.verify(token, process.env.SECRET)
+
+    if (!token || !decodedToken.id) {
+      return response.status(401).json({ error: 'token missing or invalid' })
+    }  
+
+    user = await User.findById(decodedToken.id)
+   
+    await Settings.find({userId: user.id}).remove()
+  } catch(exception) {
+    next(exception)
+  }
+})
 
 module.exports = usersRouter

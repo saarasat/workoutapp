@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import SelectPrepend from './SelectPrepend'
 import SimpleSelect from './SimpleSelect'
 import CalendarModal from './CalendarModal'
-import { Button, Col, Form, InputGroup, Row, Modal, ModalBody } from 'react-bootstrap'
+import { Button, Col, Form, Row } from 'react-bootstrap'
 import { createNewWorkout } from '../reducers/workoutReducer'
 import { createOptions, createMeterOptions, weekdays, months } from './Units'
 import { sports, difficultyLevels } from './Sports'
@@ -90,7 +90,6 @@ const Workout = (props) => {
               visible={calendarVisible}
               hide={() => setCalendarVisible(false)}
               setDate={setWorkoutDate}
-              showDay={() => setCalendarVisible(false)}
             />
           </Row>
 

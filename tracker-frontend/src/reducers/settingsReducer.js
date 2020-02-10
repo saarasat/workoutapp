@@ -53,18 +53,6 @@ export const initializeSettings = () => {
   }
 }
 
-
-export const deleteSettings = (id) => {
-
-  return async (dispatch) => {
-    const data = await dataService.delete('settings', id)
-    dispatch({
-      data: data,
-      type: 'DELETE_SETTINGS'
-    })
-  }
-}
-
 export const updateSettings = (id, newSettings) => {
   
   return async dispatch => {

@@ -5,14 +5,14 @@ import Highcharts from 'highcharts'
 import Notification from './Notification'
 import { setNotification } from '../reducers/notificationReducer'
 
-const WeightGraph = ({data, setNotification}) => {
+const WorkoutGraph = ({data, setNotification}) => {
 
   const options = {
     chart: {
       type: 'column'
     },
     title: {
-      text: 'Workouts',
+      text: 'Weekyl workout time',
       style: {
         color: '#FFFFFF',
       }
@@ -25,36 +25,22 @@ const WeightGraph = ({data, setNotification}) => {
       text: ''
     },
     xAxis: {
-      type: 'datetime',
-      dateTimeLabelFormats: {
-        day: '%e %b'
-      },
       title: {
-        text: false,
+        text: 'week',
       },
     },
     yAxis: {
       min: 0,
       title: {
-        text: false
+        text: 'h'
       }
-    },
-    tooltip: {
-      headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-      pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-          '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-      footerFormat: '</table>',
-      shared: true,
-      useHTML: true
     },
     series: [{
       type: 'column',
-      data: data.length > 0 ? data : 0, 
-      showInLegend: false
+      data: data ? data : 0, 
+      showInLegend: false,
     }],
   }
-
-
   return (
     <div className="container">
       <HighchartsReact
@@ -68,4 +54,4 @@ const WeightGraph = ({data, setNotification}) => {
   )
 }
 
-export default connect(null, {setNotification})(WeightGraph)
+export default connect(null, {setNotification})(WorkoutGraph)

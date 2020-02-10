@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Button, Card, Col, Form, Row } from 'react-bootstrap'
+import { Button, Card, Form } from 'react-bootstrap'
 import { createOptions, createWeightOptions } from './Units'
 import { createNewSettings, updateSettings, deleteSettings } from '../reducers/settingsReducer'
 import { handleLogout } from '../reducers/loginReducer'
@@ -22,19 +22,17 @@ const Profile = (props) => {
   const [weight, setWeight] = useState(0)
   const [settingsDate, setSettingsDate] = useState(new Date())
   const [data, setData] = useState([])
-  const [bmi, setBmi] = useState(0)
 
   useEffect(() => {
     if (props.settings.length > 0) {
       setHeight(props.settings[props.settings.length-1].height)
       setWeight(props.settings[props.settings.length-1].weight)
       setData(props.settings.map(setting => ({x: setting.date, y: setting.weight})))
-      setBmi(countBMI())
     }
   },[props.settings])
 
-  const handleDeletion = (id) => {
-    props.deleteSettings(id)
+  const handleDeletion = (userId) => {
+    props.updateSettings(userId, )
   }
 
   const countBMI = () => {
@@ -81,7 +79,7 @@ const Profile = (props) => {
     setShowWeight(!showWeight)
   }
 
-  const removeUser = async (event) => {
+  const removeUser = async () => {
     const id = props.user.userId
     await props.deleteUser(id)
     props.handleLogout()
@@ -97,8 +95,7 @@ const Profile = (props) => {
             <CalendarModal
               visible={calendarVisible}
               hide={() => setCalendarVisible(false)}
-              changeDay={setSettingsDate}
-              showDay={() => setCalendarVisible(false)}
+              setDate={setSettingsDate}
             />
           {!showHeight ? <Card.Header className="profile-form-header" onClick={() => setShowHeight(!showHeight)}>
             Height: {height !== 0 ? height + " cm" : "Not yet defined"} </Card.Header> 
@@ -106,10 +103,7 @@ const Profile = (props) => {
           {!showWeight ? <Card.Header className="profile-form-header" onClick={() => setShowWeight(!showWeight)}>
             Weight: {weight !== 0 ? weight + " kg" : "Not yet defined"} </Card.Header> 
           : <DropDown hide={() => setShowWeight(false)} onChange={handleWeightChange} options={createWeightOptions(40,200, 'kg')} value="weight" label="Weight"/>} 
-          <Row className="form-row">
-            <Col><Button type="submit" className="btn-save" variant="dark">Save</Button></Col>
-            <Col><Button type="submit" className="btn-save" variant="dark">Save</Button></Col>
-          </Row>
+          <Button type="submit" className="btn-save" variant="dark">Save</Button>
         </Form>
         <Notification />
       </div>
@@ -118,7 +112,12 @@ const Profile = (props) => {
         {height > 0 && weight > 0 ? <>{countBMI()}</> : null}
       </div>
       <div className="container">
-        <RemoveAlert confirm={removeUser} removalText="Remove account"/>
+        <RemoveAlert 
+          confirm={removeUser} 
+          buttonText="Remove account"
+          buttonClass="btn-pause"
+          alertText="Are you sure you want to remove all data?"
+        />
       </div>
       </div>
   )
@@ -131,4 +130,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { deleteUser, deleteSettings, updateSettings, handleLogout, createNewSettings, setNotification })(Profile)
+export default connect(mapStateToProps, { deleteUser, updateSettings, handleLogout, createNewSettings, setNotification })(Profile)
