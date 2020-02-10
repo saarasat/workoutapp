@@ -19,47 +19,45 @@ After logging in the user can logout from the upper right corner of the topnav.
 
 #### Creating settings
 
-<img src="/Documentation/images/ProfilePage.png" width="270" height="480" />
-
-
 First up, it is the best to add the settings. That way each workout can have calories added to them.
 
-1. First settings:
+<b>1. First settings:</b>
 - Date: current day by default. Can be changed.
 - Height: in cm
 - Weight: in kg
-All three information required.
+All three data points are required.
 
-2. Weight graph: 
+<img src="/Documentation/images/ProfilePage.png" width="216" height="384" />
+
+<b>2. Weight graph:</b> 
 - After inserting the weight of two days, the graph displays weight per day.
 - Data for each can be changed by inserting a new weight for that day
 
-[Weight graph]()
+<img src="/Documentation/images/ProfileGraph.png" width="216" height="384" />
 
-
-
-3. BMI:
+<b>3. BMI:</b>
 - The app counts BMI (Body mass index) based on weight and height. 
 
 ### Removing the account
 
-The account and all data related to it can be deleted on the profile page
+The account and all data related to it can be deleted on the profile page. As removal of the account will delete all data relating to that account permanently, the user is asked to verify the deletion.
 
 ### Adding workouts
 
 Can be done from homepage, or by clicking the button "Training" in the bottom navigation. 
 
-1. Choose the type of workout
-2. Insert time, the specific sport and time of the exercise
-3. For cycling and running, distance can be added 
+<img src="/Documentation/images/HomePage.png" width="216" height="384" />
 
-[Adding a workout]()
+1. Choose the type of a workout
+2. Insert time, the specific sport and time used working out
+3. For cycling and running also distance can be added 
+
+<img src="/Documentation/images/AddingWorkouts.png" width="216" height="384" />
 
 ### Checking the results
 
-[Monthly workouts]()
 
-After adding a workout the user is redirected to the workout-list. It shows monthly the workouts added. 
+After adding a workout the user is redirected to the workout-list. It shows monthly the workouts added and can be found also on the bottom navigation.
 
 - Graph of the weekly results based on time used working out
 - Total workouts
@@ -69,13 +67,19 @@ After adding a workout the user is redirected to the workout-list. It shows mont
 - The best workout of the month based on calories burned
 - Kilometers for running and cycling
 
+<img src="/Documentation/images/WorkoutList.png" width="216" height="384" />
+
+<img src="/Documentation/images/ResultList.png" width="216" height="384" />
+
 Each result is clickable and can be checked and removed individually
 
-[Single result]()
+<img src="/Documentation/images/SingleResult.png" width="216" height="384" />
 
 ### Stopwatch
 
 Stopwatch can be used to measure time of a sport activity
+
+<img src="/Documentation/images/Stopwatch.png" width="216" height="384" />
 
 ### Adding personal programs
 
@@ -85,6 +89,8 @@ The app allows to add personalized workout programs
 2. "Add new program" - header
 3. Program requires a name (between 3-50 characters)
 4. The toughness level should be added as well
+
+<img src="/Documentation/images/ProgramForn.png" width="216" height="384" />
 
 ### Adding moves to personal programs
 
@@ -99,9 +105,18 @@ Moves can be added to the program by clicking the pen-icon
   - Add the kgs used (optional)
 5. The program can be used from the bottom at "Start this program"
 
-### Saving a personal program workout
+<img src="/Documentation/images/Program.png" width="216" height="384" />
+
+
+### Working out with a persona program
+
+After navigating to the "Programs"-tab, the program can also be started from the programlist, by clicking on its name.
 
 After doing the program, it can be saved as a workout just like any other workout
+
+<img src="/Documentation/images/DoingAProgram.png" width="216" height="384" />
+
+<img src="/Documentation/images/AddingAProgramWorkout.png" width="216" height="384" />
 
 
 
